@@ -1,0 +1,93 @@
+arazzo: 1.0.1
+info:
+  title: Diagnose an asset and source the right replacement part
+  summary: Confirm a symptom, predict the next symptom, then look up, detail and source the part.
+  version: 1.0.0
+sourceDescriptions:
+- name: aquantMcp
+  url: ../openapi/aquant-mcp-server-openapi.json
+  type: openapi
+workflows:
+- workflowId: diagnose-and-source-part
+  summary: >-
+    Guard on observation_existence, rank likely next symptoms, then walk the parts chain from
+    catalog lookup through detail to sourcing.
+  inputs:
+    type: object
+    required: [tenant_id, asset_id, observation_name, triage_product_id, question, model]
+    properties:
+      tenant_id: {type: string, description: '[TEMPORARY] Aquant tenant identifier.'}
+      asset_id: {type: string}
+      observation_name: {type: string, description: The reported symptom.}
+      triage_product_id: {type: string}
+      question: {type: string, description: The technician's natural-language ask.}
+      model: {type: string, description: Equipment model, used for part sourcing.}
+      top_n: {type: integer, description: How many symptom predictions to return.}
+  steps:
+  - stepId: confirm-observation
+    description: Guard — verify Aquant knows this symptom before acting on it.
+    operationId: observation_existence
+    requestBody:
+      contentType: application/json
+      payload:
+        observation_name: $inputs.observation_name
+    successCriteria:
+    - condition: $statusCode == 200
+    - context: $response.body
+      condition: $.exists == true
+      type: jsonpath
+    outputs:
+      exists: $response.body#/exists
+  - stepId: predict-next-symptom
+    description: Rank the most likely next symptoms for this asset, with how to check each.
+    operationId: next_symptom
+    requestBody:
+      contentType: application/json
+      payload:
+        asset_id: $inputs.asset_id
+        top_n: $inputs.top_n
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      predictions: $response.body#/predictions
+  - stepId: lookup-part-catalog
+    description: Find candidate parts from the tenant catalog.
+    operationId: part_catalog_lookup
+    requestBody:
+      contentType: application/json
+      payload:
+        triage_product_id: $inputs.triage_product_id
+        question: $inputs.question
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      parts: $response.body#/parts
+  - stepId: get-part-info
+    description: Pull detail for the selected catalog entry — pass the catalog data through, do not re-derive it.
+    operationId: part_info
+    requestBody:
+      contentType: application/json
+      payload:
+        catalog_data: $steps.lookup-part-catalog.outputs.parts
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      part_info: $response.body#/part_info
+  - stepId: get-part-sources
+    description: Find where the part can be sourced.
+    operationId: part_sources
+    requestBody:
+      contentType: application/json
+      payload:
+        catalog_data: $steps.lookup-part-catalog.outputs.parts
+        model: $inputs.model
+        question: $inputs.question
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sources: $response.body#/sources
+  outputs:
+    predictions: $steps.predict-next-symptom.outputs.predictions
+    parts: $steps.lookup-part-catalog.outputs.parts
+    part_info: $steps.get-part-info.outputs.part_info
+    sources: $steps.get-part-sources.outputs.sources

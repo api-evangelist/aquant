@@ -1,0 +1,63 @@
+generated: '2026-07-31'
+method: probed
+source: https://login.aquant.ai/.well-known/openid-configuration
+note: >-
+  Neither Aquant OpenAPI declares an oauth2 security scheme, so the mechanical derive pass
+  (0-working/derive-oauth-scopes.py) returns nothing. The only OAuth/OIDC surface Aquant
+  operates is its Okta customer-identity tenant at login.aquant.ai, which is used for human
+  sign-in to the Aquant platform rather than for API authorization. The scopes below are the
+  standard OIDC set advertised by that discovery document — they are recorded because they are
+  real and anonymously discoverable, NOT because they authorize the MCP or ACP APIs.
+applies_to: platform sign-in (login.aquant.ai) — not aquant:mcp-server or aquant:acp-voiceai
+schemes:
+- name: aquant-okta
+  type: openIdConnect
+  issuer: https://login.aquant.ai
+  source: well-known/aquant-openid-configuration.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.aquant.ai/oauth2/v1/authorize
+    tokenUrl: https://login.aquant.ai/oauth2/v1/token
+    pkce: S256
+  - flow: implicit
+    authorizationUrl: https://login.aquant.ai/oauth2/v1/authorize
+  - flow: deviceCode
+    deviceAuthorizationUrl: https://login.aquant.ai/oauth2/v1/device/authorize
+    tokenUrl: https://login.aquant.ai/oauth2/v1/token
+  - flow: password
+    tokenUrl: https://login.aquant.ai/oauth2/v1/token
+  - flow: refreshToken
+    tokenUrl: https://login.aquant.ai/oauth2/v1/token
+scopes:
+- scope: openid
+  description: Required to obtain an ID token; identifies the request as an OpenID Connect request.
+  flows: [authorizationCode, implicit, deviceCode, password]
+  sources: [well-known/aquant-openid-configuration.json]
+- scope: profile
+  description: Access to default profile claims (name, family_name, given_name, locale, zoneinfo, updated_at).
+  flows: [authorizationCode, implicit, deviceCode, password]
+  sources: [well-known/aquant-openid-configuration.json]
+- scope: email
+  description: Access to the email and email_verified claims.
+  flows: [authorizationCode, implicit, deviceCode, password]
+  sources: [well-known/aquant-openid-configuration.json]
+- scope: address
+  description: Access to the address claim.
+  flows: [authorizationCode, implicit, deviceCode, password]
+  sources: [well-known/aquant-openid-configuration.json]
+- scope: phone
+  description: Access to the phone_number and phone_number_verified claims.
+  flows: [authorizationCode, implicit, deviceCode, password]
+  sources: [well-known/aquant-openid-configuration.json]
+- scope: offline_access
+  description: Issues a refresh token so the client can renew access without re-prompting the user.
+  flows: [authorizationCode, deviceCode, password]
+  sources: [well-known/aquant-openid-configuration.json]
+- scope: groups
+  description: Includes the user's group memberships as a claim — the Okta-specific scope Aquant uses for role/tenant assignment.
+  flows: [authorizationCode, implicit, deviceCode, password]
+  sources: [well-known/aquant-openid-configuration.json]
+gaps:
+- >-
+  No API-level scope surface exists. The MCP server and the ACP/VoiceAI API authorize by
+  API key/secret and tenant_id, with no scope vocabulary published for either.

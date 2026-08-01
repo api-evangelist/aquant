@@ -1,0 +1,110 @@
+generated: '2026-07-31'
+method: probed
+source: live GET probes of every Aquant host found in apis.yml + OpenAPI servers
+note: >-
+  Aquant serves no /.well-known/ discovery documents from its own marketing or API hosts.
+  The three 200s recorded below are all served by third-party platforms operating an Aquant
+  subdomain — Okta (login.aquant.ai), SafeBase/Drata (security.aquant.ai) and Atlassian Jira
+  Service Management (support.aquant.ai). They are recorded honestly as vendor-served, not as
+  Aquant-authored discovery for the Aquant APIs.
+hosts:
+- host: https://login.aquant.ai
+  operator: Okta (Aquant customer identity tenant)
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: aquant-openid-configuration.json
+    spec: OpenID Connect Discovery 1.0
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: aquant-oauth-authorization-server.json
+    spec: RFC 8414
+  - path: /oauth2/default/.well-known/openid-configuration
+    status: 200
+    note: default Okta authorization server; not saved (superset issuer captured above)
+- host: https://mcp.aquant.ai
+  operator: Aquant
+  documents:
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://voiceai-api.aquant.ai
+  operator: Aquant
+  documents:
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+- host: https://www.aquant.ai
+  operator: Aquant (Webflow)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://security.aquant.ai
+  operator: SafeBase (Drata) trust center
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    vendor_served: true
+    issuer: https://app.safebase.io/api/mcp
+    note: SafeBase's own trust-center MCP authorization server, not an Aquant API auth server.
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    vendor_served: true
+    issuer: https://app.safebase.io/api/mcp
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    vendor_served: true
+    resource: https://app.safebase.io/api/mcp
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://support.aquant.ai
+  operator: Atlassian Jira Service Management (hosted customer portal)
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: aquant-support-security.txt
+    vendor_served: true
+    spec: RFC 9116
+    note: >-
+      PGP-signed Atlassian security.txt served for every Jira Service Management customer
+      portal. Contact and policy point at atlassian.com, not Aquant — this does NOT constitute
+      an Aquant vulnerability disclosure program.
+- host: https://benchmark.aquant.ai
+  operator: Aquant
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+- host: https://studio.aquant.ai
+  operator: Aquant (Base44)
+  documents:
+  - path: /.well-known/agent-card.json
+    status: 404
+    body: '{"error_type":"HTTPException","message":".well-known/agent-card.json not configured for this app"}'
+  - path: /.well-known/agent.json
+    status: 404

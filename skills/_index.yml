@@ -1,0 +1,20 @@
+generated: '2026-07-31'
+method: generated
+source: openapi/aquant-mcp-server-openapi.json + mcp/aquant-mcp-tools.json
+note: >-
+  Three packaged Agent Skills, one per marquee Aquant service flow. Every operationId
+  referenced was verified verbatim against the live spec and the live MCP tools/list — none
+  is invented. Skills mirror the workflows in arazzo/.
+skills:
+- file: aquant-diagnose-and-source-part.md
+  name: Diagnose an asset and source the right replacement part
+  api: openapi/aquant-mcp-server-openapi.json
+  operations: [observation_existence, next_symptom, part_catalog_lookup, part_info, part_sources]
+- file: aquant-dispatch-nearest-technician.md
+  name: Locate an asset and dispatch the nearest qualified technician
+  api: openapi/aquant-mcp-server-openapi.json
+  operations: [asset_location, agent_data, technician_proximity]
+- file: aquant-preventive-maintenance-visit.md
+  name: Run a preventive-maintenance visit and file the summary
+  api: openapi/aquant-mcp-server-openapi.json
+  operations: [health_check, preventive_maintenance_check_list, summary_report]

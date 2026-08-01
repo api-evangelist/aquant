@@ -1,0 +1,59 @@
+arazzo: 1.0.1
+info:
+  title: Run a preventive-maintenance visit and file the summary
+  summary: Health-check the service, generate the PM checklist for an asset, then produce the summary report.
+  version: 1.0.0
+sourceDescriptions:
+- name: aquantMcp
+  url: ../openapi/aquant-mcp-server-openapi.json
+  type: openapi
+workflows:
+- workflowId: preventive-maintenance-visit
+  summary: >-
+    Generates a versioned, polymorphic checklist (NumberStep / RadioStep / SelectStep /
+    FormStep) whose blocking_rule and disabled_if semantics must be honoured, then files the
+    service summary with agent attribution.
+  inputs:
+    type: object
+    properties:
+      asset_id: {type: string}
+      model: {type: string}
+      chat_history: {type: string, description: The conversation to summarise into the service report.}
+  steps:
+  - stepId: check-health
+    description: Confirm the Aquant MCP service is up — the only GET operation on the API.
+    operationId: health_check
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: generate-checklist
+    description: Generate the preventive-maintenance checklist. Pass at least one of asset_id or model.
+    operationId: preventive_maintenance_check_list
+    requestBody:
+      contentType: application/json
+      payload:
+        asset_id: $inputs.asset_id
+        model: $inputs.model
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      schema_version: $response.body#/schema_version
+      agent_id: $response.body#/agent_id
+      steps: $response.body#/steps
+  - stepId: file-summary-report
+    description: Produce the service summary from the visit conversation, with contributing-agent attribution.
+    operationId: summary_report
+    requestBody:
+      contentType: application/json
+      payload:
+        chat_history: $inputs.chat_history
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      summary_version: $response.body#/summary_version
+      site: $response.body#/site
+      agents_used: $response.body#/agents_used
+  outputs:
+    checklist_schema_version: $steps.generate-checklist.outputs.schema_version
+    checklist_steps: $steps.generate-checklist.outputs.steps
+    site: $steps.file-summary-report.outputs.site
+    agents_used: $steps.file-summary-report.outputs.agents_used

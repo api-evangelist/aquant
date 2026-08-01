@@ -1,0 +1,113 @@
+generated: '2026-07-31'
+method: derived
+source: >-
+  openapi/aquant-mcp-server-openapi.json (4xx responses),
+  live 422 probes of https://voiceai-api.aquant.ai,
+  https://www.npmjs.com/package/@aquantinc/acp-web-sdk (Error Handling table)
+format: fastapi-detail
+rfc9457: false
+note: >-
+  Aquant publishes no error reference page. Nothing on either surface uses
+  application/problem+json (RFC 9457). Two distinct, incompatible error envelopes are in use
+  across the two APIs — captured verbatim below rather than normalised.
+envelopes:
+- name: fastapi-validation
+  api: aquant:mcp-server
+  content_type: application/json
+  schema: openapi/aquant-mcp-server-openapi.json#/components/schemas/HTTPValidationError
+  shape: '{"detail": [{"loc": [...], "msg": "...", "type": "...", "input": ..., "ctx": {...}}]}'
+  note: Stock FastAPI validation envelope; the only error response modelled in the spec.
+- name: acp-status-code
+  api: aquant:acp-voiceai
+  content_type: application/json
+  shape: '{"status_code": <int>, "message": "<string>", "data": ...}'
+  note: >-
+    Custom envelope with a five-digit application status_code (e.g. 10422 for a 422) that is
+    NOT the HTTP status. Observed live; not described in the published OpenAPI.
+  evidence:
+    probed: '2026-07-31'
+    request: POST https://voiceai-api.aquant.ai/acp/token with body {}
+    http_status: 422
+    body_prefix: '{"status_code":10422,"message":"[{''type'': ''missing'', ''loc'': (''body'', ''api_key'')...'
+- name: mcp-jsonrpc
+  api: aquant:mcp-server
+  content_type: application/json
+  shape: '{"jsonrpc":"2.0","id":"server-error","error":{"code":<int>,"message":"<string>"}}'
+  spec: JSON-RPC 2.0 error object
+  note: Returned by the /mcp Streamable HTTP transport for protocol-level failures.
+problems:
+- status: 422
+  name: HTTPValidationError
+  title: Validation Error
+  api: aquant:mcp-server
+  content_type: application/json
+  schema: HTTPValidationError
+  remediation: >-
+    Correct the offending request field. `detail[].loc` gives the JSON pointer path,
+    `detail[].type` the failed constraint.
+  source_operations:
+  - openapi/aquant-mcp-server-openapi.json#part_catalog_lookup
+  - openapi/aquant-mcp-server-openapi.json#part_info
+  - openapi/aquant-mcp-server-openapi.json#part_sources
+  - openapi/aquant-mcp-server-openapi.json#agent_data
+  - openapi/aquant-mcp-server-openapi.json#technician_proximity
+  - openapi/aquant-mcp-server-openapi.json#observation_existence
+  - openapi/aquant-mcp-server-openapi.json#asset_location
+  - openapi/aquant-mcp-server-openapi.json#preventive_maintenance_check_list
+  - openapi/aquant-mcp-server-openapi.json#summary_report
+  - openapi/aquant-mcp-server-openapi.json#next_symptom
+- status: 404
+  title: Not Found
+  api: aquant:mcp-server
+  content_type: application/json
+  body: '{"detail":"Not Found"}'
+  in_spec: false
+  method: probed
+  remediation: Path does not exist. The MCP server serves no route at /, /sse, or /api-docs.
+- status: 405
+  title: Method Not Allowed
+  api: aquant:acp-voiceai
+  content_type: application/json
+  body: '{"detail":"Method Not Allowed"}'
+  in_spec: false
+  method: probed
+  remediation: /acp/token and /vss/web-chat accept POST only.
+- status: 406
+  title: Not Acceptable
+  api: aquant:mcp-server
+  transport: mcp
+  body: '{"jsonrpc":"2.0","id":"server-error","error":{"code":-32600,"message":"Not Acceptable: Client must accept text/event-stream"}}'
+  in_spec: false
+  method: probed
+  remediation: 'Send Accept: application/json, text/event-stream on every /mcp request.'
+- status: 400
+  title: Missing session ID
+  api: aquant:mcp-server
+  transport: mcp
+  body: '{"jsonrpc":"2.0","id":"server-error","error":{"code":-32600,"message":"Bad Request: Missing session ID"}}'
+  in_spec: false
+  method: probed
+  remediation: >-
+    Call initialize first, capture the mcp-session-id response header, and send it on every
+    subsequent /mcp request.
+sdk_error_codes:
+  api: aquant:acp-voiceai
+  source: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#error-handling
+  base_class: AquantError
+  codes:
+  - {code: AUTH_INVALID_CREDENTIALS, http: 401, meaning: Invalid API key or secret}
+  - {code: AGENT_NOT_FOUND, http: 404, meaning: No agent found for the given agentId}
+  - {code: AGENT_NOT_ACTIVE, http: 400, meaning: Agent exists but is not active}
+  - {code: VOICE_CONNECTION_FAILED, meaning: Voice device or call connection failed}
+  - {code: VOICE_NOT_CONNECTED, meaning: Action requires an active call but none exists}
+  - {code: CLIENT_NOT_INITIALIZED, meaning: Method called before initialize()}
+  - {code: CLIENT_DESTROYED, meaning: Method called after destroy()}
+  - {code: NETWORK_UNAVAILABLE, meaning: Network request failed}
+  - {code: SESSION_NOT_FOUND, meaning: Session ID not found}
+  - {code: SESSION_CREATE_FAILED, meaning: Session creation failed}
+  - {code: CHAT_SEND_FAILED, meaning: Chat request failed (network, HTTP error, or SSE error payload)}
+  - {code: CHAT_CONNECTION_FAILED, meaning: sendMessage without connect(), or sessionId mismatch}
+gaps:
+- No 401/403/429/5xx response is modelled in either OpenAPI document.
+- No application/problem+json anywhere; no error `type` URIs.
+- No rate-limit error is documented on any surface.

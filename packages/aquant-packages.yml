@@ -1,0 +1,75 @@
+generated: '2026-07-31'
+method: searched
+source: npm registry search + registry.npmjs.org package metadata
+registries_probed:
+- registry: npm
+  result: 4 first-party packages found
+- registry: pypi
+  result: none (the `aquant` project on PyPI is an unrelated 0.0.0a0 placeholder by a third-party author)
+- registry: rubygems
+  result: none
+- registry: nuget
+  result: none
+- registry: crates.io
+  result: none
+- registry: packagist
+  result: none
+- registry: pkg.go.dev
+  result: none
+- registry: maven central
+  result: none
+packages:
+- language: javascript
+  registry: npm
+  name: '@aquantinc/acp-web-sdk'
+  version: 0.1.3
+  url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk
+  install: npm install @aquantinc/acp-web-sdk
+  license: MIT
+  official: true
+  kind: client-sdk
+  description: >-
+    Browser SDK for the Aquant Conversation Platform — WebRTC voice calls, SSE web chat,
+    and session management from a single framework-agnostic package. Wraps
+    https://voiceai-api.aquant.ai. Ships ESM + CJS + types, with /chat and /voice subpath
+    entry points and swappable VoiceAdapter / ChatAdapter interfaces.
+  keywords: [aquant, sdk, chat, voice, websocket, webrtc, communication]
+  repository: https://github.com/aquant/acp-web-sdk
+  published: '2026-04-21'
+  last_updated: '2026-04-28'
+  covers_api: aquant:acp-voiceai
+- language: javascript
+  registry: npm
+  name: '@aquant-ai/eslint-config'
+  url: https://www.npmjs.com/package/@aquant-ai/eslint-config
+  install: npm install @aquant-ai/eslint-config
+  official: true
+  kind: internal-tooling
+  description: Aquant's shared ESLint configuration. Engineering tooling, not an API client.
+- language: javascript
+  registry: npm
+  name: '@aquant-ai/stylelint-config-scss'
+  url: https://www.npmjs.com/package/@aquant-ai/stylelint-config-scss
+  install: npm install @aquant-ai/stylelint-config-scss
+  official: true
+  kind: internal-tooling
+  description: Aquant's shared Stylelint SCSS configuration. Engineering tooling, not an API client.
+- language: javascript
+  registry: npm
+  name: '@aquant-io/eslint-config'
+  url: https://www.npmjs.com/package/@aquant-io/eslint-config
+  install: npm install @aquant-io/eslint-config
+  official: true
+  kind: internal-tooling
+  description: >-
+    Legacy @aquant-io scoped ESLint configuration, from before the aquant.io → aquant.ai
+    rebrand. Engineering tooling, not an API client.
+summary:
+  official_client_sdks: 1
+  languages: [javascript]
+  no_sdk_for:
+  - api: aquant:mcp-server
+    note: >-
+      The Aquant MCP Server ships no client library — it is consumed through any MCP client
+      over Streamable HTTP at https://mcp.aquant.ai/mcp, or as plain REST against
+      https://mcp.aquant.ai/openapi.json.

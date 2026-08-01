@@ -1,0 +1,119 @@
+generated: '2026-07-31'
+method: derived
+source: mcp/aquant-mcp-tools.json + openapi/aquant-mcp-server-openapi.json
+note: 'One-to-one crosswalk. Both surfaces are projections of the same FastAPI application: every MCP tool name equals an
+  OpenAPI operationId, and every OpenAPI operation has a tool. The only input-shape divergence is tenant_id, which MCP hoists
+  into the tool inputSchema where REST carries it out of band.'
+surfaces:
+  openapi:
+    url: https://mcp.aquant.ai/openapi.json
+    file: openapi/aquant-mcp-server-openapi.json
+    gated: false
+    operations: 11
+  mcp:
+    url: https://mcp.aquant.ai/mcp
+    transport: streamable-http
+    tools_list_gated: false
+    tools: 11
+  graphql: null
+crosswalk:
+- tool: part_catalog_lookup
+  category: parts
+  rest:
+  - part_catalog_lookup
+  binding: rest
+  confidence: high
+  note: MCP tool name is identical to the OpenAPI operationId; the tool inherits POST /part-catalog-lookup requestBody/parameters
+    as its input contract.
+- tool: part_info
+  category: parts
+  rest:
+  - part_info
+  binding: rest
+  confidence: high
+  note: MCP tool name is identical to the OpenAPI operationId; the tool inherits POST /part-info requestBody/parameters as
+    its input contract.
+- tool: part_sources
+  category: parts
+  rest:
+  - part_sources
+  binding: rest
+  confidence: high
+  note: MCP tool name is identical to the OpenAPI operationId; the tool inherits POST /part-sources requestBody/parameters
+    as its input contract.
+- tool: agent_data
+  category: workforce
+  rest:
+  - agent_data
+  binding: rest
+  confidence: high
+  note: MCP tool name is identical to the OpenAPI operationId; the tool inherits POST /agent-data requestBody/parameters as
+    its input contract.
+- tool: technician_proximity
+  category: workforce
+  rest:
+  - technician_proximity
+  binding: rest
+  confidence: high
+  note: MCP tool name is identical to the OpenAPI operationId; the tool inherits POST /technician-proximity requestBody/parameters
+    as its input contract.
+- tool: observation_existence
+  category: diagnostics
+  rest:
+  - observation_existence
+  binding: rest
+  confidence: high
+  note: MCP tool name is identical to the OpenAPI operationId; the tool inherits POST /observation-existence requestBody/parameters
+    as its input contract.
+- tool: asset_location
+  category: assets
+  rest:
+  - asset_location
+  binding: rest
+  confidence: high
+  note: MCP tool name is identical to the OpenAPI operationId; the tool inherits POST /asset-location requestBody/parameters
+    as its input contract.
+- tool: preventive_maintenance_check_list
+  category: maintenance
+  rest:
+  - preventive_maintenance_check_list
+  binding: rest
+  confidence: high
+  note: MCP tool name is identical to the OpenAPI operationId; the tool inherits POST /preventive-maintenance-check-list requestBody/parameters
+    as its input contract.
+- tool: summary_report
+  category: reporting
+  rest:
+  - summary_report
+  binding: rest
+  confidence: high
+  note: MCP tool name is identical to the OpenAPI operationId; the tool inherits POST /summary-report requestBody/parameters
+    as its input contract.
+- tool: next_symptom
+  category: diagnostics
+  rest:
+  - next_symptom
+  binding: rest
+  confidence: high
+  note: MCP tool name is identical to the OpenAPI operationId; the tool inherits POST /next-symptom requestBody/parameters
+    as its input contract.
+- tool: health_check
+  category: operations
+  rest:
+  - health_check
+  binding: rest
+  confidence: high
+  note: MCP tool name is identical to the OpenAPI operationId; the tool inherits GET /health requestBody/parameters as its
+    input contract.
+mcp_only: []
+rest_only: []
+divergences:
+- kind: input-shape
+  detail: 'Every MCP domain tool requires a tenant_id argument that is NOT part of the corresponding OpenAPI requestBody schema
+    — the REST surface expects tenancy out of band. Tools affected: part_catalog_lookup, part_info, part_sources.'
+coverage:
+  tools_named: 11
+  tools_bound: 11
+  mcp_only: 0
+  rest_operations_total: 11
+  rest_operations_with_tool: 11

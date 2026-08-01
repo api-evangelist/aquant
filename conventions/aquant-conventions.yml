@@ -1,0 +1,116 @@
+generated: '2026-07-31'
+method: derived
+source: >-
+  openapi/aquant-mcp-server-openapi.json, mcp/aquant-mcp-tools.json,
+  https://www.npmjs.com/package/@aquantinc/acp-web-sdk, live probes 2026-07-31
+note: >-
+  Aquant publishes no API design guide or conventions page. Everything below is derived from
+  the two live specs, the first-party SDK README, and anonymous protocol probes. Where a
+  convention is genuinely absent it is recorded as absent — not invented.
+apis:
+  mcp_server: https://mcp.aquant.ai
+  acp_voiceai: https://voiceai-api.aquant.ai
+transport:
+  mcp_server:
+  - style: JSON-RPC 2.0 over MCP Streamable HTTP
+    endpoint: POST /mcp
+    protocol_version: '2025-06-18'
+    session: >-
+      Stateful. initialize returns an `mcp-session-id` response header that MUST be echoed on
+      every subsequent request; omitting it yields -32600 "Bad Request: Missing session ID".
+    accept_header_required: 'application/json, text/event-stream'
+  - style: REST
+    verbs: [POST, GET]
+    note: >-
+      All ten domain operations are POST with a JSON request body, including pure reads
+      (asset_location, next_symptom). Only /health is GET. There is no resource-path or
+      collection modelling — each path is a verb.
+  acp_voiceai:
+  - style: REST + Server-Sent Events
+    note: >-
+      POST /vss/web-chat returns text/event-stream; each `data:` line carries JSON with a text
+      `delta`, terminated by {"done": true}. The SDK consumes it with fetch + ReadableStream.
+      There is no WebSocket.
+  - style: WebRTC
+    note: Voice calls run browser ↔ VoiceAI ↔ agent; the default adapter is the Twilio browser SDK.
+authentication:
+  see: authentication/aquant-authentication.yml
+  summary: >-
+    ACP: POST /acp/token exchanges api_key + api_secret + agent_id for a 1-hour bearer token.
+    MCP: tools/list is anonymous; tool invocation is scoped by a tenant_id argument.
+idempotency:
+  supported: false
+  header: null
+  evidence: >-
+    No Idempotency-Key parameter or header appears in either OpenAPI document, in the MCP tool
+    inputSchemas, or in the SDK README. No retry-safety guidance is published. All ten domain
+    operations are POST, including reads, so a naive retry is not provably safe.
+  note: >-
+    No `Idempotency` pointer is emitted in apis.yml — Aquant has no idempotency contract, and
+    claiming one would be false.
+pagination:
+  supported: false
+  evidence: >-
+    No limit/offset/cursor/page parameter exists on any of the 13 operations. The one
+    result-count control is `top_n` on next_symptom (integer, caller-supplied), which bounds a
+    prediction list rather than paging a collection. No response carries a next-page token.
+filtering_and_expansion:
+  sparse_fields: false
+  expansion: false
+  metadata:
+    supported: partial
+    note: >-
+      ACP sessions accept a free-form `metadata` object at sessions.create() and
+      sessions.updateMetadata(). The MCP/REST surface has no metadata field.
+versioning:
+  scheme: none-in-path
+  evidence: >-
+    No version segment in any path, no version header, no Accept-version media type. The MCP
+    OpenAPI declares info.version 1.0.0 and the running server reports 1.28.1 via
+    initialize → serverInfo.version; the VoiceAI OpenAPI declares the FastAPI default
+    "0.1.0". MCP protocolVersion is 2025-06-18.
+  breaking_change_policy: not published
+request_tracing:
+  request_id_header: null
+  evidence: >-
+    No X-Request-Id / X-Correlation-Id observed on any probed response. The Base44-hosted
+    studio.aquant.ai error body carries a `request_id` field, but it is null and that host is
+    not an API surface.
+error_envelope:
+  see: errors/aquant-problem-types.yml
+  summary: >-
+    Three incompatible envelopes: FastAPI `{"detail":[...]}` on the MCP REST surface, a custom
+    `{"status_code":10422,"message":...,"data":...}` on ACP, and JSON-RPC 2.0 error objects on
+    the /mcp transport. No RFC 9457.
+response_envelope:
+  shape: >-
+    Every MCP domain result schema carries the same two-field status envelope — a required
+    `status` string plus an optional `message` — wrapping a domain payload (parts[], agents[],
+    predictions[], steps[], asset_location, part_info, sources, exists). This is the single
+    most consistent convention on the API.
+  examples: examples/aquant-mcp-server-examples.yml
+tenancy:
+  parameter: tenant_id
+  scope: MCP tools only (part_catalog_lookup, part_info, part_sources)
+  in: tool inputSchema (MCP) / out of band (REST)
+  provider_note: >-
+    Marked "[TEMPORARY] The tenant ID. This should be removed in the future." verbatim in the
+    published tool descriptions.
+rate_limiting:
+  documented: false
+  headers_observed: none
+  note: >-
+    No RateLimit-* / X-RateLimit-* headers observed on any probed response, and no rate-limit
+    policy is published. No rate-limits/ artifact is emitted rather than inventing limits.
+content_negotiation:
+  request: application/json
+  response: [application/json, text/event-stream]
+caching:
+  documented: false
+  headers_observed: none
+cross_links:
+  errors: errors/aquant-problem-types.yml
+  authentication: authentication/aquant-authentication.yml
+  lifecycle: lifecycle/aquant-lifecycle.yml
+  data_model: data-model/aquant-data-model.yml
+  crosswalk: mcp/aquant-tool-crosswalk.yml

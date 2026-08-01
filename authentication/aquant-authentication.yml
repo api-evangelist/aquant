@@ -1,0 +1,106 @@
+generated: '2026-07-31'
+method: searched
+source: >-
+  https://www.npmjs.com/package/@aquantinc/acp-web-sdk (Authentication section),
+  https://login.aquant.ai/.well-known/openid-configuration,
+  live probes of https://voiceai-api.aquant.ai and https://mcp.aquant.ai
+docs: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#authentication
+note: >-
+  Neither published OpenAPI declares components.securitySchemes, so the mechanical derive pass
+  (0-working/derive-authentication.py) returns nothing. The auth model below is taken from the
+  first-party SDK documentation and from live, anonymous protocol probes — not guessed.
+summary:
+  types: [apiKey, http, openIdConnect]
+  api_key_in: [body]
+  oauth2_flows: [authorizationCode, implicit, refreshToken, password, deviceCode]
+  spec_declared_scheme_count: 0
+schemes:
+- name: acp-key-secret-exchange
+  api: aquant:acp-voiceai
+  type: apiKey
+  in: body
+  parameters: [api_key, api_secret, agent_id]
+  token_endpoint: POST https://voiceai-api.aquant.ai/acp/token
+  produces: bearer access token + agent metadata (agentId, agentName, agentPhone)
+  token_ttl_seconds: 3600
+  refresh: >-
+    No refresh endpoint documented. The SDK instructs callers to destroy() the client and
+    re-initialize to obtain a new token.
+  evidence:
+    url: https://voiceai-api.aquant.ai/acp/token
+    method: POST
+    probed: '2026-07-31'
+    http_status: 422
+    body: >-
+      {"status_code":10422,"message":"[{'type': 'missing', 'loc': ('body', 'api_key'), ...},
+      {... 'api_secret' ...}, {... 'agent_id' ...}]"}
+    interpretation: >-
+      An empty POST returns a field-level validation error naming exactly api_key, api_secret
+      and agent_id as required body fields — confirming the SDK-documented credential exchange
+      against the live endpoint without sending any credential.
+  documented_errors:
+  - code: AUTH_INVALID_CREDENTIALS
+    http: 401
+    meaning: Invalid API key or secret
+  - code: AGENT_NOT_FOUND
+    http: 404
+    meaning: No agent found for the given agentId
+  - code: AGENT_NOT_ACTIVE
+    http: 400
+    meaning: Agent exists but is not active
+- name: acp-bearer
+  api: aquant:acp-voiceai
+  type: http
+  scheme: bearer
+  bearerFormat: opaque access token
+  obtained_from: POST /acp/token
+  applies_to: [POST /vss/web-chat, WebRTC voice device registration]
+- name: mcp-tenant-scope
+  api: aquant:mcp-server
+  type: apiKey
+  in: body
+  parameter: tenant_id
+  required_by: [part_catalog_lookup, part_info, part_sources]
+  note: >-
+    The MCP server identifies as "Aquant MCP Server (Authenticated)" and every parts tool
+    requires a tenant_id argument (documented in-spec as "[TEMPORARY] The tenant ID. This
+    should be removed in the future."). No bearer/OAuth challenge is issued on tools/list —
+    the tool MANIFEST is anonymous; tool INVOCATION is tenant-scoped.
+  evidence:
+    url: https://mcp.aquant.ai/mcp
+    probed: '2026-07-31'
+    tools_list_http_status: 200
+    oauth_protected_resource: 404
+    oauth_authorization_server: 404
+- name: aquant-okta-oidc
+  api: platform (human sign-in, not the public APIs)
+  type: openIdConnect
+  openIdConnectUrl: https://login.aquant.ai/.well-known/openid-configuration
+  issuer: https://login.aquant.ai
+  provider: Okta
+  authorizationUrl: https://login.aquant.ai/oauth2/v1/authorize
+  tokenUrl: https://login.aquant.ai/oauth2/v1/token
+  userinfoUrl: https://login.aquant.ai/oauth2/v1/userinfo
+  jwksUrl: https://login.aquant.ai/oauth2/v1/keys
+  introspectionUrl: https://login.aquant.ai/oauth2/v1/introspect
+  revocationUrl: https://login.aquant.ai/oauth2/v1/revoke
+  endSessionUrl: https://login.aquant.ai/oauth2/v1/logout
+  deviceAuthorizationUrl: https://login.aquant.ai/oauth2/v1/device/authorize
+  dynamic_client_registration: https://login.aquant.ai/oauth2/v1/clients
+  grant_types: [authorization_code, implicit, refresh_token, password, 'urn:ietf:params:oauth:grant-type:device_code']
+  token_endpoint_auth_methods: [client_secret_basic, client_secret_post, client_secret_jwt, private_key_jwt, none]
+  pkce: [S256]
+  id_token_signing_algs: [RS256]
+  scopes: [openid, email, profile, address, phone, offline_access, groups]
+  file: well-known/aquant-openid-configuration.json
+gaps:
+- >-
+  Neither OpenAPI declares components.securitySchemes, so no security requirement is machine-
+  readable on any of the 13 published operations. Both specs would score zero on
+  securitySchemes-defined and securitySchemes-applied contract-quality checks.
+- >-
+  The MCP server publishes no /.well-known/oauth-protected-resource (RFC 9728), so an MCP
+  client cannot discover how to authenticate tool invocation.
+- >-
+  No public API-key issuance or self-service developer signup — credentials come through the
+  commercial relationship.

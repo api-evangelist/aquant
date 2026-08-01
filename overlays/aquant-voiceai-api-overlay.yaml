@@ -1,0 +1,52 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Aquant Conversation Platform (VoiceAI) API
+  version: 1.0.0
+x-generated: '2026-07-31'
+x-method: generated
+x-source: >-
+  openapi/aquant-voiceai-api-openapi.json plus
+  https://www.npmjs.com/package/@aquantinc/acp-web-sdk and live 422 probes 2026-07-31
+x-note: >-
+  The served spec describes only the two health probes. The ACP and VSS routes below are LIVE
+  and confirmed by probe (POST with an empty body returns a field-level 422 naming the exact
+  required fields), and their semantics are documented in Aquant's own first-party SDK. This
+  overlay records them as an enhancement to the provider's spec; it does not modify the
+  original, and no field is asserted that was not observed or published.
+extends: openapi/aquant-voiceai-api-openapi.json
+actions:
+- target: $.info
+  update:
+    title: Aquant Conversation Platform (VoiceAI) API
+    x-apievangelist-enriched: '2026-07-31'
+    x-sdk: '@aquantinc/acp-web-sdk'
+    x-undocumented-routes-observed: [POST /acp/token, POST /vss/web-chat]
+    description: >-
+      Voice and chat access to Aquant AI service agents. Credentials are exchanged for a
+      one-hour bearer token, after which clients can place WebRTC voice calls to the agent or
+      stream web-chat replies as Server-Sent Events.
+- target: $
+  update:
+    servers:
+    - url: https://voiceai-api.aquant.ai
+      description: Production (probed 2026-07-31)
+- target: $
+  update:
+    x-observed-operations:
+    - operationId: acp_token
+      method: post
+      path: /acp/token
+      summary: Exchange API key and secret for an access token
+      requestBody_required_fields: [api_key, api_secret, agent_id]
+      evidence: 'POST with {} returned 422 naming api_key, api_secret, agent_id as missing'
+      returns: access token (TTL 3600s) plus agentId, agentName, agentPhone
+    - operationId: vss_web_chat
+      method: post
+      path: /vss/web-chat
+      summary: Send a chat message and stream the assistant reply
+      requestBody_required_fields: [agent_id, sender_id, message]
+      evidence: 'POST with {} returned 422 naming agent_id, sender_id, message as missing'
+      responses:
+        '200':
+          content_type: text/event-stream
+          streaming: 'data: lines carrying a JSON text delta, terminated by {"done": true}'

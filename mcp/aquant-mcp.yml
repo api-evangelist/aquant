@@ -1,0 +1,120 @@
+generated: '2026-07-31'
+method: searched
+status: published
+source: https://mcp.aquant.ai/mcp
+server:
+  name: Aquant MCP Server (Authenticated)
+  version: 1.28.1
+  transport: http
+  protocol: streamable-http
+  url: https://mcp.aquant.ai/mcp
+  protocol_version: '2025-06-18'
+  capabilities:
+    tools:
+      listChanged: false
+    resources: false
+    prompts: false
+    experimental: {}
+discovery:
+  initialize: POST /mcp {"jsonrpc":"2.0","method":"initialize"} → 200, returns mcp-session-id header
+  tools_list: POST /mcp {"jsonrpc":"2.0","method":"tools/list"} with mcp-session-id → 200
+  rest_mirror: https://mcp.aquant.ai/openapi.json (OpenAPI 3.1.0, 11 operations)
+  anonymous_tools_list: true
+  note: tools/list responded anonymously — no OAuth challenge, no /.well-known/oauth-protected-resource (404). The server
+    name says "(Authenticated)" and every domain tool takes a tenant_id, so tool INVOCATION is expected to be tenant-scoped
+    even though the tool manifest is public.
+x-evidence:
+  fetched: '2026-07-31'
+  url: https://mcp.aquant.ai/mcp
+  http_status: 200
+  content_type: application/json
+  tools_file: aquant-mcp-tools.json
+tools:
+- name: part_catalog_lookup
+  description: Look up part information from the catalog using a triage product ID and a user question.
+  required:
+  - tenant_id
+  - triage_product_id
+  - question
+  parameters:
+  - tenant_id
+  - triage_product_id
+  - question
+  source_operation: openapi/aquant-mcp-server-openapi.json#part_catalog_lookup
+- name: part_info
+  description: Retrieve detailed part information given catalog data from the lookup tool.
+  required:
+  - tenant_id
+  - catalog_data
+  parameters:
+  - tenant_id
+  - catalog_data
+  source_operation: openapi/aquant-mcp-server-openapi.json#part_info
+- name: part_sources
+  description: Retrieve sources for parts given catalog data, model, and question.
+  required:
+  - tenant_id
+  - catalog_data
+  - model
+  - question
+  parameters:
+  - tenant_id
+  - catalog_data
+  - model
+  - question
+  source_operation: openapi/aquant-mcp-server-openapi.json#part_sources
+- name: agent_data
+  description: Retrieve agents and their proficiency scores based on an observation name.
+  required:
+  - observation_name
+  parameters:
+  - observation_name
+  source_operation: openapi/aquant-mcp-server-openapi.json#agent_data
+- name: technician_proximity
+  description: Retrieve technicians and their proximity to an asset location.
+  required:
+  - asset_location
+  - technicians
+  parameters:
+  - asset_location
+  - technicians
+  source_operation: openapi/aquant-mcp-server-openapi.json#technician_proximity
+- name: observation_existence
+  description: Check if an observation exists in the loaded data.
+  required:
+  - observation_name
+  parameters:
+  - observation_name
+  source_operation: openapi/aquant-mcp-server-openapi.json#observation_existence
+- name: asset_location
+  description: Retrieve the location of an asset based on its ID.
+  required:
+  - asset_id
+  parameters:
+  - asset_id
+  source_operation: openapi/aquant-mcp-server-openapi.json#asset_location
+- name: preventive_maintenance_check_list
+  description: Generate a preventive maintenance check list for a model or asset.
+  required: []
+  parameters:
+  - asset_id
+  - model
+  source_operation: openapi/aquant-mcp-server-openapi.json#preventive_maintenance_check_list
+- name: summary_report
+  description: Generate a summary report for a chat history.
+  required: []
+  parameters:
+  - chat_history
+  source_operation: openapi/aquant-mcp-server-openapi.json#summary_report
+- name: next_symptom
+  description: Generate a next symptom for an asset based on its ID.
+  required: []
+  parameters:
+  - asset_id
+  - top_n
+  source_operation: openapi/aquant-mcp-server-openapi.json#next_symptom
+- name: health_check
+  description: '### Responses:'
+  required: []
+  parameters: []
+  source_operation: openapi/aquant-mcp-server-openapi.json#health_check

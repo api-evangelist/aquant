@@ -1,0 +1,69 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Aquant MCP Server
+  version: 1.0.0
+x-generated: '2026-07-31'
+x-method: generated
+x-source: openapi/aquant-mcp-server-openapi.json
+x-note: >-
+  Enhancements the API Evangelist enrichment pipeline would apply to Aquant's published spec.
+  The original document at openapi/aquant-mcp-server-openapi.json is never mutated. Every
+  addition below is grounded in evidence captured elsewhere in this repo — the MCP handshake
+  (mcp/aquant-mcp.yml), the tool crosswalk, and live probes — not invented.
+extends: openapi/aquant-mcp-server-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-31'
+    x-runtime-version: 1.28.1
+    x-runtime-version-source: 'POST /mcp initialize -> result.serverInfo.version'
+    x-mcp-endpoint: https://mcp.aquant.ai/mcp
+    x-mcp-protocol-version: '2025-06-18'
+    x-tool-crosswalk: mcp/aquant-tool-crosswalk.yml
+    description: >-
+      Aquant service-intelligence tools for equipment servicing: parts lookup and sourcing,
+      technician data and proximity, asset location, observation/symptom diagnostics,
+      preventive-maintenance checklists, and service summary reporting. The same eleven
+      operations are also published as MCP tools over JSON-RPC Streamable HTTP at /mcp.
+- target: $
+  update:
+    servers:
+    - url: https://mcp.aquant.ai
+      description: Production (probed 2026-07-31)
+- target: $
+  update:
+    tags:
+    - name: parts
+      description: Part catalog lookup, part detail, and part sourcing.
+    - name: workforce
+      description: Technician (agent) proficiency data and proximity to an asset.
+    - name: assets
+      description: Asset location and symptom/observation diagnostics.
+    - name: maintenance
+      description: Preventive-maintenance checklist generation.
+    - name: reporting
+      description: Service summary report generation from chat history.
+    - name: operations
+      description: Service health.
+- target: $.paths['/part-catalog-lookup'].post
+  update: {tags: [parts], x-mcp-tool: part_catalog_lookup}
+- target: $.paths['/part-info'].post
+  update: {tags: [parts], x-mcp-tool: part_info}
+- target: $.paths['/part-sources'].post
+  update: {tags: [parts], x-mcp-tool: part_sources}
+- target: $.paths['/agent-data'].post
+  update: {tags: [workforce], x-mcp-tool: agent_data}
+- target: $.paths['/technician-proximity'].post
+  update: {tags: [workforce], x-mcp-tool: technician_proximity}
+- target: $.paths['/asset-location'].post
+  update: {tags: [assets], x-mcp-tool: asset_location}
+- target: $.paths['/observation-existence'].post
+  update: {tags: [assets], x-mcp-tool: observation_existence}
+- target: $.paths['/next-symptom'].post
+  update: {tags: [assets], x-mcp-tool: next_symptom}
+- target: $.paths['/preventive-maintenance-check-list'].post
+  update: {tags: [maintenance], x-mcp-tool: preventive_maintenance_check_list}
+- target: $.paths['/summary-report'].post
+  update: {tags: [reporting], x-mcp-tool: summary_report}
+- target: $.paths['/health'].get
+  update: {tags: [operations], x-mcp-tool: health_check}

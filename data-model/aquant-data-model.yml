@@ -1,0 +1,485 @@
+generated: '2026-07-31'
+method: derived
+source: openapi/aquant-mcp-server-openapi.json
+note: Entity graph derived from OpenAPI components.schemas $ref links. Aquant publishes no object reference, so
+  id-prefix/domain fields are absent rather than guessed.
+root_domains:
+- domain: parts
+  entities:
+  - PartCatalogLookupRequest
+  - PartCatalogLookupResult
+  - PartCatalogInfo
+  - PartInfoRequest
+  - PartInfoResult
+  - PartSourcesRequest
+  - PartSourcesResult
+- domain: workforce
+  entities:
+  - AgentDataRequest
+  - AgentDataResult
+  - AgentInfo
+  - TechnicianProximityRequest
+  - TechnicianProximityResult
+  - TechnicianProximityInfo
+  - TechnicianLocation
+- domain: assets
+  entities:
+  - AssetLocationRequest
+  - AssetLocationResult
+  - AssetLocationInfo
+  - NextSymptomRequest
+  - NextSymptomResult
+  - Prediction
+  - ObservationExistenceRequest
+  - ObservationExistenceResult
+- domain: maintenance
+  entities:
+  - PreventiveMaintenanceCheckListRequest
+  - PreventiveMaintenanceCheckListResult
+  - Step
+  - FormStep
+  - NumberStep
+  - RadioStep
+  - SelectStep
+  - FormField
+  - RadioOption
+  - BlockingRule
+- domain: reporting
+  entities:
+  - SummaryReportRequest
+  - SummaryReportResult
+  - Site
+  - AgentUsed
+- domain: errors
+  entities:
+  - HTTPValidationError
+  - ValidationError
+entities:
+- name: AgentDataRequest
+  fields:
+  - observation_name
+  required:
+  - observation_name
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/AgentDataRequest
+- name: AgentDataResult
+  fields:
+  - status
+  - message
+  - agents
+  required:
+  - status
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/AgentDataResult
+- name: AgentInfo
+  fields:
+  - event_agent_name
+  - proficiency_score
+  - location
+  required:
+  - event_agent_name
+  - proficiency_score
+  - location
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/AgentInfo
+- name: AgentUsed
+  fields:
+  - id
+  - name
+  - status
+  - result
+  - highlights
+  required:
+  - id
+  - name
+  - status
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/AgentUsed
+- name: AssetLocationInfo
+  fields:
+  - asset_id
+  - location
+  required:
+  - asset_id
+  - location
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/AssetLocationInfo
+- name: AssetLocationRequest
+  fields:
+  - asset_id
+  required:
+  - asset_id
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/AssetLocationRequest
+- name: AssetLocationResult
+  fields:
+  - status
+  - message
+  - asset_location
+  required:
+  - status
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/AssetLocationResult
+- name: BlockingRule
+  fields:
+  - if_value
+  - block
+  required:
+  - if_value
+  - block
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/BlockingRule
+- name: FormField
+  fields:
+  - key
+  - type
+  - disabled_if
+  - placeholder
+  required:
+  - key
+  - type
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/FormField
+- name: FormStep
+  fields:
+  - id
+  - title
+  - type
+  - required
+  - status
+  - fields
+  - values
+  required:
+  - id
+  - title
+  - type
+  - required
+  - status
+  - fields
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/FormStep
+- name: HTTPValidationError
+  fields:
+  - detail
+  required: []
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/HTTPValidationError
+- name: NextSymptomRequest
+  fields:
+  - asset_id
+  - top_n
+  required: []
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/NextSymptomRequest
+- name: NextSymptomResult
+  fields:
+  - asset_id
+  - top_n
+  - predictions
+  - status
+  - message
+  required:
+  - asset_id
+  - top_n
+  - predictions
+  - status
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/NextSymptomResult
+- name: NumberStep
+  fields:
+  - id
+  - title
+  - type
+  - required
+  - status
+  - label
+  - placeholder
+  - key
+  - unit
+  - value
+  required:
+  - id
+  - title
+  - type
+  - required
+  - status
+  - label
+  - placeholder
+  - key
+  - unit
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/NumberStep
+- name: ObservationExistenceRequest
+  fields:
+  - observation_name
+  required:
+  - observation_name
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/ObservationExistenceRequest
+- name: ObservationExistenceResult
+  fields:
+  - status
+  - message
+  - exists
+  - observation_name
+  required:
+  - status
+  - exists
+  - observation_name
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/ObservationExistenceResult
+- name: PartCatalogInfo
+  fields:
+  - part_id
+  - part_name
+  - part_description
+  - part_image_link
+  - part_url_link
+  required:
+  - part_id
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/PartCatalogInfo
+- name: PartCatalogLookupRequest
+  fields:
+  - triage_product_id
+  - question
+  required:
+  - triage_product_id
+  - question
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/PartCatalogLookupRequest
+- name: PartCatalogLookupResult
+  fields:
+  - status
+  - message
+  - parts
+  required:
+  - status
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/PartCatalogLookupResult
+- name: PartInfoRequest
+  fields:
+  - catalog_data
+  required:
+  - catalog_data
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/PartInfoRequest
+- name: PartInfoResult
+  fields:
+  - status
+  - message
+  - part_info
+  required:
+  - status
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/PartInfoResult
+- name: PartSourcesRequest
+  fields:
+  - catalog_data
+  - model
+  - question
+  required:
+  - catalog_data
+  - model
+  - question
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/PartSourcesRequest
+- name: PartSourcesResult
+  fields:
+  - status
+  - message
+  - sources
+  required:
+  - status
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/PartSourcesResult
+- name: Prediction
+  fields:
+  - rank
+  - obs_predict
+  - confidence
+  - how_to_check
+  required:
+  - rank
+  - obs_predict
+  - confidence
+  - how_to_check
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/Prediction
+- name: PreventiveMaintenanceCheckListRequest
+  fields:
+  - asset_id
+  - model
+  required: []
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/PreventiveMaintenanceCheckListRequest
+- name: PreventiveMaintenanceCheckListResult
+  fields:
+  - schema_version
+  - agent_id
+  - steps
+  - status
+  - message
+  required:
+  - schema_version
+  - agent_id
+  - steps
+  - status
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/PreventiveMaintenanceCheckListResult
+- name: RadioOption
+  fields:
+  - value
+  - label
+  required:
+  - value
+  - label
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/RadioOption
+- name: RadioStep
+  fields:
+  - id
+  - title
+  - type
+  - required
+  - status
+  - options
+  - value
+  - blocking_rule
+  required:
+  - id
+  - title
+  - type
+  - required
+  - status
+  - options
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/RadioStep
+- name: SelectStep
+  fields:
+  - id
+  - title
+  - type
+  - required
+  - status
+  - key
+  - options
+  - value
+  required:
+  - id
+  - title
+  - type
+  - required
+  - status
+  - key
+  - options
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/SelectStep
+- name: Site
+  fields:
+  - name
+  - address
+  required:
+  - name
+  - address
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/Site
+- name: Step
+  fields: []
+  required: []
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/Step
+- name: SummaryReportRequest
+  fields:
+  - chat_history
+  required: []
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/SummaryReportRequest
+- name: SummaryReportResult
+  fields:
+  - summary_version
+  - site
+  - agents_used
+  - status
+  - message
+  required:
+  - summary_version
+  - site
+  - agents_used
+  - status
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/SummaryReportResult
+- name: TechnicianLocation
+  fields:
+  - event_agent_name
+  - location
+  required:
+  - event_agent_name
+  - location
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/TechnicianLocation
+- name: TechnicianProximityInfo
+  fields:
+  - event_agent_name
+  - location
+  - proximity_km
+  required:
+  - event_agent_name
+  - location
+  - proximity_km
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/TechnicianProximityInfo
+- name: TechnicianProximityRequest
+  fields:
+  - asset_location
+  - technicians
+  required:
+  - asset_location
+  - technicians
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/TechnicianProximityRequest
+- name: TechnicianProximityResult
+  fields:
+  - status
+  - message
+  - technicians
+  required:
+  - status
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/TechnicianProximityResult
+- name: ValidationError
+  fields:
+  - loc
+  - msg
+  - type
+  - input
+  - ctx
+  required:
+  - loc
+  - msg
+  - type
+  source: openapi/aquant-mcp-server-openapi.json#/components/schemas/ValidationError
+relationships:
+- from: AgentDataResult
+  to: AgentInfo
+  kind: has_many
+  via: agents
+- from: AssetLocationResult
+  to: AssetLocationInfo
+  kind: has_one
+  via: asset_location
+- from: FormStep
+  to: FormField
+  kind: has_many
+  via: fields
+- from: HTTPValidationError
+  to: ValidationError
+  kind: has_many
+  via: detail
+- from: NextSymptomResult
+  to: Prediction
+  kind: has_many
+  via: predictions
+- from: PartCatalogLookupResult
+  to: PartCatalogInfo
+  kind: has_many
+  via: parts
+- from: PartInfoRequest
+  to: PartCatalogInfo
+  kind: has_many
+  via: catalog_data
+- from: PartSourcesRequest
+  to: PartCatalogInfo
+  kind: has_many
+  via: catalog_data
+- from: PreventiveMaintenanceCheckListResult
+  to: Step
+  kind: has_many
+  via: steps
+- from: RadioStep
+  to: RadioOption
+  kind: has_many
+  via: options
+- from: RadioStep
+  to: BlockingRule
+  kind: has_one
+  via: blocking_rule
+- from: SummaryReportResult
+  to: Site
+  kind: has_one
+  via: site
+- from: SummaryReportResult
+  to: AgentUsed
+  kind: has_many
+  via: agents_used
+- from: TechnicianProximityRequest
+  to: TechnicianLocation
+  kind: has_many
+  via: technicians
+- from: TechnicianProximityResult
+  to: TechnicianProximityInfo
+  kind: has_many
+  via: technicians

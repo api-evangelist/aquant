@@ -1,0 +1,127 @@
+generated: '2026-07-31'
+method: derived
+source: >-
+  openapi/aquant-mcp-server-openapi.json, openapi/aquant-voiceai-api-openapi.json,
+  mcp/aquant-mcp-tools.json, well-known/aquant-openid-configuration.json,
+  https://security.aquant.ai/, live probes 2026-07-31
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: >-
+    Two live documents declare openapi 3.1.0 — https://mcp.aquant.ai/openapi.json (11
+    operations, 37 component schemas) and https://voiceai-api.aquant.ai/openapi.json (2 health
+    operations).
+- id: json-schema-2020-12
+  conforms: true
+  evidence: OpenAPI 3.1.0 schemas are JSON Schema 2020-12; captured at json-schema/aquant-mcp-server-schemas.json.
+- id: mcp
+  conforms: true
+  version: '2025-06-18'
+  transport: streamable-http
+  evidence: >-
+    POST https://mcp.aquant.ai/mcp initialize → 200 with protocolVersion 2025-06-18 and
+    serverInfo "Aquant MCP Server (Authenticated)" 1.28.1; tools/list returns 11 tools with
+    inputSchema. Capabilities advertise tools only; resources/list and prompts/list return
+    -32601 Method not found.
+- id: jsonrpc-2.0
+  conforms: true
+  evidence: The /mcp transport speaks JSON-RPC 2.0, including well-formed -32600/-32601 error objects.
+- id: sse
+  conforms: true
+  evidence: >-
+    POST /vss/web-chat streams text/event-stream; each data: line carries a JSON text delta,
+    terminated by {"done": true}. Documented in @aquantinc/acp-web-sdk.
+- id: webrtc
+  conforms: true
+  evidence: ACP voice calls use WebRTC via the Twilio browser SDK adapter (SDK README, Voice section).
+- id: oidc
+  conforms: true
+  scope: platform sign-in only
+  evidence: >-
+    https://login.aquant.ai/.well-known/openid-configuration returns a complete OpenID Connect
+    Discovery 1.0 document (Okta tenant). Not used to authorize the public APIs.
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  scope: platform sign-in only
+  evidence: https://login.aquant.ai/.well-known/oauth-authorization-server → 200.
+- id: oauth2
+  conforms: partial
+  evidence: >-
+    OAuth 2.0 is available at the Okta identity tenant (authorization_code + PKCE S256,
+    device_code, refresh_token), but neither public API declares an oauth2 security scheme or
+    accepts an OAuth token.
+- id: rfc9728-oauth-protected-resource-metadata
+  conforms: false
+  evidence: https://mcp.aquant.ai/.well-known/oauth-protected-resource → 404. MCP clients cannot discover how to authenticate tool calls.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    No application/problem+json anywhere. Three separate error envelopes in use — FastAPI
+    {"detail":[...]}, a custom {"status_code":10422,...}, and JSON-RPC error objects.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: >-
+    /.well-known/security.txt is 404 on every Aquant-operated host. The 200 at
+    support.aquant.ai is Atlassian's vendor-served file for Jira Service Management, not Aquant's.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation header observed; no deprecation policy published.
+- id: a2a
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json return 404 on all seven Aquant
+    hosts probed. No A2A agent card is published.
+- id: asyncapi
+  conforms: false
+  evidence: >-
+    No AsyncAPI document and no webhook catalog. Aquant's event surface (SSE web-chat, WebRTC
+    voice) is client-pull streaming, not a subscribable event API.
+- id: llms-txt
+  conforms: true
+  evidence: https://www.aquant.ai/llms.txt → 200, well-formed llms.txt (H1 + blockquote + link sections). Saved at llms/aquant-llms.txt.
+- id: json-api
+  conforms: false
+  evidence: Plain JSON; no JSON:API media type or document structure.
+- id: odata
+  conforms: false
+- id: scim2
+  conforms: false
+- id: fhir
+  conforms: false
+  note: Aquant serves medical-device SERVICE organizations, not clinical data; no FHIR surface.
+- id: hipaa
+  conforms: true
+  kind: compliance-program
+  evidence: HIPAA listed among published certifications at https://security.aquant.ai/.
+- id: soc2
+  conforms: true
+  kind: compliance-program
+  evidence: SOC 1 and SOC 2 listed at https://security.aquant.ai/ (SafeBase trust center).
+- id: iso-27001
+  conforms: true
+  kind: compliance-program
+  evidence: ISO/IEC 27001 listed at https://security.aquant.ai/.
+- id: fedramp
+  conforms: true
+  level: Moderate
+  kind: compliance-program
+  evidence: FedRAMP Moderate listed at https://security.aquant.ai/.
+- id: gdpr
+  conforms: true
+  kind: compliance-program
+  evidence: >-
+    GDPR listed at https://security.aquant.ai/; a Data Processing Agreement is published at
+    https://www.aquant.ai/data-processing-agreement.
+- id: ccpa
+  conforms: true
+  kind: compliance-program
+  evidence: CCPA listed at https://security.aquant.ai/.
+- id: pci-dss
+  conforms: false
+  evidence: Not listed among published certifications; Aquant handles no card data.
+summary:
+  conformant: 11
+  partial: 1
+  non_conformant: 9
+  compliance_programs_published: 6
+  trust_center: security/aquant-trust-center.yml

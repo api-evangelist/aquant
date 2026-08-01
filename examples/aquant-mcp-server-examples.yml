@@ -1,0 +1,134 @@
+generated: '2026-07-31'
+method: searched
+source: https://mcp.aquant.ai/mcp (JSON-RPC tools/list, anonymous)
+note: >-
+  Example responses published verbatim by the Aquant MCP Server inside each tool description
+  (fenced "**Example Response:**" JSON blocks returned by tools/list). Copied exactly as
+  served — not fabricated, and not edited. Note that Aquant ships these as SHAPE templates:
+  the values are titleised field names ("Part Id", "Status"), not realistic sample data. They
+  document the response structure, not representative payloads.
+examples:
+- tool: part_catalog_lookup
+  operationId: part_catalog_lookup
+  path: /part-catalog-lookup
+  status: 200
+  content_type: application/json
+  response:
+    status: Status
+    message: Message
+    parts:
+    - part_id: Part Id
+      part_name: Part Name
+      part_description: Part Description
+      part_image_link: Part Image Link
+      part_url_link: Part Url Link
+- tool: part_info
+  operationId: part_info
+  path: /part-info
+  status: 200
+  content_type: application/json
+  response:
+    status: Status
+    message: Message
+    part_info:
+    - {}
+- tool: part_sources
+  operationId: part_sources
+  path: /part-sources
+  status: 200
+  content_type: application/json
+  response:
+    status: Status
+    message: Message
+    sources:
+    - {}
+- tool: agent_data
+  operationId: agent_data
+  path: /agent-data
+  status: 200
+  content_type: application/json
+  response:
+    status: Status
+    message: Message
+    agents:
+    - event_agent_name: Event Agent Name
+      proficiency_score: 1.0
+      location: Location
+- tool: technician_proximity
+  operationId: technician_proximity
+  path: /technician-proximity
+  status: 200
+  content_type: application/json
+  response:
+    status: Status
+    message: Message
+    technicians:
+    - event_agent_name: Event Agent Name
+      location: Location
+      proximity_km: 1.0
+- tool: observation_existence
+  operationId: observation_existence
+  path: /observation-existence
+  status: 200
+  content_type: application/json
+  response:
+    status: Status
+    message: Message
+    exists: true
+    observation_name: Observation Name
+- tool: asset_location
+  operationId: asset_location
+  path: /asset-location
+  status: 200
+  content_type: application/json
+  response:
+    status: Status
+    message: Message
+    asset_location:
+      asset_id: Asset Id
+      location: Location
+- tool: preventive_maintenance_check_list
+  operationId: preventive_maintenance_check_list
+  path: /preventive-maintenance-check-list
+  status: 200
+  content_type: application/json
+  response:
+    schema_version: Schema Version
+    agent_id: Agent Id
+    steps: []
+    status: Status
+    message: Message
+- tool: summary_report
+  operationId: summary_report
+  path: /summary-report
+  status: 200
+  content_type: application/json
+  response:
+    summary_version: Summary Version
+    site:
+      name: Name
+      address: Address
+    agents_used:
+    - id: Id
+      name: Name
+      status: Status
+      highlights:
+      - string
+    status: Status
+    message: Message
+- tool: next_symptom
+  operationId: next_symptom
+  path: /next-symptom
+  status: 200
+  content_type: application/json
+  response:
+    asset_id: Asset Id
+    top_n: 1
+    predictions:
+    - rank: 1
+      obs_predict: Obs Predict
+      confidence: Confidence
+      how_to_check:
+      - string
+    status: Status
+    message: Message

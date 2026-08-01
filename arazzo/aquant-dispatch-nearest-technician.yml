@@ -1,0 +1,59 @@
+arazzo: 1.0.1
+info:
+  title: Locate an asset and rank the nearest qualified technician
+  summary: Resolve an asset location, pull technician proficiency, then rank technicians by proximity.
+  version: 1.0.0
+sourceDescriptions:
+- name: aquantMcp
+  url: ../openapi/aquant-mcp-server-openapi.json
+  type: openapi
+workflows:
+- workflowId: dispatch-nearest-technician
+  summary: >-
+    Read-only dispatch support. Aquant's public API ranks technicians; it does not assign,
+    schedule, or notify.
+  inputs:
+    type: object
+    required: [asset_id, observation_name]
+    properties:
+      asset_id: {type: string}
+      observation_name: {type: string, description: The symptom the job is about; scopes which technicians are returned.}
+  steps:
+  - stepId: locate-asset
+    description: Resolve where the asset is.
+    operationId: asset_location
+    requestBody:
+      contentType: application/json
+      payload:
+        asset_id: $inputs.asset_id
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      asset_location: $response.body#/asset_location
+  - stepId: get-technicians
+    description: Pull technicians (Aquant "agents") and their proficiency for this observation.
+    operationId: agent_data
+    requestBody:
+      contentType: application/json
+      payload:
+        observation_name: $inputs.observation_name
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      agents: $response.body#/agents
+  - stepId: rank-by-proximity
+    description: Rank the candidate technicians by distance to the asset.
+    operationId: technician_proximity
+    requestBody:
+      contentType: application/json
+      payload:
+        asset_location: $steps.locate-asset.outputs.asset_location
+        technicians: $steps.get-technicians.outputs.agents
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      ranked: $response.body#/technician_proximity
+  outputs:
+    asset_location: $steps.locate-asset.outputs.asset_location
+    agents: $steps.get-technicians.outputs.agents
+    ranked: $steps.rank-by-proximity.outputs.ranked

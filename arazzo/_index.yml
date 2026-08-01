@@ -1,0 +1,20 @@
+generated: '2026-07-31'
+method: generated
+source: openapi/aquant-mcp-server-openapi.json
+note: >-
+  Native Arazzo 1.0.1 workflows stitching Aquant's own MCP-server operations into real
+  multi-step service flows. Every operationId was verified verbatim against the live spec.
+  No sandbox/test values exist to seed inputs — Aquant publishes none.
+workflows:
+- file: aquant-diagnose-and-source-part.yml
+  workflowId: diagnose-and-source-part
+  title: Diagnose an asset and source the right replacement part
+  summary: observation_existence -> next_symptom -> part_catalog_lookup -> part_info -> part_sources
+- file: aquant-dispatch-nearest-technician.yml
+  workflowId: dispatch-nearest-technician
+  title: Locate an asset and rank the nearest qualified technician
+  summary: asset_location -> agent_data -> technician_proximity
+- file: aquant-preventive-maintenance-visit.yml
+  workflowId: preventive-maintenance-visit
+  title: Run a preventive-maintenance visit and file the summary
+  summary: health_check -> preventive_maintenance_check_list -> summary_report

@@ -1,23 +1,190 @@
 aid: aquant
 name: Aquant
-description: 'Aquant is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Aquant is an agentic AI platform built for organizations that manufacture,
+  sell, and service complex equipment. It turns a company''s own service content —
+  manuals, service histories, parts and warranty data, case notes — and the tacit expertise
+  in its technicians'' heads into role-specific AI agents for field technicians, call
+  centers, customer self-service, and service leaders. The platform ships a library
+  of prebuilt agents (Troubleshooting, Knowledge, Parts, IoT, Voice AI, Vision AI,
+  Preventive Maintenance) plus an Agent Studio for building custom agents, and delivers
+  them across web, mobile, voice, offline, and API channels into CRM, FSM, and support-portal
+  workflows. Aquant exposes two public machine-readable surfaces: an MCP server at
+  mcp.aquant.ai that publishes eleven service-intelligence tools over both JSON-RPC
+  Streamable HTTP and REST, and the Aquant Conversation Platform (ACP) voice/chat API
+  at voiceai-api.aquant.ai fronted by a first-party browser SDK.'
 url: https://raw.githubusercontent.com/api-evangelist/aquant/refs/heads/main/apis.yml
+image: https://cdn.prod.website-files.com/687529371c5de2d8428c0a4d/6877cd3487c351b4d9032d3b_logo-aquant-light.svg
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-07-31'
 modified: '2026-07-31'
 tags:
 - Company
-apis: []
+- Artificial Intelligence
+- Agents
+- Field Service
+- Service Management
+- Manufacturing
+- Medical Devices
+- Industrial Equipment
+- Knowledge Management
+- Voice AI
+- Model Context Protocol
+- Predictive Maintenance
+apis:
+- aid: aquant:mcp-server
+  name: Aquant MCP Server
+  description: 'The Aquant MCP Server exposes Aquant''s service-intelligence capabilities
+    as eleven agent-callable tools — part catalog lookup, part info and sourcing, agent
+    (technician) data, technician proximity, observation existence, asset location,
+    preventive-maintenance checklists, next-symptom prediction, summary reports, and
+    a health check. The same eleven operations are published twice: as MCP tools over
+    JSON-RPC Streamable HTTP at /mcp, and as REST POST operations described by a public
+    OpenAPI 3.1.0 document at /openapi.json with Swagger UI and ReDoc renderings.'
+  humanURL: https://www.aquant.ai/platform
+  baseURL: https://mcp.aquant.ai
+  tags:
+  - Model Context Protocol
+  - Agents
+  - Field Service
+  - Parts
+  - Predictive Maintenance
+  properties:
+  - type: OpenAPI
+    url: openapi/aquant-mcp-server-openapi.json
+  - type: MCPServer
+    url: mcp/aquant-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/aquant-tool-crosswalk.yml
+  - type: APIReference
+    url: https://mcp.aquant.ai/docs
+  - type: Overlay
+    url: overlays/aquant-mcp-server-overlay.yaml
+  - type: DataModel
+    url: data-model/aquant-data-model.yml
+  - type: ErrorCatalog
+    url: errors/aquant-problem-types.yml
+  - type: Examples
+    url: examples/aquant-mcp-server-examples.yml
+  - type: JSONSchema
+    url: json-schema/aquant-mcp-server-schemas.json
+- aid: aquant:acp-voiceai
+  name: Aquant Conversation Platform (VoiceAI) API
+  description: 'The Aquant Conversation Platform (ACP) API powers Voice AI and web
+    chat with Aquant''s service agents. Clients exchange an API key and secret for a
+    one-hour access token at POST /acp/token, then start WebRTC voice calls with the
+    named agent or stream web-chat replies as Server-Sent Events from POST /vss/web-chat.
+    The public OpenAPI document at /openapi.json currently describes only the liveness
+    and readiness probes; the ACP and VSS routes are live and documented in the
+    first-party @aquantinc/acp-web-sdk browser SDK rather than in the served spec.'
+  humanURL: https://www.npmjs.com/package/@aquantinc/acp-web-sdk
+  baseURL: https://voiceai-api.aquant.ai
+  tags:
+  - Voice AI
+  - Chat
+  - Agents
+  - Conversation
+  - Server-Sent Events
+  properties:
+  - type: OpenAPI
+    url: openapi/aquant-voiceai-api-openapi.json
+  - type: APIReference
+    url: https://voiceai-api.aquant.ai/docs
+  - type: GettingStarted
+    url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start
+  - type: SDKs
+    url: packages/aquant-packages.yml
+  - type: Overlay
+    url: overlays/aquant-voiceai-api-overlay.yaml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: TrustCenter
+  url: security/aquant-trust-center.yml
 - type: Website
-  url: https://forgeglobal.com/aquant_stock/
+  url: https://www.aquant.ai/
+- type: Documentation
+  url: https://www.aquant.ai/platform
+- type: APIReference
+  url: https://mcp.aquant.ai/docs
+- type: GettingStarted
+  url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start
+- type: Support
+  url: https://support.aquant.ai/
+- type: Blog
+  url: https://www.aquant.ai/resources/blog
+- type: GitHubOrganization
+  url: https://github.com/AquantIO
+- type: Login
+  url: https://login.aquant.ai/
+- type: TermsOfService
+  url: https://cdn.prod.website-files.com/687529371c5de2d8428c0a4d/688ce744542f10274811b354_Terms%20of%20Service.pdf
+- type: PrivacyPolicy
+  url: https://www.aquant.ai/privacy-policy
+- type: TrustCenter
+  url: https://security.aquant.ai/
+- type: Compliance
+  url: https://security.aquant.ai/
+- type: MCPServer
+  url: mcp/aquant-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/aquant-tool-crosswalk.yml
+- type: Packages
+  url: packages/aquant-packages.yml
+- type: SDKs
+  url: packages/aquant-packages.yml
+- type: LLMsTxt
+  url: llms/aquant-llms.txt
+- type: WellKnown
+  url: well-known/aquant-well-known.yml
+- type: Authentication
+  url: authentication/aquant-authentication.yml
+- type: OAuthScopes
+  url: scopes/aquant-scopes.yml
+- type: Conventions
+  url: conventions/aquant-conventions.yml
+- type: ErrorCatalog
+  url: errors/aquant-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/aquant-lifecycle.yml
+- type: ChangeLog
+  url: https://www.aquant.ai/company/whats-new
+- type: ChangeLog
+  url: changelog/aquant-changelog.yml
+- type: Conformance
+  url: conformance/aquant-conformance.yml
+- type: DataModel
+  url: data-model/aquant-data-model.yml
+- type: AgenticAccess
+  url: agentic-access/aquant-agentic-access.yml
+- type: DomainSecurity
+  url: security/aquant-domain-security.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Arazzo
+  name: Aquant Arazzo workflows
+  url: arazzo/_index.yml
+- type: Arazzo
+  name: Diagnose an asset and source the right replacement part
+  url: arazzo/aquant-diagnose-and-source-part.yml
+- type: Arazzo
+  name: Locate an asset and rank the nearest qualified technician
+  url: arazzo/aquant-dispatch-nearest-technician.yml
+- type: Arazzo
+  name: Run a preventive-maintenance visit and file the summary
+  url: arazzo/aquant-preventive-maintenance-visit.yml
+- type: Overlay
+  url: overlays/aquant-mcp-server-overlay.yaml
+- type: JSONSchema
+  url: json-schema/aquant-mcp-server-schemas.json
+- type: Examples
+  url: examples/aquant-mcp-server-examples.yml
+x-enrichment:
+  date: '2026-07-31'
+  status: enriched
+  artifacts_added: 34
+  pass: local-v1

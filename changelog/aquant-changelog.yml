@@ -1,0 +1,55 @@
+generated: '2026-07-31'
+method: searched
+source: https://www.aquant.ai/company/whats-new
+url: https://www.aquant.ai/company/whats-new
+scheme: dated product announcements (no semantic version, no API changelog)
+kind: product
+note: >-
+  Aquant publishes a "What's New" product page, not a developer changelog. Entries are dated
+  feature announcements without version numbers, breaking-change flags, or endpoint diffs.
+  Neither the MCP server nor the ACP/VoiceAI API has a changelog of its own — the running MCP
+  server reports 1.28.1 while its published OpenAPI still says 1.0.0, and no record of what
+  changed between those exists publicly.
+current_version:
+  aquant:mcp-server: 1.28.1
+  aquant:acp-voiceai: null
+  '@aquantinc/acp-web-sdk': 0.1.3
+entries:
+- date: '2025-08-05'
+  title: Agentic AI Platform
+  kind: launch
+  breaking: false
+  highlights:
+  - Build, bring, and deploy custom AI agents inside Aquant.
+  - Pre-built service agents shipped for immediate deployment.
+  - Integrate internally developed agents into the Aquant ecosystem.
+  source: https://www.aquant.ai/resources/post/aquant-launches-agentic-ai-platform-giving-service-organizations-the-power-to-build-bring-and-deploy-custom-ai-agents
+- date: '2025-04-22'
+  title: AI in Offline Mode
+  kind: feature
+  breaking: false
+  highlights:
+  - AI functionality without cloud connectivity for field work.
+  - Key data and workflows preloaded to the device based on job history; syncs on reconnect.
+- date: '2025-04-22'
+  title: Voice AI
+  kind: feature
+  breaking: false
+  highlights:
+  - Phone-based, hands-free AI support for technicians and customers.
+  - Human escalation and continuous learning.
+  related_surface: aquant:acp-voiceai
+sdk_releases:
+  package: '@aquantinc/acp-web-sdk'
+  source: https://registry.npmjs.org/@aquantinc/acp-web-sdk
+  versions:
+  - {version: 0.1.0, first_published: '2026-04-21'}
+  - {version: 0.1.1}
+  - {version: 0.1.2}
+  - {version: 0.1.3, last_modified: '2026-04-28'}
+related:
+- name: Agent Library launch
+  url: https://www.aquant.ai/resources/post/aquant-launches-agent-library-to-scale-domain-intelligence-across-every-role-and-function
+gaps:
+- No per-API changelog, no breaking-change notices, no dated endpoint diffs.
+- No RSS/Atom feed for the What's New page.
