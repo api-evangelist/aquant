@@ -1,0 +1,195 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Aquant MCP Server",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Part Catalog Lookup",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/part-catalog-lookup",
+        "params": [
+          {
+            "name": "tenant_id",
+            "value": "",
+            "type": "query",
+            "description": "[TEMPORARY] The tenant ID. This should be removed in the future."
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Look up part information from the catalog using a triage product ID and a user question.\n\nArgs:\n    payload: The request body containing triage_product_id and question.\n    tenant_id: [TEMPORARY] The tenant ID. This should be removed in the future.\n    db_session: Mock database session (ready for future replacement with real DB)"
+    },
+    {
+      "info": {
+        "name": "Part Info",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/part-info",
+        "params": [
+          {
+            "name": "tenant_id",
+            "value": "",
+            "type": "query",
+            "description": "[TEMPORARY] The tenant ID. This should be removed in the future."
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Retrieve detailed part information given catalog data from the lookup tool.\n\nArgs:\n    payload: The request body containing catalog_data.\n    tenant_id: [TEMPORARY] The tenant ID. This should be removed in the future.\n    db_session: Mock database session (ready for future replacement with real DB)"
+    },
+    {
+      "info": {
+        "name": "Part Sources",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/part-sources",
+        "params": [
+          {
+            "name": "tenant_id",
+            "value": "",
+            "type": "query",
+            "description": "[TEMPORARY] The tenant ID. This should be removed in the future."
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Retrieve sources for parts given catalog data, model, and question.\n\nArgs:\n    payload: The request body containing catalog_data, model, and question.\n    tenant_id: [TEMPORARY] The tenant ID. This should be removed in the future.\n    db_session: Mock database session (ready for future replacement with real DB)"
+    },
+    {
+      "info": {
+        "name": "Agent Data",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/agent-data",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Retrieve agents and their proficiency scores based on an observation name.\n\nArgs:\n    payload: The request body containing observation_name."
+    },
+    {
+      "info": {
+        "name": "Technician Proximity",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/technician-proximity",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Retrieve technicians and their proximity to an asset location.\n\nArgs:\n    payload: The request body containing asset_location and technicians."
+    },
+    {
+      "info": {
+        "name": "Observation Existence",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/observation-existence",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Check if an observation exists in the loaded data.\n\nArgs:\n    payload: The request body containing observation_name."
+    },
+    {
+      "info": {
+        "name": "Asset Location",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/asset-location",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Retrieve the location of an asset based on its ID.\n\nArgs:\n    payload: The request body containing asset_id."
+    },
+    {
+      "info": {
+        "name": "Preventive Maintenance Check List",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/preventive-maintenance-check-list",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Generate a preventive maintenance check list for a model or asset.\n\nArgs:\n    payload: The request body containing asset_id."
+    },
+    {
+      "info": {
+        "name": "Summary Report",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/summary-report",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Generate a summary report for a chat history."
+    },
+    {
+      "info": {
+        "name": "Next Symptom",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/next-symptom",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Generate a next symptom for an asset based on its ID."
+    },
+    {
+      "info": {
+        "name": "Health Check",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/health"
+      },
+      "docs": "Health Check"
+    }
+  ],
+  "bundled": true
+}

@@ -20,9 +20,9 @@ discovery:
   tools_list: POST /mcp {"jsonrpc":"2.0","method":"tools/list"} with mcp-session-id → 200
   rest_mirror: https://mcp.aquant.ai/openapi.json (OpenAPI 3.1.0, 11 operations)
   anonymous_tools_list: true
-  note: tools/list responded anonymously — no OAuth challenge, no /.well-known/oauth-protected-resource (404). The server
-    name says "(Authenticated)" and every domain tool takes a tenant_id, so tool INVOCATION is expected to be tenant-scoped
-    even though the tool manifest is public.
+  note: tools/list responded anonymously — no OAuth challenge, no /.well-known/oauth-protected-resource
+    (404). The server name says "(Authenticated)" and every domain tool takes a tenant_id, so tool INVOCATION
+    is expected to be tenant-scoped even though the tool manifest is public.
 x-evidence:
   fetched: '2026-07-31'
   url: https://mcp.aquant.ai/mcp
@@ -118,3 +118,10 @@ tools:
   required: []
   parameters: []
   source_operation: openapi/aquant-mcp-server-openapi.json#health_check
+deployment:
+  mode: remote
+  endpoint: https://mcp.aquant.ai/mcp
+  verified: probed
+  probe: live
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,1479 @@
+{
+  "item": [
+    {
+      "id": "ba2e26a3-d58e-4f74-9a9d-be2adcea79c6",
+      "name": "Part Catalog Lookup",
+      "request": {
+        "name": "Part Catalog Lookup",
+        "description": {
+          "content": "Look up part information from the catalog using a triage product ID and a user question.\n\nArgs:\n    payload: The request body containing triage_product_id and question.\n    tenant_id: [TEMPORARY] The tenant ID. This should be removed in the future.\n    db_session: Mock database session (ready for future replacement with real DB)",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "part-catalog-lookup"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "tenant_id",
+              "value": "<string>",
+              "description": "(Required) [TEMPORARY] The tenant ID. This should be removed in the future."
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"triage_product_id\": \"<string>\",\n  \"question\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "2f0c8ca8-ac34-486d-95c1-cc8c325294db",
+          "name": "Successful Response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "part-catalog-lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "tenant_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"triage_product_id\": \"<string>\",\n  \"question\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "74dabb83-6552-44d4-a23c-bb9705de7449",
+          "name": "Validation Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "part-catalog-lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "tenant_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"triage_product_id\": \"<string>\",\n  \"question\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+          "code": 422,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "d49ce132-3b01-4664-99ba-9b5e6716b439",
+      "name": "Part Info",
+      "request": {
+        "name": "Part Info",
+        "description": {
+          "content": "Retrieve detailed part information given catalog data from the lookup tool.\n\nArgs:\n    payload: The request body containing catalog_data.\n    tenant_id: [TEMPORARY] The tenant ID. This should be removed in the future.\n    db_session: Mock database session (ready for future replacement with real DB)",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "part-info"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "tenant_id",
+              "value": "<string>",
+              "description": "(Required) [TEMPORARY] The tenant ID. This should be removed in the future."
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"catalog_data\": [\n    {\n      \"part_id\": \"<string>\",\n      \"part_name\": \"<string>\",\n      \"part_description\": \"<string>\",\n      \"part_image_link\": \"<string>\",\n      \"part_url_link\": \"<string>\"\n    },\n    {\n      \"part_id\": \"<string>\",\n      \"part_name\": \"<string>\",\n      \"part_description\": \"<string>\",\n      \"part_image_link\": \"<string>\",\n      \"part_url_link\": \"<string>\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "40b47ca5-3436-46ea-896e-6ca5f86af227",
+          "name": "Successful Response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "part-info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "tenant_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"catalog_data\": [\n    {\n      \"part_id\": \"string\",\n      \"part_name\": \"string\",\n      \"part_description\": \"string\",\n      \"part_image_link\": \"string\",\n      \"part_url_link\": \"string\"\n    },\n    {\n      \"part_id\": \"string\",\n      \"part_name\": \"string\",\n      \"part_description\": \"string\",\n      \"part_image_link\": \"string\",\n      \"part_url_link\": \"string\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "be761be8-7097-42dd-a1ad-6ca23ad8b32f",
+          "name": "Validation Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "part-info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "tenant_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"catalog_data\": [\n    {\n      \"part_id\": \"string\",\n      \"part_name\": \"string\",\n      \"part_description\": \"string\",\n      \"part_image_link\": \"string\",\n      \"part_url_link\": \"string\"\n    },\n    {\n      \"part_id\": \"string\",\n      \"part_name\": \"string\",\n      \"part_description\": \"string\",\n      \"part_image_link\": \"string\",\n      \"part_url_link\": \"string\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+          "code": 422,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "3354160a-79c0-4985-93af-f0706a7de0e4",
+      "name": "Part Sources",
+      "request": {
+        "name": "Part Sources",
+        "description": {
+          "content": "Retrieve sources for parts given catalog data, model, and question.\n\nArgs:\n    payload: The request body containing catalog_data, model, and question.\n    tenant_id: [TEMPORARY] The tenant ID. This should be removed in the future.\n    db_session: Mock database session (ready for future replacement with real DB)",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "part-sources"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "tenant_id",
+              "value": "<string>",
+              "description": "(Required) [TEMPORARY] The tenant ID. This should be removed in the future."
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"catalog_data\": [\n    {\n      \"part_id\": \"<string>\",\n      \"part_name\": \"<string>\",\n      \"part_description\": \"<string>\",\n      \"part_image_link\": \"<string>\",\n      \"part_url_link\": \"<string>\"\n    },\n    {\n      \"part_id\": \"<string>\",\n      \"part_name\": \"<string>\",\n      \"part_description\": \"<string>\",\n      \"part_image_link\": \"<string>\",\n      \"part_url_link\": \"<string>\"\n    }\n  ],\n  \"model\": \"<string>\",\n  \"question\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "6c8cc921-88ef-4c75-b2b7-61925197f115",
+          "name": "Successful Response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "part-sources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "tenant_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"catalog_data\": [\n    {\n      \"part_id\": \"string\",\n      \"part_name\": \"string\",\n      \"part_description\": \"string\",\n      \"part_image_link\": \"string\",\n      \"part_url_link\": \"string\"\n    },\n    {\n      \"part_id\": \"string\",\n      \"part_name\": \"string\",\n      \"part_description\": \"string\",\n      \"part_image_link\": \"string\",\n      \"part_url_link\": \"string\"\n    }\n  ],\n  \"model\": \"<string>\",\n  \"question\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "23e2c131-a312-400d-8e6f-aad246850d0a",
+          "name": "Validation Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "part-sources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "tenant_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"catalog_data\": [\n    {\n      \"part_id\": \"string\",\n      \"part_name\": \"string\",\n      \"part_description\": \"string\",\n      \"part_image_link\": \"string\",\n      \"part_url_link\": \"string\"\n    },\n    {\n      \"part_id\": \"string\",\n      \"part_name\": \"string\",\n      \"part_description\": \"string\",\n      \"part_image_link\": \"string\",\n      \"part_url_link\": \"string\"\n    }\n  ],\n  \"model\": \"<string>\",\n  \"question\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+          "code": 422,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "eadbaaef-d34e-498c-8d92-19d8dbf81f0b",
+      "name": "Agent Data",
+      "request": {
+        "name": "Agent Data",
+        "description": {
+          "content": "Retrieve agents and their proficiency scores based on an observation name.\n\nArgs:\n    payload: The request body containing observation_name.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "agent-data"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"observation_name\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "77250c98-3378-4864-91f9-c71fb76acd42",
+          "name": "Successful Response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "agent-data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"observation_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "894f1641-272f-49e3-86d3-3a17556ae613",
+          "name": "Validation Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "agent-data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"observation_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+          "code": 422,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "26308b6f-0675-4b40-aa4d-1822b2c43432",
+      "name": "Technician Proximity",
+      "request": {
+        "name": "Technician Proximity",
+        "description": {
+          "content": "Retrieve technicians and their proximity to an asset location.\n\nArgs:\n    payload: The request body containing asset_location and technicians.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "technician-proximity"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"asset_location\": \"<string>\",\n  \"technicians\": [\n    {\n      \"event_agent_name\": \"<string>\",\n      \"location\": \"<string>\"\n    },\n    {\n      \"event_agent_name\": \"<string>\",\n      \"location\": \"<string>\"\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "74a3e350-a7f6-4633-a018-b30ad699e8ae",
+          "name": "Successful Response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "technician-proximity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_location\": \"<string>\",\n  \"technicians\": [\n    {\n      \"event_agent_name\": \"string\",\n      \"location\": \"string\"\n    },\n    {\n      \"event_agent_name\": \"string\",\n      \"location\": \"string\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "c4dd2029-46e3-40a7-a940-fba9f07f3f2c",
+          "name": "Validation Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "technician-proximity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_location\": \"<string>\",\n  \"technicians\": [\n    {\n      \"event_agent_name\": \"string\",\n      \"location\": \"string\"\n    },\n    {\n      \"event_agent_name\": \"string\",\n      \"location\": \"string\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+          "code": 422,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "ac8c3a3b-d69d-42a4-b3ea-262484687aca",
+      "name": "Observation Existence",
+      "request": {
+        "name": "Observation Existence",
+        "description": {
+          "content": "Check if an observation exists in the loaded data.\n\nArgs:\n    payload: The request body containing observation_name.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "observation-existence"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"observation_name\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "4fd9ccda-e769-4f6d-9714-adaea9774ec5",
+          "name": "Successful Response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "observation-existence"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"observation_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": \"string\",\n  \"exists\": false,\n  \"observation_name\": \"string\",\n  \"message\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "a2f3eb83-cb0f-4cae-a428-f1e61d21eeae",
+          "name": "Validation Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "observation-existence"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"observation_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+          "code": 422,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "4e9058d5-05f5-4035-8e92-41aa984fe3d6",
+      "name": "Asset Location",
+      "request": {
+        "name": "Asset Location",
+        "description": {
+          "content": "Retrieve the location of an asset based on its ID.\n\nArgs:\n    payload: The request body containing asset_id.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "asset-location"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"asset_id\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "dcd606c5-63d2-443e-9a2f-e9ec4e297276",
+          "name": "Successful Response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "asset-location"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\",\n  \"asset_location\": {\n    \"asset_id\": \"string\",\n    \"location\": \"string\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "7407338b-949e-4017-a94d-521dc5453ac3",
+          "name": "Validation Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "asset-location"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+          "code": 422,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "980bd824-a6d8-4f92-a699-749b88e6a5b5",
+      "name": "Preventive Maintenance Check List",
+      "request": {
+        "name": "Preventive Maintenance Check List",
+        "description": {
+          "content": "Generate a preventive maintenance check list for a model or asset.\n\nArgs:\n    payload: The request body containing asset_id.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "preventive-maintenance-check-list"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"asset_id\": \"<string>\",\n  \"model\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "735d6a17-2c20-41c8-95aa-001849a297d1",
+          "name": "Successful Response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "preventive-maintenance-check-list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_id\": \"<string>\",\n  \"model\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"schema_version\": \"string\",\n  \"agent_id\": \"string\",\n  \"steps\": [\n    {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"type\": \"string\",\n      \"required\": false,\n      \"status\": \"string\",\n      \"options\": [\n        {\n          \"value\": \"string\",\n          \"label\": \"string\"\n        },\n        {\n          \"value\": \"string\",\n          \"label\": \"string\"\n        }\n      ],\n      \"value\": \"string\",\n      \"blocking_rule\": {\n        \"if_value\": \"string\",\n        \"block\": true\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"type\": \"string\",\n      \"required\": true,\n      \"status\": \"string\",\n      \"options\": [\n        {\n          \"value\": \"string\",\n          \"label\": \"string\"\n        },\n        {\n          \"value\": \"string\",\n          \"label\": \"string\"\n        }\n      ],\n      \"value\": \"string\",\n      \"blocking_rule\": {\n        \"if_value\": \"string\",\n        \"block\": false\n      }\n    }\n  ],\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "ed0bee40-31e8-47da-b3fe-844beb6f67ca",
+          "name": "Validation Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "preventive-maintenance-check-list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_id\": \"<string>\",\n  \"model\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+          "code": 422,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "c2ec7664-9914-4ecf-9eb7-e59069ec1566",
+      "name": "Summary Report",
+      "request": {
+        "name": "Summary Report",
+        "description": {
+          "content": "Generate a summary report for a chat history.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "summary-report"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "29be5481-ce9a-4cc6-b338-d13d01176111",
+          "name": "Successful Response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "summary-report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"summary_version\": \"string\",\n  \"site\": {\n    \"name\": \"string\",\n    \"address\": \"string\"\n  },\n  \"agents_used\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"result\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"result\": \"string\"\n    }\n  ],\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "827c17ac-cf8c-4682-8945-fd67d394047a",
+          "name": "Validation Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "summary-report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+          "code": 422,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "9848e96a-1486-45a7-b22d-e319eb7a3513",
+      "name": "Next Symptom",
+      "request": {
+        "name": "Next Symptom",
+        "description": {
+          "content": "Generate a next symptom for an asset based on its ID.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "next-symptom"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"asset_id\": \"<string>\",\n  \"top_n\": \"<integer>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "9c051cbe-0eb0-4458-bdee-5eb9fcc6eeb2",
+          "name": "Successful Response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "next-symptom"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_id\": \"<string>\",\n  \"top_n\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"asset_id\": \"string\",\n  \"top_n\": 1765,\n  \"predictions\": [\n    {\n      \"rank\": 1963,\n      \"obs_predict\": \"string\",\n      \"confidence\": \"string\",\n      \"how_to_check\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"rank\": 3869,\n      \"obs_predict\": \"string\",\n      \"confidence\": \"string\",\n      \"how_to_check\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "1be1fdb6-f81a-4fe1-a8db-2e865bdd98a9",
+          "name": "Validation Error",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "next-symptom"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"asset_id\": \"<string>\",\n  \"top_n\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+          "code": 422,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "fe2482ff-670e-4b86-8ef6-dc28ca6666fa",
+      "name": "Health Check",
+      "request": {
+        "name": "Health Check",
+        "description": {},
+        "url": {
+          "path": [
+            "health"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "bff436a8-e0ef-443c-80f2-608bbf06224b",
+          "name": "Successful Response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "health"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "39ca561a-71be-450b-9b0f-63b58bfa1a08",
+    "name": "Aquant MCP Server",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

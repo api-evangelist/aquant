@@ -1,0 +1,165 @@
+{
+  "item": [
+    {
+      "id": "66abe3bc-94e3-4561-90c1-5383121ec728",
+      "name": "Liveness",
+      "request": {
+        "name": "Liveness",
+        "description": {
+          "content": "Liveness probe - returns 200 if the process is running.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "health",
+            "live"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "60d8a78d-c9b6-4e75-9f99-6acbcd52fc45",
+          "name": "Successful Response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "health",
+                "live"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "a7f7b422-10cb-4b40-8067-3616a570426c",
+      "name": "Readiness",
+      "request": {
+        "name": "Readiness",
+        "description": {
+          "content": "Readiness probe - checks DB and Redis before accepting traffic.\n\nSync def (not async) so FastAPI runs it in a threadpool — the SQLAlchemy\nand redis-py clients are blocking, and running them in an async handler\nwould stall the event loop and any in-flight WebSocket sessions.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "health",
+            "ready"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "b3028a69-f128-4998-862c-acd59eb419bd",
+          "name": "Successful Response",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "health",
+                "ready"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "60d862a8-4395-4e1c-84fc-c1442e67c6e1",
+    "name": "FastAPI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}
