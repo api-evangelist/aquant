@@ -28,6 +28,19 @@ tags:
 - Manufacturing
 - Medical Devices
 - Industrial Equipment
+- Knowledge-Management
+- Voice AI
+- MCP
+- Predictive Maintenance
+tags_raw:
+- Company
+- Artificial Intelligence
+- Agents
+- Field Service
+- Service Management
+- Manufacturing
+- Medical Devices
+- Industrial Equipment
 - Knowledge Management
 - Voice AI
 - Model Context Protocol
@@ -45,6 +58,12 @@ apis:
   humanURL: https://www.aquant.ai/platform
   baseURL: https://mcp.aquant.ai
   tags:
+  - MCP
+  - Agents
+  - Field Service
+  - Parts
+  - Predictive Maintenance
+  tags_raw:
   - Model Context Protocol
   - Agents
   - Field Service
