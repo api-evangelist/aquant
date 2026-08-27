@@ -46,40 +46,20 @@ tags_raw:
 - Model Context Protocol
 - Predictive Maintenance
 apis:
-- aid: aquant:mcp-server
-  name: Aquant MCP Server
-  description: 'The Aquant MCP Server exposes Aquant''s service-intelligence capabilities
-    as eleven agent-callable tools — part catalog lookup, part info and sourcing, agent
-    (technician) data, technician proximity, observation existence, asset location,
-    preventive-maintenance checklists, next-symptom prediction, summary reports, and
-    a health check. The same eleven operations are published twice: as MCP tools over
-    JSON-RPC Streamable HTTP at /mcp, and as REST POST operations described by a public
-    OpenAPI 3.1.0 document at /openapi.json with Swagger UI and ReDoc renderings.'
+- aid: aquant:aquant-agent-data-api
+  name: Aquant Agent Data API
+  description: The Agent Data API from Aquant — 1 operation(s) for agent data.
   humanURL: https://www.aquant.ai/platform
   baseURL: https://mcp.aquant.ai
   tags:
-  - MCP
-  - Agents
-  - Field Service
-  - Parts
-  - Predictive Maintenance
-  tags_raw:
-  - Model Context Protocol
-  - Agents
-  - Field Service
-  - Parts
-  - Predictive Maintenance
+  - Agent Data
   properties:
   - type: OpenAPI
-    url: openapi/aquant-mcp-server-openapi.json
-  - type: MCPServer
-    url: mcp/aquant-mcp.yml
+    url: openapi/aquant-agent-data-api-openapi.yml
   - type: ToolCrosswalk
     url: mcp/aquant-tool-crosswalk.yml
   - type: APIReference
     url: https://mcp.aquant.ai/docs
-  - type: Overlay
-    url: overlays/aquant-mcp-server-overlay.yaml
   - type: DataModel
     url: data-model/aquant-data-model.yml
   - type: ErrorCatalog
@@ -88,40 +68,302 @@ apis:
     url: examples/aquant-mcp-server-examples.yml
   - type: JSONSchema
     url: json-schema/aquant-mcp-server-schemas.json
-- aid: aquant:acp-voiceai
-  name: Aquant Conversation Platform (VoiceAI) API
-  description: 'The Aquant Conversation Platform (ACP) API powers Voice AI and web
-    chat with Aquant''s service agents. Clients exchange an API key and secret for a
-    one-hour access token at POST /acp/token, then start WebRTC voice calls with the
-    named agent or stream web-chat replies as Server-Sent Events from POST /vss/web-chat.
-    The public OpenAPI document at /openapi.json currently describes only the liveness
-    and readiness probes; the ACP and VSS routes are live and documented in the
-    first-party @aquantinc/acp-web-sdk browser SDK rather than in the served spec.'
-  humanURL: https://www.npmjs.com/package/@aquantinc/acp-web-sdk
-  baseURL: https://voiceai-api.aquant.ai
-  tags:
-  - Voice AI
-  - Chat
-  - Agents
-  - Conversation
-  - Server-Sent Events
-  properties:
-  - type: OpenAPI
-    url: openapi/aquant-voiceai-api-openapi.json
   - type: APIReference
     url: https://voiceai-api.aquant.ai/docs
   - type: GettingStarted
     url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start
   - type: SDKs
     url: packages/aquant-packages.yml
-  - type: Overlay
-    url: overlays/aquant-voiceai-api-overlay.yaml
+- aid: aquant:aquant-asset-location-api
+  name: Aquant Asset Location API
+  description: The Asset Location API from Aquant — 1 operation(s) for asset location.
+  humanURL: https://www.aquant.ai/platform
+  baseURL: https://mcp.aquant.ai
+  tags:
+  - Asset Location
+  properties:
+  - type: OpenAPI
+    url: openapi/aquant-asset-location-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/aquant-tool-crosswalk.yml
+  - type: APIReference
+    url: https://mcp.aquant.ai/docs
+  - type: DataModel
+    url: data-model/aquant-data-model.yml
+  - type: ErrorCatalog
+    url: errors/aquant-problem-types.yml
+  - type: Examples
+    url: examples/aquant-mcp-server-examples.yml
+  - type: JSONSchema
+    url: json-schema/aquant-mcp-server-schemas.json
+  - type: APIReference
+    url: https://voiceai-api.aquant.ai/docs
+  - type: GettingStarted
+    url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start
+  - type: SDKs
+    url: packages/aquant-packages.yml
+- aid: aquant:aquant-health-api
+  name: Aquant Health API
+  description: The Health API from Aquant — 3 operation(s) for health.
+  humanURL: https://www.aquant.ai/platform
+  baseURL: https://mcp.aquant.ai
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/aquant-health-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/aquant-tool-crosswalk.yml
+  - type: APIReference
+    url: https://mcp.aquant.ai/docs
+  - type: DataModel
+    url: data-model/aquant-data-model.yml
+  - type: ErrorCatalog
+    url: errors/aquant-problem-types.yml
+  - type: Examples
+    url: examples/aquant-mcp-server-examples.yml
+  - type: JSONSchema
+    url: json-schema/aquant-mcp-server-schemas.json
+  - type: APIReference
+    url: https://voiceai-api.aquant.ai/docs
+  - type: GettingStarted
+    url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start
+  - type: SDKs
+    url: packages/aquant-packages.yml
+- aid: aquant:aquant-next-symptom-api
+  name: Aquant Next Symptom API
+  description: The Next Symptom API from Aquant — 1 operation(s) for next symptom.
+  humanURL: https://www.aquant.ai/platform
+  baseURL: https://mcp.aquant.ai
+  tags:
+  - Next Symptom
+  properties:
+  - type: OpenAPI
+    url: openapi/aquant-next-symptom-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/aquant-tool-crosswalk.yml
+  - type: APIReference
+    url: https://mcp.aquant.ai/docs
+  - type: DataModel
+    url: data-model/aquant-data-model.yml
+  - type: ErrorCatalog
+    url: errors/aquant-problem-types.yml
+  - type: Examples
+    url: examples/aquant-mcp-server-examples.yml
+  - type: JSONSchema
+    url: json-schema/aquant-mcp-server-schemas.json
+  - type: APIReference
+    url: https://voiceai-api.aquant.ai/docs
+  - type: GettingStarted
+    url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start
+  - type: SDKs
+    url: packages/aquant-packages.yml
+- aid: aquant:aquant-observation-existence-api
+  name: Aquant Observation Existence API
+  description: The Observation Existence API from Aquant — 1 operation(s) for observation existence.
+  humanURL: https://www.aquant.ai/platform
+  baseURL: https://mcp.aquant.ai
+  tags:
+  - Observation Existence
+  properties:
+  - type: OpenAPI
+    url: openapi/aquant-observation-existence-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/aquant-tool-crosswalk.yml
+  - type: APIReference
+    url: https://mcp.aquant.ai/docs
+  - type: DataModel
+    url: data-model/aquant-data-model.yml
+  - type: ErrorCatalog
+    url: errors/aquant-problem-types.yml
+  - type: Examples
+    url: examples/aquant-mcp-server-examples.yml
+  - type: JSONSchema
+    url: json-schema/aquant-mcp-server-schemas.json
+  - type: APIReference
+    url: https://voiceai-api.aquant.ai/docs
+  - type: GettingStarted
+    url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start
+  - type: SDKs
+    url: packages/aquant-packages.yml
+- aid: aquant:aquant-part-catalog-lookup-api
+  name: Aquant Part Catalog Lookup API
+  description: The Part Catalog Lookup API from Aquant — 1 operation(s) for part catalog lookup.
+  humanURL: https://www.aquant.ai/platform
+  baseURL: https://mcp.aquant.ai
+  tags:
+  - Part Catalog Lookup
+  properties:
+  - type: OpenAPI
+    url: openapi/aquant-part-catalog-lookup-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/aquant-tool-crosswalk.yml
+  - type: APIReference
+    url: https://mcp.aquant.ai/docs
+  - type: DataModel
+    url: data-model/aquant-data-model.yml
+  - type: ErrorCatalog
+    url: errors/aquant-problem-types.yml
+  - type: Examples
+    url: examples/aquant-mcp-server-examples.yml
+  - type: JSONSchema
+    url: json-schema/aquant-mcp-server-schemas.json
+  - type: APIReference
+    url: https://voiceai-api.aquant.ai/docs
+  - type: GettingStarted
+    url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start
+  - type: SDKs
+    url: packages/aquant-packages.yml
+- aid: aquant:aquant-part-info-api
+  name: Aquant Part Info API
+  description: The Part Info API from Aquant — 1 operation(s) for part info.
+  humanURL: https://www.aquant.ai/platform
+  baseURL: https://mcp.aquant.ai
+  tags:
+  - Part Info
+  properties:
+  - type: OpenAPI
+    url: openapi/aquant-part-info-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/aquant-tool-crosswalk.yml
+  - type: APIReference
+    url: https://mcp.aquant.ai/docs
+  - type: DataModel
+    url: data-model/aquant-data-model.yml
+  - type: ErrorCatalog
+    url: errors/aquant-problem-types.yml
+  - type: Examples
+    url: examples/aquant-mcp-server-examples.yml
+  - type: JSONSchema
+    url: json-schema/aquant-mcp-server-schemas.json
+  - type: APIReference
+    url: https://voiceai-api.aquant.ai/docs
+  - type: GettingStarted
+    url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start
+  - type: SDKs
+    url: packages/aquant-packages.yml
+- aid: aquant:aquant-part-sources-api
+  name: Aquant Part Sources API
+  description: The Part Sources API from Aquant — 1 operation(s) for part sources.
+  humanURL: https://www.aquant.ai/platform
+  baseURL: https://mcp.aquant.ai
+  tags:
+  - Part Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/aquant-part-sources-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/aquant-tool-crosswalk.yml
+  - type: APIReference
+    url: https://mcp.aquant.ai/docs
+  - type: DataModel
+    url: data-model/aquant-data-model.yml
+  - type: ErrorCatalog
+    url: errors/aquant-problem-types.yml
+  - type: Examples
+    url: examples/aquant-mcp-server-examples.yml
+  - type: JSONSchema
+    url: json-schema/aquant-mcp-server-schemas.json
+  - type: APIReference
+    url: https://voiceai-api.aquant.ai/docs
+  - type: GettingStarted
+    url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start
+  - type: SDKs
+    url: packages/aquant-packages.yml
+- aid: aquant:aquant-preventive-maintenance-check-list-api
+  name: Aquant Preventive Maintenance Check List API
+  description: >-
+    The Preventive Maintenance Check List API from Aquant — 1 operation(s) for preventive maintenance
+    check list.
+  humanURL: https://www.aquant.ai/platform
+  baseURL: https://mcp.aquant.ai
+  tags:
+  - Preventive Maintenance Check List
+  properties:
+  - type: OpenAPI
+    url: openapi/aquant-preventive-maintenance-check-list-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/aquant-tool-crosswalk.yml
+  - type: APIReference
+    url: https://mcp.aquant.ai/docs
+  - type: DataModel
+    url: data-model/aquant-data-model.yml
+  - type: ErrorCatalog
+    url: errors/aquant-problem-types.yml
+  - type: Examples
+    url: examples/aquant-mcp-server-examples.yml
+  - type: JSONSchema
+    url: json-schema/aquant-mcp-server-schemas.json
+  - type: APIReference
+    url: https://voiceai-api.aquant.ai/docs
+  - type: GettingStarted
+    url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start
+  - type: SDKs
+    url: packages/aquant-packages.yml
+- aid: aquant:aquant-summary-report-api
+  name: Aquant Summary Report API
+  description: The Summary Report API from Aquant — 1 operation(s) for summary report.
+  humanURL: https://www.aquant.ai/platform
+  baseURL: https://mcp.aquant.ai
+  tags:
+  - Summary Report
+  properties:
+  - type: OpenAPI
+    url: openapi/aquant-summary-report-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/aquant-tool-crosswalk.yml
+  - type: APIReference
+    url: https://mcp.aquant.ai/docs
+  - type: DataModel
+    url: data-model/aquant-data-model.yml
+  - type: ErrorCatalog
+    url: errors/aquant-problem-types.yml
+  - type: Examples
+    url: examples/aquant-mcp-server-examples.yml
+  - type: JSONSchema
+    url: json-schema/aquant-mcp-server-schemas.json
+  - type: APIReference
+    url: https://voiceai-api.aquant.ai/docs
+  - type: GettingStarted
+    url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start
+  - type: SDKs
+    url: packages/aquant-packages.yml
+- aid: aquant:aquant-technician-proximity-api
+  name: Aquant Technician Proximity API
+  description: The Technician Proximity API from Aquant — 1 operation(s) for technician proximity.
+  humanURL: https://www.aquant.ai/platform
+  baseURL: https://mcp.aquant.ai
+  tags:
+  - Technician Proximity
+  properties:
+  - type: OpenAPI
+    url: openapi/aquant-technician-proximity-api-openapi.yml
+  - type: ToolCrosswalk
+    url: mcp/aquant-tool-crosswalk.yml
+  - type: APIReference
+    url: https://mcp.aquant.ai/docs
+  - type: DataModel
+    url: data-model/aquant-data-model.yml
+  - type: ErrorCatalog
+    url: errors/aquant-problem-types.yml
+  - type: Examples
+    url: examples/aquant-mcp-server-examples.yml
+  - type: JSONSchema
+    url: json-schema/aquant-mcp-server-schemas.json
+  - type: APIReference
+    url: https://voiceai-api.aquant.ai/docs
+  - type: GettingStarted
+    url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start
+  - type: SDKs
+    url: packages/aquant-packages.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/aquant-voiceai-api-overlay.yaml
 - type: TrustCenter
   url: security/aquant-trust-center.yml
 - type: Website
