@@ -13,6 +13,17 @@ description: 'Aquant is an agentic AI platform built for organizations that manu
   Streamable HTTP and REST, and the Aquant Conversation Platform (ACP) voice/chat API
   at voiceai-api.aquant.ai fronted by a first-party browser SDK.'
 url: https://raw.githubusercontent.com/api-evangelist/aquant/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://cdn.prod.website-files.com/687529371c5de2d8428c0a4d/6877cd3487c351b4d9032d3b_logo-aquant-light.svg
 x-type: company
 x-source: harvest:secondary-market
