@@ -4,8 +4,14 @@ info:
   summary: Resolve an asset location, pull technician proficiency, then rank technicians by proximity.
   version: 1.0.0
 sourceDescriptions:
-- name: aquantMcp
-  url: ../openapi/aquant-mcp-server-openapi.json
+- name: agentDataApi
+  url: ../openapi/aquant-agent-data-api-openapi.yml
+  type: openapi
+- name: assetLocationApi
+  url: ../openapi/aquant-asset-location-api-openapi.yml
+  type: openapi
+- name: technicianProximityApi
+  url: ../openapi/aquant-technician-proximity-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: dispatch-nearest-technician

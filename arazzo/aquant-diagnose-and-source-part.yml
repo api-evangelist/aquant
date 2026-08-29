@@ -4,8 +4,20 @@ info:
   summary: Confirm a symptom, predict the next symptom, then look up, detail and source the part.
   version: 1.0.0
 sourceDescriptions:
-- name: aquantMcp
-  url: ../openapi/aquant-mcp-server-openapi.json
+- name: nextSymptomApi
+  url: ../openapi/aquant-next-symptom-api-openapi.yml
+  type: openapi
+- name: observationExistenceApi
+  url: ../openapi/aquant-observation-existence-api-openapi.yml
+  type: openapi
+- name: partCatalogLookupApi
+  url: ../openapi/aquant-part-catalog-lookup-api-openapi.yml
+  type: openapi
+- name: partInfoApi
+  url: ../openapi/aquant-part-info-api-openapi.yml
+  type: openapi
+- name: partSourcesApi
+  url: ../openapi/aquant-part-sources-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: diagnose-and-source-part
@@ -21,7 +33,7 @@ workflows:
       observation_name: {type: string, description: The reported symptom.}
       triage_product_id: {type: string}
       question: {type: string, description: The technician's natural-language ask.}
-      model: {type: string, description: Equipment model, used for part sourcing.}
+      model: {type: string, description: Equipment model, used for part sourcing.: null}
       top_n: {type: integer, description: How many symptom predictions to return.}
   steps:
   - stepId: confirm-observation

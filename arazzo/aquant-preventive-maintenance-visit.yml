@@ -4,8 +4,14 @@ info:
   summary: Health-check the service, generate the PM checklist for an asset, then produce the summary report.
   version: 1.0.0
 sourceDescriptions:
-- name: aquantMcp
-  url: ../openapi/aquant-mcp-server-openapi.json
+- name: healthApi
+  url: ../openapi/aquant-health-api-openapi.yml
+  type: openapi
+- name: preventiveMaintenanceCheckListApi
+  url: ../openapi/aquant-preventive-maintenance-check-list-api-openapi.yml
+  type: openapi
+- name: summaryReportApi
+  url: ../openapi/aquant-summary-report-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: preventive-maintenance-visit

@@ -1,7 +1,7 @@
-generated: '2026-07-31'
-method: generated
-source: openapi/aquant-mcp-server-openapi.json
-note: >-
+x-generated: '2026-07-31'
+x-method: generated
+x-source: openapi/aquant-mcp-server-openapi.json
+x-note: >-
   Native Arazzo 1.0.1 workflows stitching Aquant's own MCP-server operations into real
   multi-step service flows. Every operationId was verified verbatim against the live spec.
   No sandbox/test values exist to seed inputs — Aquant publishes none.
