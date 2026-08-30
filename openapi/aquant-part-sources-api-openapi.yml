@@ -1,0 +1,141 @@
+openapi: 3.2.0
+info:
+  title: Aquant MCP Server Part Sources API
+  version: 1.0.0
+tags:
+- name: Part Sources
+paths:
+  /part-sources:
+    post:
+      summary: Part Sources
+      description: "Retrieve sources for parts given catalog data, model, and question.\n\nArgs:\n    payload: The request body containing catalog_data, model, and question.\n    tenant_id: [TEMPORARY] The tenant ID. This should be removed in the future.\n    db_session: Mock database session (ready for future replacement with real DB)"
+      operationId: part_sources
+      parameters:
+      - name: tenant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          description: '[TEMPORARY] The tenant ID. This should be removed in the future.'
+          title: Tenant Id
+        description: '[TEMPORARY] The tenant ID. This should be removed in the future.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartSourcesRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartSourcesResult'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Part Sources
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PartSourcesResult:
+      properties:
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+        sources:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Sources
+          default: []
+      type: object
+      required:
+      - status
+      title: PartSourcesResult
+    PartCatalogInfo:
+      properties:
+        part_id:
+          type: string
+          title: Part Id
+        part_name:
+          type: string
+          title: Part Name
+        part_description:
+          type: string
+          title: Part Description
+        part_image_link:
+          type: string
+          title: Part Image Link
+        part_url_link:
+          type: string
+          title: Part Url Link
+      type: object
+      required:
+      - part_id
+      title: PartCatalogInfo
+    PartSourcesRequest:
+      properties:
+        catalog_data:
+          items:
+            $ref: '#/components/schemas/PartCatalogInfo'
+          type: array
+          title: Catalog Data
+          description: List of part catalog info objects from the catalog lookup tool.
+        model:
+          type: string
+          title: Model
+          description: The model name for the part sources tool.
+        question:
+          type: string
+          title: Question
+          description: The user question to match against sources.
+      type: object
+      required:
+      - catalog_data
+      - model
+      - question
+      title: PartSourcesRequest

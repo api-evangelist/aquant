@@ -1,0 +1,131 @@
+openapi: 3.2.0
+info:
+  title: Aquant MCP Server Part Info API
+  version: 1.0.0
+tags:
+- name: Part Info
+paths:
+  /part-info:
+    post:
+      summary: Part Info
+      description: "Retrieve detailed part information given catalog data from the lookup tool.\n\nArgs:\n    payload: The request body containing catalog_data.\n    tenant_id: [TEMPORARY] The tenant ID. This should be removed in the future.\n    db_session: Mock database session (ready for future replacement with real DB)"
+      operationId: part_info
+      parameters:
+      - name: tenant_id
+        in: query
+        required: true
+        schema:
+          type: string
+          description: '[TEMPORARY] The tenant ID. This should be removed in the future.'
+          title: Tenant Id
+        description: '[TEMPORARY] The tenant ID. This should be removed in the future.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartInfoRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartInfoResult'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Part Info
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PartInfoRequest:
+      properties:
+        catalog_data:
+          items:
+            $ref: '#/components/schemas/PartCatalogInfo'
+          type: array
+          title: Catalog Data
+          description: List of part catalog info objects from the catalog lookup tool.
+      type: object
+      required:
+      - catalog_data
+      title: PartInfoRequest
+    PartInfoResult:
+      properties:
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+        part_info:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Part Info
+          default: []
+      type: object
+      required:
+      - status
+      title: PartInfoResult
+    PartCatalogInfo:
+      properties:
+        part_id:
+          type: string
+          title: Part Id
+        part_name:
+          type: string
+          title: Part Name
+        part_description:
+          type: string
+          title: Part Description
+        part_image_link:
+          type: string
+          title: Part Image Link
+        part_url_link:
+          type: string
+          title: Part Url Link
+      type: object
+      required:
+      - part_id
+      title: PartCatalogInfo

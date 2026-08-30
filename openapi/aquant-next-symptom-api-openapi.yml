@@ -1,0 +1,136 @@
+openapi: 3.2.0
+info:
+  title: Aquant MCP Server Next Symptom API
+  version: 1.0.0
+tags:
+- name: Next Symptom
+paths:
+  /next-symptom:
+    post:
+      summary: Next Symptom
+      description: Generate a next symptom for an asset based on its ID.
+      operationId: next_symptom
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NextSymptomRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NextSymptomResult'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Next Symptom
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Prediction:
+      properties:
+        rank:
+          type: integer
+          title: Rank
+        obs_predict:
+          type: string
+          title: Obs Predict
+        confidence:
+          type: string
+          title: Confidence
+        how_to_check:
+          items:
+            type: string
+          type: array
+          title: How To Check
+      type: object
+      required:
+      - rank
+      - obs_predict
+      - confidence
+      - how_to_check
+      title: Prediction
+    NextSymptomResult:
+      properties:
+        asset_id:
+          type: string
+          title: Asset Id
+        top_n:
+          type: integer
+          title: Top N
+        predictions:
+          items:
+            $ref: '#/components/schemas/Prediction'
+          type: array
+          title: Predictions
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - asset_id
+      - top_n
+      - predictions
+      - status
+      title: NextSymptomResult
+    NextSymptomRequest:
+      properties:
+        asset_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Asset Id
+          description: The asset ID to predict next symptoms for.
+        top_n:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Top N
+          description: Number of top predictions to return.
+          default: 3
+      type: object
+      title: NextSymptomRequest

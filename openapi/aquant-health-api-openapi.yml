@@ -1,0 +1,56 @@
+openapi: 3.2.0
+info:
+  title: Aquant Health API
+  version: '1.0'
+  description: 'Operations tagged Health across 2 of this provider''s published API definitions: aquant-mcp-server-openapi.json, aquant-voiceai-api-openapi.json. Each path carries the servers of the definition it was published in.'
+tags:
+- name: Health
+paths:
+  /health:
+    get:
+      summary: Health Check
+      operationId: health_check
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Health
+  /health/live:
+    get:
+      summary: Liveness
+      description: Liveness probe - returns 200 if the process is running.
+      operationId: liveness_health_live_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Health
+  /health/ready:
+    get:
+      summary: Readiness
+      description: 'Readiness probe - checks DB and Redis before accepting traffic.
+
+
+        Sync def (not async) so FastAPI runs it in a threadpool — the SQLAlchemy
+
+        and redis-py clients are blocking, and running them in an async handler
+
+        would stall the event loop and any in-flight WebSocket sessions.'
+      operationId: readiness_health_ready_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Health
+x-refined-from:
+- aquant-mcp-server-openapi.json
+- aquant-voiceai-api-openapi.json

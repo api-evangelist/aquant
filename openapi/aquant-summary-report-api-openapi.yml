@@ -1,0 +1,147 @@
+openapi: 3.2.0
+info:
+  title: Aquant MCP Server Summary Report API
+  version: 1.0.0
+tags:
+- name: Summary Report
+paths:
+  /summary-report:
+    post:
+      summary: Summary Report
+      description: Generate a summary report for a chat history.
+      operationId: summary_report
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SummaryReportRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SummaryReportResult'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Summary Report
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    AgentUsed:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        status:
+          type: string
+          title: Status
+        result:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Result
+        highlights:
+          items:
+            type: string
+          type: array
+          title: Highlights
+          default: []
+      type: object
+      required:
+      - id
+      - name
+      - status
+      title: AgentUsed
+    Site:
+      properties:
+        name:
+          type: string
+          title: Name
+        address:
+          type: string
+          title: Address
+      type: object
+      required:
+      - name
+      - address
+      title: Site
+    SummaryReportRequest:
+      properties:
+        chat_history:
+          anyOf:
+          - items: {}
+            type: array
+          - type: 'null'
+          title: Chat History
+          description: The chat history to generate a summary report for.
+      type: object
+      title: SummaryReportRequest
+    SummaryReportResult:
+      properties:
+        summary_version:
+          type: string
+          title: Summary Version
+        site:
+          $ref: '#/components/schemas/Site'
+        agents_used:
+          items:
+            $ref: '#/components/schemas/AgentUsed'
+          type: array
+          title: Agents Used
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - summary_version
+      - site
+      - agents_used
+      - status
+      title: SummaryReportResult
