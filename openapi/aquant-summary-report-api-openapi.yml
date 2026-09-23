@@ -33,32 +33,6 @@ paths:
       - Summary Report
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     HTTPValidationError:
       properties:
         detail:
@@ -68,6 +42,44 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    Site:
+      properties:
+        name:
+          type: string
+          title: Name
+        address:
+          type: string
+          title: Address
+      type: object
+      required:
+      - name
+      - address
+      title: Site
+    SummaryReportResult:
+      properties:
+        summary_version:
+          type: string
+          title: Summary Version
+        site:
+          $ref: '#/components/schemas/Site'
+        agents_used:
+          items:
+            $ref: '#/components/schemas/AgentUsed'
+          type: array
+          title: Agents Used
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - summary_version
+      - site
+      - agents_used
+      - status
+      title: SummaryReportResult
     AgentUsed:
       properties:
         id:
@@ -96,19 +108,6 @@ components:
       - name
       - status
       title: AgentUsed
-    Site:
-      properties:
-        name:
-          type: string
-          title: Name
-        address:
-          type: string
-          title: Address
-      type: object
-      required:
-      - name
-      - address
-      title: Site
     SummaryReportRequest:
       properties:
         chat_history:
@@ -120,28 +119,29 @@ components:
           description: The chat history to generate a summary report for.
       type: object
       title: SummaryReportRequest
-    SummaryReportResult:
+    ValidationError:
       properties:
-        summary_version:
-          type: string
-          title: Summary Version
-        site:
-          $ref: '#/components/schemas/Site'
-        agents_used:
+        loc:
           items:
-            $ref: '#/components/schemas/AgentUsed'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Agents Used
-        status:
-          type: string
-          title: Status
-        message:
+          title: Location
+        msg:
           type: string
           title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
-      - summary_version
-      - site
-      - agents_used
-      - status
-      title: SummaryReportResult
+      - loc
+      - msg
+      - type
+      title: ValidationError

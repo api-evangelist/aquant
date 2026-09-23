@@ -8,7 +8,12 @@ paths:
   /observation-existence:
     post:
       summary: Observation Existence
-      description: "Check if an observation exists in the loaded data.\n\nArgs:\n    payload: The request body containing observation_name."
+      description: 'Check if an observation exists in the loaded data.
+
+
+        Args:
+
+        payload: The request body containing observation_name.'
       operationId: observation_existence
       requestBody:
         content:
@@ -53,6 +58,25 @@ components:
       - exists
       - observation_name
       title: ObservationExistenceResult
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ObservationExistenceRequest:
+      properties:
+        observation_name:
+          type: string
+          title: Observation Name
+          description: The observation name to check for existence.
+      type: object
+      required:
+      - observation_name
+      title: ObservationExistenceRequest
     ValidationError:
       properties:
         loc:
@@ -79,22 +103,3 @@ components:
       - msg
       - type
       title: ValidationError
-    ObservationExistenceRequest:
-      properties:
-        observation_name:
-          type: string
-          title: Observation Name
-          description: The observation name to check for existence.
-      type: object
-      required:
-      - observation_name
-      title: ObservationExistenceRequest
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError

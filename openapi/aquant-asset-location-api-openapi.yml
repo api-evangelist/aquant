@@ -8,7 +8,12 @@ paths:
   /asset-location:
     post:
       summary: Asset Location
-      description: "Retrieve the location of an asset based on its ID.\n\nArgs:\n    payload: The request body containing asset_id."
+      description: 'Retrieve the location of an asset based on its ID.
+
+
+        Args:
+
+        payload: The request body containing asset_id.'
       operationId: asset_location
       requestBody:
         content:
@@ -33,6 +38,52 @@ paths:
       - Asset Location
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    AssetLocationInfo:
+      properties:
+        asset_id:
+          type: string
+          title: Asset Id
+        location:
+          type: string
+          title: Location
+      type: object
+      required:
+      - asset_id
+      - location
+      title: AssetLocationInfo
+    AssetLocationRequest:
+      properties:
+        asset_id:
+          type: string
+          title: Asset Id
+          description: The asset ID to look up location for.
+      type: object
+      required:
+      - asset_id
+      title: AssetLocationRequest
+    AssetLocationResult:
+      properties:
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+        asset_location:
+          $ref: '#/components/schemas/AssetLocationInfo'
+      type: object
+      required:
+      - status
+      title: AssetLocationResult
     ValidationError:
       properties:
         loc:
@@ -59,49 +110,3 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    AssetLocationRequest:
-      properties:
-        asset_id:
-          type: string
-          title: Asset Id
-          description: The asset ID to look up location for.
-      type: object
-      required:
-      - asset_id
-      title: AssetLocationRequest
-    AssetLocationInfo:
-      properties:
-        asset_id:
-          type: string
-          title: Asset Id
-        location:
-          type: string
-          title: Location
-      type: object
-      required:
-      - asset_id
-      - location
-      title: AssetLocationInfo
-    AssetLocationResult:
-      properties:
-        status:
-          type: string
-          title: Status
-        message:
-          type: string
-          title: Message
-        asset_location:
-          $ref: '#/components/schemas/AssetLocationInfo'
-      type: object
-      required:
-      - status
-      title: AssetLocationResult
