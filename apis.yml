@@ -53,7 +53,7 @@ tags:
 - Manufacturing
 - Medical Devices
 - Industrial Equipment
-- Knowledge-Management
+- Knowledge Management
 - Voice AI
 - MCP
 - Predictive Maintenance
@@ -70,6 +70,7 @@ tags_raw:
 - Voice AI
 - Model Context Protocol
 - Predictive Maintenance
+- Knowledge-Management
 apis:
 - aid: aquant:aquant-agent-data-api
   name: Aquant Agent Data API

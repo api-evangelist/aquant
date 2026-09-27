@@ -38,25 +38,6 @@ paths:
       - Agent Data
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    AgentDataRequest:
-      properties:
-        observation_name:
-          type: string
-          title: Observation Name
-          description: The observation name to search for agents and proficiency scores.
-      type: object
-      required:
-      - observation_name
-      title: AgentDataRequest
     AgentDataResult:
       properties:
         status:
@@ -118,3 +99,22 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    AgentDataRequest:
+      properties:
+        observation_name:
+          type: string
+          title: Observation Name
+          description: The observation name to search for agents and proficiency scores.
+      type: object
+      required:
+      - observation_name
+      title: AgentDataRequest

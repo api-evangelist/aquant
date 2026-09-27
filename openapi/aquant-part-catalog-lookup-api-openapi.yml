@@ -51,69 +51,6 @@ paths:
       - Part Catalog Lookup
 components:
   schemas:
-    PartCatalogLookupResult:
-      properties:
-        status:
-          type: string
-          title: Status
-        message:
-          type: string
-          title: Message
-        parts:
-          items:
-            $ref: '#/components/schemas/PartCatalogInfo'
-          type: array
-          title: Parts
-          default: []
-      type: object
-      required:
-      - status
-      title: PartCatalogLookupResult
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    PartCatalogLookupRequest:
-      properties:
-        triage_product_id:
-          type: string
-          title: Triage Product Id
-          description: The triage product ID to look up in the catalog.
-        question:
-          type: string
-          title: Question
-          description: The user question to match against the catalog.
-      type: object
-      required:
-      - triage_product_id
-      - question
-      title: PartCatalogLookupRequest
-    PartCatalogInfo:
-      properties:
-        part_id:
-          type: string
-          title: Part Id
-        part_name:
-          type: string
-          title: Part Name
-        part_description:
-          type: string
-          title: Part Description
-        part_image_link:
-          type: string
-          title: Part Image Link
-        part_url_link:
-          type: string
-          title: Part Url Link
-      type: object
-      required:
-      - part_id
-      title: PartCatalogInfo
     ValidationError:
       properties:
         loc:
@@ -140,3 +77,66 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PartCatalogLookupResult:
+      properties:
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+        parts:
+          items:
+            $ref: '#/components/schemas/PartCatalogInfo'
+          type: array
+          title: Parts
+          default: []
+      type: object
+      required:
+      - status
+      title: PartCatalogLookupResult
+    PartCatalogInfo:
+      properties:
+        part_id:
+          type: string
+          title: Part Id
+        part_name:
+          type: string
+          title: Part Name
+        part_description:
+          type: string
+          title: Part Description
+        part_image_link:
+          type: string
+          title: Part Image Link
+        part_url_link:
+          type: string
+          title: Part Url Link
+      type: object
+      required:
+      - part_id
+      title: PartCatalogInfo
+    PartCatalogLookupRequest:
+      properties:
+        triage_product_id:
+          type: string
+          title: Triage Product Id
+          description: The triage product ID to look up in the catalog.
+        question:
+          type: string
+          title: Question
+          description: The user question to match against the catalog.
+      type: object
+      required:
+      - triage_product_id
+      - question
+      title: PartCatalogLookupRequest

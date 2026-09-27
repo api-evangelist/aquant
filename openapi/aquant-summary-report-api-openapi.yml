@@ -33,53 +33,6 @@ paths:
       - Summary Report
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Site:
-      properties:
-        name:
-          type: string
-          title: Name
-        address:
-          type: string
-          title: Address
-      type: object
-      required:
-      - name
-      - address
-      title: Site
-    SummaryReportResult:
-      properties:
-        summary_version:
-          type: string
-          title: Summary Version
-        site:
-          $ref: '#/components/schemas/Site'
-        agents_used:
-          items:
-            $ref: '#/components/schemas/AgentUsed'
-          type: array
-          title: Agents Used
-        status:
-          type: string
-          title: Status
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - summary_version
-      - site
-      - agents_used
-      - status
-      title: SummaryReportResult
     AgentUsed:
       properties:
         id:
@@ -108,17 +61,6 @@ components:
       - name
       - status
       title: AgentUsed
-    SummaryReportRequest:
-      properties:
-        chat_history:
-          anyOf:
-          - items: {}
-            type: array
-          - type: 'null'
-          title: Chat History
-          description: The chat history to generate a summary report for.
-      type: object
-      title: SummaryReportRequest
     ValidationError:
       properties:
         loc:
@@ -145,3 +87,61 @@ components:
       - msg
       - type
       title: ValidationError
+    SummaryReportRequest:
+      properties:
+        chat_history:
+          anyOf:
+          - items: {}
+            type: array
+          - type: 'null'
+          title: Chat History
+          description: The chat history to generate a summary report for.
+      type: object
+      title: SummaryReportRequest
+    Site:
+      properties:
+        name:
+          type: string
+          title: Name
+        address:
+          type: string
+          title: Address
+      type: object
+      required:
+      - name
+      - address
+      title: Site
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SummaryReportResult:
+      properties:
+        summary_version:
+          type: string
+          title: Summary Version
+        site:
+          $ref: '#/components/schemas/Site'
+        agents_used:
+          items:
+            $ref: '#/components/schemas/AgentUsed'
+          type: array
+          title: Agents Used
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - summary_version
+      - site
+      - agents_used
+      - status
+      title: SummaryReportResult

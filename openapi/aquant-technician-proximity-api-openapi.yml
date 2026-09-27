@@ -38,32 +38,19 @@ paths:
       - Technician Proximity
 components:
   schemas:
-    TechnicianProximityRequest:
+    TechnicianLocation:
       properties:
-        asset_location:
+        event_agent_name:
           type: string
-          title: Asset Location
-          description: The asset location to find proximity to
-        technicians:
-          items:
-            $ref: '#/components/schemas/TechnicianLocation'
-          type: array
-          title: Technicians
-          description: List of technicians with their locations
+          title: Event Agent Name
+        location:
+          type: string
+          title: Location
       type: object
       required:
-      - asset_location
-      - technicians
-      title: TechnicianProximityRequest
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+      - event_agent_name
+      - location
+      title: TechnicianLocation
     TechnicianProximityInfo:
       properties:
         event_agent_name:
@@ -81,19 +68,6 @@ components:
       - location
       - proximity_km
       title: TechnicianProximityInfo
-    TechnicianLocation:
-      properties:
-        event_agent_name:
-          type: string
-          title: Event Agent Name
-        location:
-          type: string
-          title: Location
-      type: object
-      required:
-      - event_agent_name
-      - location
-      title: TechnicianLocation
     TechnicianProximityResult:
       properties:
         status:
@@ -112,6 +86,23 @@ components:
       required:
       - status
       title: TechnicianProximityResult
+    TechnicianProximityRequest:
+      properties:
+        asset_location:
+          type: string
+          title: Asset Location
+          description: The asset location to find proximity to
+        technicians:
+          items:
+            $ref: '#/components/schemas/TechnicianLocation'
+          type: array
+          title: Technicians
+          description: List of technicians with their locations
+      type: object
+      required:
+      - asset_location
+      - technicians
+      title: TechnicianProximityRequest
     ValidationError:
       properties:
         loc:
@@ -138,3 +129,12 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

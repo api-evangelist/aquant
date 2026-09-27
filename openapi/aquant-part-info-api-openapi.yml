@@ -51,15 +51,6 @@ paths:
       - Part Info
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     PartInfoResult:
       properties:
         status:
@@ -79,39 +70,6 @@ components:
       required:
       - status
       title: PartInfoResult
-    PartInfoRequest:
-      properties:
-        catalog_data:
-          items:
-            $ref: '#/components/schemas/PartCatalogInfo'
-          type: array
-          title: Catalog Data
-          description: List of part catalog info objects from the catalog lookup tool.
-      type: object
-      required:
-      - catalog_data
-      title: PartInfoRequest
-    PartCatalogInfo:
-      properties:
-        part_id:
-          type: string
-          title: Part Id
-        part_name:
-          type: string
-          title: Part Name
-        part_description:
-          type: string
-          title: Part Description
-        part_image_link:
-          type: string
-          title: Part Image Link
-        part_url_link:
-          type: string
-          title: Part Url Link
-      type: object
-      required:
-      - part_id
-      title: PartCatalogInfo
     ValidationError:
       properties:
         loc:
@@ -138,3 +96,45 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PartCatalogInfo:
+      properties:
+        part_id:
+          type: string
+          title: Part Id
+        part_name:
+          type: string
+          title: Part Name
+        part_description:
+          type: string
+          title: Part Description
+        part_image_link:
+          type: string
+          title: Part Image Link
+        part_url_link:
+          type: string
+          title: Part Url Link
+      type: object
+      required:
+      - part_id
+      title: PartCatalogInfo
+    PartInfoRequest:
+      properties:
+        catalog_data:
+          items:
+            $ref: '#/components/schemas/PartCatalogInfo'
+          type: array
+          title: Catalog Data
+          description: List of part catalog info objects from the catalog lookup tool.
+      type: object
+      required:
+      - catalog_data
+      title: PartInfoRequest

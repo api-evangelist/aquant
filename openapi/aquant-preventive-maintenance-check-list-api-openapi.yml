@@ -38,92 +38,6 @@ paths:
       - Preventive Maintenance Check List
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    FormField:
-      properties:
-        key:
-          type: string
-          title: Key
-        type:
-          type: string
-          title: Type
-        disabled_if:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Disabled If
-        placeholder:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Placeholder
-      type: object
-      required:
-      - key
-      - type
-      title: FormField
-    SelectStep:
-      properties:
-        id:
-          type: string
-          title: Id
-        title:
-          type: string
-          title: Title
-        type:
-          type: string
-          title: Type
-        required:
-          type: boolean
-          title: Required
-        status:
-          type: string
-          title: Status
-        key:
-          type: string
-          title: Key
-        options:
-          items:
-            type: string
-          type: array
-          title: Options
-        value:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Value
-      type: object
-      required:
-      - id
-      - title
-      - type
-      - required
-      - status
-      - key
-      - options
-      title: SelectStep
-    RadioOption:
-      properties:
-        value:
-          type: string
-          title: Value
-        label:
-          type: string
-          title: Label
-      type: object
-      required:
-      - value
-      - label
-      title: RadioOption
     PreventiveMaintenanceCheckListRequest:
       properties:
         asset_id:
@@ -140,68 +54,32 @@ components:
           description: The model to generate a preventive maintenance check list for.
       type: object
       title: PreventiveMaintenanceCheckListRequest
-    PreventiveMaintenanceCheckListResult:
+    RadioOption:
       properties:
-        schema_version:
+        value:
           type: string
-          title: Schema Version
-        agent_id:
+          title: Value
+        label:
           type: string
-          title: Agent Id
-        steps:
-          items:
-            $ref: '#/components/schemas/Step'
-          type: array
-          title: Steps
-        status:
-          type: string
-          title: Status
-        message:
-          type: string
-          title: Message
+          title: Label
       type: object
       required:
-      - schema_version
-      - agent_id
-      - steps
-      - status
-      title: PreventiveMaintenanceCheckListResult
-    FormStep:
+      - value
+      - label
+      title: RadioOption
+    BlockingRule:
       properties:
-        id:
+        if_value:
           type: string
-          title: Id
-        title:
-          type: string
-          title: Title
-        type:
-          type: string
-          title: Type
-        required:
+          title: If Value
+        block:
           type: boolean
-          title: Required
-        status:
-          type: string
-          title: Status
-        fields:
-          items:
-            $ref: '#/components/schemas/FormField'
-          type: array
-          title: Fields
-        values:
-          additionalProperties: true
-          type: object
-          title: Values
-          default: {}
+          title: Block
       type: object
       required:
-      - id
-      - title
-      - type
-      - required
-      - status
-      - fields
-      title: FormStep
+      - if_value
+      - block
+      title: BlockingRule
     NumberStep:
       properties:
         id:
@@ -295,19 +173,42 @@ components:
       - $ref: '#/components/schemas/SelectStep'
       - $ref: '#/components/schemas/NumberStep'
       title: Step
-    BlockingRule:
+    FormStep:
       properties:
-        if_value:
+        id:
           type: string
-          title: If Value
-        block:
+          title: Id
+        title:
+          type: string
+          title: Title
+        type:
+          type: string
+          title: Type
+        required:
           type: boolean
-          title: Block
+          title: Required
+        status:
+          type: string
+          title: Status
+        fields:
+          items:
+            $ref: '#/components/schemas/FormField'
+          type: array
+          title: Fields
+        values:
+          additionalProperties: true
+          type: object
+          title: Values
+          default: {}
       type: object
       required:
-      - if_value
-      - block
-      title: BlockingRule
+      - id
+      - title
+      - type
+      - required
+      - status
+      - fields
+      title: FormStep
     ValidationError:
       properties:
         loc:
@@ -334,3 +235,102 @@ components:
       - msg
       - type
       title: ValidationError
+    SelectStep:
+      properties:
+        id:
+          type: string
+          title: Id
+        title:
+          type: string
+          title: Title
+        type:
+          type: string
+          title: Type
+        required:
+          type: boolean
+          title: Required
+        status:
+          type: string
+          title: Status
+        key:
+          type: string
+          title: Key
+        options:
+          items:
+            type: string
+          type: array
+          title: Options
+        value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value
+      type: object
+      required:
+      - id
+      - title
+      - type
+      - required
+      - status
+      - key
+      - options
+      title: SelectStep
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PreventiveMaintenanceCheckListResult:
+      properties:
+        schema_version:
+          type: string
+          title: Schema Version
+        agent_id:
+          type: string
+          title: Agent Id
+        steps:
+          items:
+            $ref: '#/components/schemas/Step'
+          type: array
+          title: Steps
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - schema_version
+      - agent_id
+      - steps
+      - status
+      title: PreventiveMaintenanceCheckListResult
+    FormField:
+      properties:
+        key:
+          type: string
+          title: Key
+        type:
+          type: string
+          title: Type
+        disabled_if:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Disabled If
+        placeholder:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Placeholder
+      type: object
+      required:
+      - key
+      - type
+      title: FormField

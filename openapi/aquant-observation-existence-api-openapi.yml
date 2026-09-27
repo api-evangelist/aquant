@@ -38,45 +38,6 @@ paths:
       - Observation Existence
 components:
   schemas:
-    ObservationExistenceResult:
-      properties:
-        status:
-          type: string
-          title: Status
-        message:
-          type: string
-          title: Message
-        exists:
-          type: boolean
-          title: Exists
-        observation_name:
-          type: string
-          title: Observation Name
-      type: object
-      required:
-      - status
-      - exists
-      - observation_name
-      title: ObservationExistenceResult
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ObservationExistenceRequest:
-      properties:
-        observation_name:
-          type: string
-          title: Observation Name
-          description: The observation name to check for existence.
-      type: object
-      required:
-      - observation_name
-      title: ObservationExistenceRequest
     ValidationError:
       properties:
         loc:
@@ -103,3 +64,42 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ObservationExistenceRequest:
+      properties:
+        observation_name:
+          type: string
+          title: Observation Name
+          description: The observation name to check for existence.
+      type: object
+      required:
+      - observation_name
+      title: ObservationExistenceRequest
+    ObservationExistenceResult:
+      properties:
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+        exists:
+          type: boolean
+          title: Exists
+        observation_name:
+          type: string
+          title: Observation Name
+      type: object
+      required:
+      - status
+      - exists
+      - observation_name
+      title: ObservationExistenceResult

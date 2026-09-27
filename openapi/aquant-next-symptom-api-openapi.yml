@@ -33,15 +33,6 @@ paths:
       - Next Symptom
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     NextSymptomRequest:
       properties:
         asset_id:
@@ -59,29 +50,6 @@ components:
           default: 3
       type: object
       title: NextSymptomRequest
-    Prediction:
-      properties:
-        rank:
-          type: integer
-          title: Rank
-        obs_predict:
-          type: string
-          title: Obs Predict
-        confidence:
-          type: string
-          title: Confidence
-        how_to_check:
-          items:
-            type: string
-          type: array
-          title: How To Check
-      type: object
-      required:
-      - rank
-      - obs_predict
-      - confidence
-      - how_to_check
-      title: Prediction
     NextSymptomResult:
       properties:
         asset_id:
@@ -134,3 +102,35 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Prediction:
+      properties:
+        rank:
+          type: integer
+          title: Rank
+        obs_predict:
+          type: string
+          title: Obs Predict
+        confidence:
+          type: string
+          title: Confidence
+        how_to_check:
+          items:
+            type: string
+          type: array
+          title: How To Check
+      type: object
+      required:
+      - rank
+      - obs_predict
+      - confidence
+      - how_to_check
+      title: Prediction
