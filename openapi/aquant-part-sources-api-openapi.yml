@@ -99,15 +99,6 @@ components:
       - model
       - question
       title: PartSourcesRequest
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     PartCatalogInfo:
       properties:
         part_id:
@@ -148,3 +139,12 @@ components:
       required:
       - status
       title: PartSourcesResult
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

@@ -64,25 +64,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ObservationExistenceRequest:
-      properties:
-        observation_name:
-          type: string
-          title: Observation Name
-          description: The observation name to check for existence.
-      type: object
-      required:
-      - observation_name
-      title: ObservationExistenceRequest
     ObservationExistenceResult:
       properties:
         status:
@@ -103,3 +84,22 @@ components:
       - exists
       - observation_name
       title: ObservationExistenceResult
+    ObservationExistenceRequest:
+      properties:
+        observation_name:
+          type: string
+          title: Observation Name
+          description: The observation name to check for existence.
+      type: object
+      required:
+      - observation_name
+      title: ObservationExistenceRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

@@ -38,41 +38,6 @@ paths:
       - Agent Data
 components:
   schemas:
-    AgentDataResult:
-      properties:
-        status:
-          type: string
-          title: Status
-        message:
-          type: string
-          title: Message
-        agents:
-          items:
-            $ref: '#/components/schemas/AgentInfo'
-          type: array
-          title: Agents
-          default: []
-      type: object
-      required:
-      - status
-      title: AgentDataResult
-    AgentInfo:
-      properties:
-        event_agent_name:
-          type: string
-          title: Event Agent Name
-        proficiency_score:
-          type: number
-          title: Proficiency Score
-        location:
-          type: string
-          title: Location
-      type: object
-      required:
-      - event_agent_name
-      - proficiency_score
-      - location
-      title: AgentInfo
     ValidationError:
       properties:
         loc:
@@ -99,15 +64,41 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
+    AgentInfo:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        event_agent_name:
+          type: string
+          title: Event Agent Name
+        proficiency_score:
+          type: number
+          title: Proficiency Score
+        location:
+          type: string
+          title: Location
       type: object
-      title: HTTPValidationError
+      required:
+      - event_agent_name
+      - proficiency_score
+      - location
+      title: AgentInfo
+    AgentDataResult:
+      properties:
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+        agents:
+          items:
+            $ref: '#/components/schemas/AgentInfo'
+          type: array
+          title: Agents
+          default: []
+      type: object
+      required:
+      - status
+      title: AgentDataResult
     AgentDataRequest:
       properties:
         observation_name:
@@ -118,3 +109,12 @@ components:
       required:
       - observation_name
       title: AgentDataRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

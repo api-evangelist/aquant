@@ -51,25 +51,6 @@ paths:
       - Part Info
 components:
   schemas:
-    PartInfoResult:
-      properties:
-        status:
-          type: string
-          title: Status
-        message:
-          type: string
-          title: Message
-        part_info:
-          items:
-            additionalProperties: true
-            type: object
-          type: array
-          title: Part Info
-          default: []
-      type: object
-      required:
-      - status
-      title: PartInfoResult
     ValidationError:
       properties:
         loc:
@@ -96,15 +77,18 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
+    PartInfoRequest:
       properties:
-        detail:
+        catalog_data:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: '#/components/schemas/PartCatalogInfo'
           type: array
-          title: Detail
+          title: Catalog Data
+          description: List of part catalog info objects from the catalog lookup tool.
       type: object
-      title: HTTPValidationError
+      required:
+      - catalog_data
+      title: PartInfoRequest
     PartCatalogInfo:
       properties:
         part_id:
@@ -126,15 +110,31 @@ components:
       required:
       - part_id
       title: PartCatalogInfo
-    PartInfoRequest:
+    PartInfoResult:
       properties:
-        catalog_data:
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+        part_info:
           items:
-            $ref: '#/components/schemas/PartCatalogInfo'
+            additionalProperties: true
+            type: object
           type: array
-          title: Catalog Data
-          description: List of part catalog info objects from the catalog lookup tool.
+          title: Part Info
+          default: []
       type: object
       required:
-      - catalog_data
-      title: PartInfoRequest
+      - status
+      title: PartInfoResult
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

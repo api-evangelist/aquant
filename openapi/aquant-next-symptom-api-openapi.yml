@@ -33,49 +33,6 @@ paths:
       - Next Symptom
 components:
   schemas:
-    NextSymptomRequest:
-      properties:
-        asset_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Asset Id
-          description: The asset ID to predict next symptoms for.
-        top_n:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Top N
-          description: Number of top predictions to return.
-          default: 3
-      type: object
-      title: NextSymptomRequest
-    NextSymptomResult:
-      properties:
-        asset_id:
-          type: string
-          title: Asset Id
-        top_n:
-          type: integer
-          title: Top N
-        predictions:
-          items:
-            $ref: '#/components/schemas/Prediction'
-          type: array
-          title: Predictions
-        status:
-          type: string
-          title: Status
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - asset_id
-      - top_n
-      - predictions
-      - status
-      title: NextSymptomResult
     ValidationError:
       properties:
         loc:
@@ -102,15 +59,23 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
+    NextSymptomRequest:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        asset_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Asset Id
+          description: The asset ID to predict next symptoms for.
+        top_n:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Top N
+          description: Number of top predictions to return.
+          default: 3
       type: object
-      title: HTTPValidationError
+      title: NextSymptomRequest
     Prediction:
       properties:
         rank:
@@ -134,3 +99,38 @@ components:
       - confidence
       - how_to_check
       title: Prediction
+    NextSymptomResult:
+      properties:
+        asset_id:
+          type: string
+          title: Asset Id
+        top_n:
+          type: integer
+          title: Top N
+        predictions:
+          items:
+            $ref: '#/components/schemas/Prediction'
+          type: array
+          title: Predictions
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - asset_id
+      - top_n
+      - predictions
+      - status
+      title: NextSymptomResult
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError

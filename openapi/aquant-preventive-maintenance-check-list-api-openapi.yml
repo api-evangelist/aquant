@@ -38,6 +38,218 @@ paths:
       - Preventive Maintenance Check List
 components:
   schemas:
+    BlockingRule:
+      properties:
+        if_value:
+          type: string
+          title: If Value
+        block:
+          type: boolean
+          title: Block
+      type: object
+      required:
+      - if_value
+      - block
+      title: BlockingRule
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    FormStep:
+      properties:
+        id:
+          type: string
+          title: Id
+        title:
+          type: string
+          title: Title
+        type:
+          type: string
+          title: Type
+        required:
+          type: boolean
+          title: Required
+        status:
+          type: string
+          title: Status
+        fields:
+          items:
+            $ref: '#/components/schemas/FormField'
+          type: array
+          title: Fields
+        values:
+          additionalProperties: true
+          type: object
+          title: Values
+          default: {}
+      type: object
+      required:
+      - id
+      - title
+      - type
+      - required
+      - status
+      - fields
+      title: FormStep
+    FormField:
+      properties:
+        key:
+          type: string
+          title: Key
+        type:
+          type: string
+          title: Type
+        disabled_if:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Disabled If
+        placeholder:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Placeholder
+      type: object
+      required:
+      - key
+      - type
+      title: FormField
+    Step:
+      anyOf:
+      - $ref: '#/components/schemas/RadioStep'
+      - $ref: '#/components/schemas/FormStep'
+      - $ref: '#/components/schemas/SelectStep'
+      - $ref: '#/components/schemas/NumberStep'
+      title: Step
+    PreventiveMaintenanceCheckListResult:
+      properties:
+        schema_version:
+          type: string
+          title: Schema Version
+        agent_id:
+          type: string
+          title: Agent Id
+        steps:
+          items:
+            $ref: '#/components/schemas/Step'
+          type: array
+          title: Steps
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - schema_version
+      - agent_id
+      - steps
+      - status
+      title: PreventiveMaintenanceCheckListResult
+    SelectStep:
+      properties:
+        id:
+          type: string
+          title: Id
+        title:
+          type: string
+          title: Title
+        type:
+          type: string
+          title: Type
+        required:
+          type: boolean
+          title: Required
+        status:
+          type: string
+          title: Status
+        key:
+          type: string
+          title: Key
+        options:
+          items:
+            type: string
+          type: array
+          title: Options
+        value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value
+      type: object
+      required:
+      - id
+      - title
+      - type
+      - required
+      - status
+      - key
+      - options
+      title: SelectStep
+    RadioStep:
+      properties:
+        id:
+          type: string
+          title: Id
+        title:
+          type: string
+          title: Title
+        type:
+          type: string
+          title: Type
+        required:
+          type: boolean
+          title: Required
+        status:
+          type: string
+          title: Status
+        options:
+          items:
+            $ref: '#/components/schemas/RadioOption'
+          type: array
+          title: Options
+        value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value
+        blocking_rule:
+          anyOf:
+          - $ref: '#/components/schemas/BlockingRule'
+          - type: 'null'
+      type: object
+      required:
+      - id
+      - title
+      - type
+      - required
+      - status
+      - options
+      title: RadioStep
     PreventiveMaintenanceCheckListRequest:
       properties:
         asset_id:
@@ -54,32 +266,6 @@ components:
           description: The model to generate a preventive maintenance check list for.
       type: object
       title: PreventiveMaintenanceCheckListRequest
-    RadioOption:
-      properties:
-        value:
-          type: string
-          title: Value
-        label:
-          type: string
-          title: Label
-      type: object
-      required:
-      - value
-      - label
-      title: RadioOption
-    BlockingRule:
-      properties:
-        if_value:
-          type: string
-          title: If Value
-        block:
-          type: boolean
-          title: Block
-      type: object
-      required:
-      - if_value
-      - block
-      title: BlockingRule
     NumberStep:
       properties:
         id:
@@ -126,155 +312,19 @@ components:
       - key
       - unit
       title: NumberStep
-    RadioStep:
+    RadioOption:
       properties:
-        id:
-          type: string
-          title: Id
-        title:
-          type: string
-          title: Title
-        type:
-          type: string
-          title: Type
-        required:
-          type: boolean
-          title: Required
-        status:
-          type: string
-          title: Status
-        options:
-          items:
-            $ref: '#/components/schemas/RadioOption'
-          type: array
-          title: Options
         value:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Value
-        blocking_rule:
-          anyOf:
-          - $ref: '#/components/schemas/BlockingRule'
-          - type: 'null'
+        label:
+          type: string
+          title: Label
       type: object
       required:
-      - id
-      - title
-      - type
-      - required
-      - status
-      - options
-      title: RadioStep
-    Step:
-      anyOf:
-      - $ref: '#/components/schemas/RadioStep'
-      - $ref: '#/components/schemas/FormStep'
-      - $ref: '#/components/schemas/SelectStep'
-      - $ref: '#/components/schemas/NumberStep'
-      title: Step
-    FormStep:
-      properties:
-        id:
-          type: string
-          title: Id
-        title:
-          type: string
-          title: Title
-        type:
-          type: string
-          title: Type
-        required:
-          type: boolean
-          title: Required
-        status:
-          type: string
-          title: Status
-        fields:
-          items:
-            $ref: '#/components/schemas/FormField'
-          type: array
-          title: Fields
-        values:
-          additionalProperties: true
-          type: object
-          title: Values
-          default: {}
-      type: object
-      required:
-      - id
-      - title
-      - type
-      - required
-      - status
-      - fields
-      title: FormStep
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    SelectStep:
-      properties:
-        id:
-          type: string
-          title: Id
-        title:
-          type: string
-          title: Title
-        type:
-          type: string
-          title: Type
-        required:
-          type: boolean
-          title: Required
-        status:
-          type: string
-          title: Status
-        key:
-          type: string
-          title: Key
-        options:
-          items:
-            type: string
-          type: array
-          title: Options
-        value:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Value
-      type: object
-      required:
-      - id
-      - title
-      - type
-      - required
-      - status
-      - key
-      - options
-      title: SelectStep
+      - value
+      - label
+      title: RadioOption
     HTTPValidationError:
       properties:
         detail:
@@ -284,53 +334,3 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    PreventiveMaintenanceCheckListResult:
-      properties:
-        schema_version:
-          type: string
-          title: Schema Version
-        agent_id:
-          type: string
-          title: Agent Id
-        steps:
-          items:
-            $ref: '#/components/schemas/Step'
-          type: array
-          title: Steps
-        status:
-          type: string
-          title: Status
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - schema_version
-      - agent_id
-      - steps
-      - status
-      title: PreventiveMaintenanceCheckListResult
-    FormField:
-      properties:
-        key:
-          type: string
-          title: Key
-        type:
-          type: string
-          title: Type
-        disabled_if:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Disabled If
-        placeholder:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Placeholder
-      type: object
-      required:
-      - key
-      - type
-      title: FormField

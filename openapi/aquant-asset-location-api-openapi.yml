@@ -51,16 +51,6 @@ components:
       - asset_id
       - location
       title: AssetLocationInfo
-    AssetLocationRequest:
-      properties:
-        asset_id:
-          type: string
-          title: Asset Id
-          description: The asset ID to look up location for.
-      type: object
-      required:
-      - asset_id
-      title: AssetLocationRequest
     ValidationError:
       properties:
         loc:
@@ -87,15 +77,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     AssetLocationResult:
       properties:
         status:
@@ -110,3 +91,22 @@ components:
       required:
       - status
       title: AssetLocationResult
+    AssetLocationRequest:
+      properties:
+        asset_id:
+          type: string
+          title: Asset Id
+          description: The asset ID to look up location for.
+      type: object
+      required:
+      - asset_id
+      title: AssetLocationRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
