@@ -51,6 +51,28 @@ paths:
       - Part Sources
 components:
   schemas:
+    PartSourcesRequest:
+      properties:
+        catalog_data:
+          items:
+            $ref: '#/components/schemas/PartCatalogInfo'
+          type: array
+          title: Catalog Data
+          description: List of part catalog info objects from the catalog lookup tool.
+        model:
+          type: string
+          title: Model
+          description: The model name for the part sources tool.
+        question:
+          type: string
+          title: Question
+          description: The user question to match against sources.
+      type: object
+      required:
+      - catalog_data
+      - model
+      - question
+      title: PartSourcesRequest
     ValidationError:
       properties:
         loc:
@@ -77,28 +99,34 @@ components:
       - msg
       - type
       title: ValidationError
-    PartSourcesRequest:
+    HTTPValidationError:
       properties:
-        catalog_data:
+        detail:
           items:
-            $ref: '#/components/schemas/PartCatalogInfo'
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Catalog Data
-          description: List of part catalog info objects from the catalog lookup tool.
-        model:
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PartSourcesResult:
+      properties:
+        status:
           type: string
-          title: Model
-          description: The model name for the part sources tool.
-        question:
+          title: Status
+        message:
           type: string
-          title: Question
-          description: The user question to match against sources.
+          title: Message
+        sources:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Sources
+          default: []
       type: object
       required:
-      - catalog_data
-      - model
-      - question
-      title: PartSourcesRequest
+      - status
+      title: PartSourcesResult
     PartCatalogInfo:
       properties:
         part_id:
@@ -120,31 +148,3 @@ components:
       required:
       - part_id
       title: PartCatalogInfo
-    PartSourcesResult:
-      properties:
-        status:
-          type: string
-          title: Status
-        message:
-          type: string
-          title: Message
-        sources:
-          items:
-            additionalProperties: true
-            type: object
-          type: array
-          title: Sources
-          default: []
-      type: object
-      required:
-      - status
-      title: PartSourcesResult
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError

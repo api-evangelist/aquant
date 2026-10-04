@@ -59,46 +59,15 @@ components:
       - msg
       - type
       title: ValidationError
-    NextSymptomRequest:
+    HTTPValidationError:
       properties:
-        asset_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Asset Id
-          description: The asset ID to predict next symptoms for.
-        top_n:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Top N
-          description: Number of top predictions to return.
-          default: 3
-      type: object
-      title: NextSymptomRequest
-    Prediction:
-      properties:
-        rank:
-          type: integer
-          title: Rank
-        obs_predict:
-          type: string
-          title: Obs Predict
-        confidence:
-          type: string
-          title: Confidence
-        how_to_check:
+        detail:
           items:
-            type: string
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: How To Check
+          title: Detail
       type: object
-      required:
-      - rank
-      - obs_predict
-      - confidence
-      - how_to_check
-      title: Prediction
+      title: HTTPValidationError
     NextSymptomResult:
       properties:
         asset_id:
@@ -125,12 +94,43 @@ components:
       - predictions
       - status
       title: NextSymptomResult
-    HTTPValidationError:
+    Prediction:
       properties:
-        detail:
+        rank:
+          type: integer
+          title: Rank
+        obs_predict:
+          type: string
+          title: Obs Predict
+        confidence:
+          type: string
+          title: Confidence
+        how_to_check:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            type: string
           type: array
-          title: Detail
+          title: How To Check
       type: object
-      title: HTTPValidationError
+      required:
+      - rank
+      - obs_predict
+      - confidence
+      - how_to_check
+      title: Prediction
+    NextSymptomRequest:
+      properties:
+        asset_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Asset Id
+          description: The asset ID to predict next symptoms for.
+        top_n:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Top N
+          description: Number of top predictions to return.
+          default: 3
+      type: object
+      title: NextSymptomRequest

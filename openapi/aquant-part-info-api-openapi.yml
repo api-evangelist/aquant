@@ -77,18 +77,15 @@ components:
       - msg
       - type
       title: ValidationError
-    PartInfoRequest:
+    HTTPValidationError:
       properties:
-        catalog_data:
+        detail:
           items:
-            $ref: '#/components/schemas/PartCatalogInfo'
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Catalog Data
-          description: List of part catalog info objects from the catalog lookup tool.
+          title: Detail
       type: object
-      required:
-      - catalog_data
-      title: PartInfoRequest
+      title: HTTPValidationError
     PartCatalogInfo:
       properties:
         part_id:
@@ -110,6 +107,18 @@ components:
       required:
       - part_id
       title: PartCatalogInfo
+    PartInfoRequest:
+      properties:
+        catalog_data:
+          items:
+            $ref: '#/components/schemas/PartCatalogInfo'
+          type: array
+          title: Catalog Data
+          description: List of part catalog info objects from the catalog lookup tool.
+      type: object
+      required:
+      - catalog_data
+      title: PartInfoRequest
     PartInfoResult:
       properties:
         status:
@@ -129,12 +138,3 @@ components:
       required:
       - status
       title: PartInfoResult
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError

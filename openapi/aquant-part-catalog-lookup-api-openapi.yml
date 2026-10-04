@@ -51,6 +51,21 @@ paths:
       - Part Catalog Lookup
 components:
   schemas:
+    PartCatalogLookupRequest:
+      properties:
+        triage_product_id:
+          type: string
+          title: Triage Product Id
+          description: The triage product ID to look up in the catalog.
+        question:
+          type: string
+          title: Question
+          description: The user question to match against the catalog.
+      type: object
+      required:
+      - triage_product_id
+      - question
+      title: PartCatalogLookupRequest
     ValidationError:
       properties:
         loc:
@@ -77,6 +92,15 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     PartCatalogLookupResult:
       properties:
         status:
@@ -116,27 +140,3 @@ components:
       required:
       - part_id
       title: PartCatalogInfo
-    PartCatalogLookupRequest:
-      properties:
-        triage_product_id:
-          type: string
-          title: Triage Product Id
-          description: The triage product ID to look up in the catalog.
-        question:
-          type: string
-          title: Question
-          description: The user question to match against the catalog.
-      type: object
-      required:
-      - triage_product_id
-      - question
-      title: PartCatalogLookupRequest
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
