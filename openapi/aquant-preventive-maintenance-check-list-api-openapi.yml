@@ -38,42 +38,13 @@ paths:
       - Preventive Maintenance Check List
 components:
   schemas:
-    FormStep:
-      properties:
-        id:
-          type: string
-          title: Id
-        title:
-          type: string
-          title: Title
-        type:
-          type: string
-          title: Type
-        required:
-          type: boolean
-          title: Required
-        status:
-          type: string
-          title: Status
-        fields:
-          items:
-            $ref: '#/components/schemas/FormField'
-          type: array
-          title: Fields
-        values:
-          additionalProperties: true
-          type: object
-          title: Values
-          default: {}
-      type: object
-      required:
-      - id
-      - title
-      - type
-      - required
-      - status
-      - fields
-      title: FormStep
+    Step:
+      anyOf:
+      - $ref: '#/components/schemas/RadioStep'
+      - $ref: '#/components/schemas/FormStep'
+      - $ref: '#/components/schemas/SelectStep'
+      - $ref: '#/components/schemas/NumberStep'
+      title: Step
     RadioOption:
       properties:
         value:
@@ -137,78 +108,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    PreventiveMaintenanceCheckListRequest:
-      properties:
-        asset_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Asset Id
-          description: The asset ID to generate a preventive maintenance check list for.
-        model:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Model
-          description: The model to generate a preventive maintenance check list for.
-      type: object
-      title: PreventiveMaintenanceCheckListRequest
-    SelectStep:
-      properties:
-        id:
-          type: string
-          title: Id
-        title:
-          type: string
-          title: Title
-        type:
-          type: string
-          title: Type
-        required:
-          type: boolean
-          title: Required
-        status:
-          type: string
-          title: Status
-        key:
-          type: string
-          title: Key
-        options:
-          items:
-            type: string
-          type: array
-          title: Options
-        value:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Value
-      type: object
-      required:
-      - id
-      - title
-      - type
-      - required
-      - status
-      - key
-      - options
-      title: SelectStep
-    Step:
-      anyOf:
-      - $ref: '#/components/schemas/RadioStep'
-      - $ref: '#/components/schemas/FormStep'
-      - $ref: '#/components/schemas/SelectStep'
-      - $ref: '#/components/schemas/NumberStep'
-      title: Step
     NumberStep:
       properties:
         id:
@@ -255,6 +154,106 @@ components:
       - key
       - unit
       title: NumberStep
+    FormStep:
+      properties:
+        id:
+          type: string
+          title: Id
+        title:
+          type: string
+          title: Title
+        type:
+          type: string
+          title: Type
+        required:
+          type: boolean
+          title: Required
+        status:
+          type: string
+          title: Status
+        fields:
+          items:
+            $ref: '#/components/schemas/FormField'
+          type: array
+          title: Fields
+        values:
+          additionalProperties: true
+          type: object
+          title: Values
+          default: {}
+      type: object
+      required:
+      - id
+      - title
+      - type
+      - required
+      - status
+      - fields
+      title: FormStep
+    PreventiveMaintenanceCheckListRequest:
+      properties:
+        asset_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Asset Id
+          description: The asset ID to generate a preventive maintenance check list for.
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+          description: The model to generate a preventive maintenance check list for.
+      type: object
+      title: PreventiveMaintenanceCheckListRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    BlockingRule:
+      properties:
+        if_value:
+          type: string
+          title: If Value
+        block:
+          type: boolean
+          title: Block
+      type: object
+      required:
+      - if_value
+      - block
+      title: BlockingRule
+    PreventiveMaintenanceCheckListResult:
+      properties:
+        schema_version:
+          type: string
+          title: Schema Version
+        agent_id:
+          type: string
+          title: Agent Id
+        steps:
+          items:
+            $ref: '#/components/schemas/Step'
+          type: array
+          title: Steps
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - schema_version
+      - agent_id
+      - steps
+      - status
+      title: PreventiveMaintenanceCheckListResult
     RadioStep:
       properties:
         id:
@@ -295,42 +294,43 @@ components:
       - status
       - options
       title: RadioStep
-    PreventiveMaintenanceCheckListResult:
+    SelectStep:
       properties:
-        schema_version:
+        id:
           type: string
-          title: Schema Version
-        agent_id:
+          title: Id
+        title:
           type: string
-          title: Agent Id
-        steps:
-          items:
-            $ref: '#/components/schemas/Step'
-          type: array
-          title: Steps
+          title: Title
+        type:
+          type: string
+          title: Type
+        required:
+          type: boolean
+          title: Required
         status:
           type: string
           title: Status
-        message:
+        key:
           type: string
-          title: Message
+          title: Key
+        options:
+          items:
+            type: string
+          type: array
+          title: Options
+        value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value
       type: object
       required:
-      - schema_version
-      - agent_id
-      - steps
+      - id
+      - title
+      - type
+      - required
       - status
-      title: PreventiveMaintenanceCheckListResult
-    BlockingRule:
-      properties:
-        if_value:
-          type: string
-          title: If Value
-        block:
-          type: boolean
-          title: Block
-      type: object
-      required:
-      - if_value
-      - block
-      title: BlockingRule
+      - key
+      - options
+      title: SelectStep

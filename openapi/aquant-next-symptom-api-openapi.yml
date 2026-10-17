@@ -33,6 +33,23 @@ paths:
       - Next Symptom
 components:
   schemas:
+    NextSymptomRequest:
+      properties:
+        asset_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Asset Id
+          description: The asset ID to predict next symptoms for.
+        top_n:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Top N
+          description: Number of top predictions to return.
+          default: 3
+      type: object
+      title: NextSymptomRequest
     ValidationError:
       properties:
         loc:
@@ -59,15 +76,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     NextSymptomResult:
       properties:
         asset_id:
@@ -117,20 +125,12 @@ components:
       - confidence
       - how_to_check
       title: Prediction
-    NextSymptomRequest:
+    HTTPValidationError:
       properties:
-        asset_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Asset Id
-          description: The asset ID to predict next symptoms for.
-        top_n:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Top N
-          description: Number of top predictions to return.
-          default: 3
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      title: NextSymptomRequest
+      title: HTTPValidationError

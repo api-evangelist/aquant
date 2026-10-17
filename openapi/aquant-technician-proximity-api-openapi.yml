@@ -38,6 +38,19 @@ paths:
       - Technician Proximity
 components:
   schemas:
+    TechnicianLocation:
+      properties:
+        event_agent_name:
+          type: string
+          title: Event Agent Name
+        location:
+          type: string
+          title: Location
+      type: object
+      required:
+      - event_agent_name
+      - location
+      title: TechnicianLocation
     TechnicianProximityRequest:
       properties:
         asset_location:
@@ -55,41 +68,6 @@ components:
       - asset_location
       - technicians
       title: TechnicianProximityRequest
-    TechnicianProximityInfo:
-      properties:
-        event_agent_name:
-          type: string
-          title: Event Agent Name
-        location:
-          type: string
-          title: Location
-        proximity_km:
-          type: number
-          title: Proximity Km
-      type: object
-      required:
-      - event_agent_name
-      - location
-      - proximity_km
-      title: TechnicianProximityInfo
-    TechnicianProximityResult:
-      properties:
-        status:
-          type: string
-          title: Status
-        message:
-          type: string
-          title: Message
-        technicians:
-          items:
-            $ref: '#/components/schemas/TechnicianProximityInfo'
-          type: array
-          title: Technicians
-          default: []
-      type: object
-      required:
-      - status
-      title: TechnicianProximityResult
     ValidationError:
       properties:
         loc:
@@ -116,6 +94,24 @@ components:
       - msg
       - type
       title: ValidationError
+    TechnicianProximityResult:
+      properties:
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+        technicians:
+          items:
+            $ref: '#/components/schemas/TechnicianProximityInfo'
+          type: array
+          title: Technicians
+          default: []
+      type: object
+      required:
+      - status
+      title: TechnicianProximityResult
     HTTPValidationError:
       properties:
         detail:
@@ -125,7 +121,7 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    TechnicianLocation:
+    TechnicianProximityInfo:
       properties:
         event_agent_name:
           type: string
@@ -133,8 +129,12 @@ components:
         location:
           type: string
           title: Location
+        proximity_km:
+          type: number
+          title: Proximity Km
       type: object
       required:
       - event_agent_name
       - location
-      title: TechnicianLocation
+      - proximity_km
+      title: TechnicianProximityInfo

@@ -56,6 +56,33 @@ components:
       required:
       - status
       title: AgentDataResult
+    AgentDataRequest:
+      properties:
+        observation_name:
+          type: string
+          title: Observation Name
+          description: The observation name to search for agents and proficiency scores.
+      type: object
+      required:
+      - observation_name
+      title: AgentDataRequest
+    AgentInfo:
+      properties:
+        event_agent_name:
+          type: string
+          title: Event Agent Name
+        proficiency_score:
+          type: number
+          title: Proficiency Score
+        location:
+          type: string
+          title: Location
+      type: object
+      required:
+      - event_agent_name
+      - proficiency_score
+      - location
+      title: AgentInfo
     ValidationError:
       properties:
         loc:
@@ -91,30 +118,3 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    AgentInfo:
-      properties:
-        event_agent_name:
-          type: string
-          title: Event Agent Name
-        proficiency_score:
-          type: number
-          title: Proficiency Score
-        location:
-          type: string
-          title: Location
-      type: object
-      required:
-      - event_agent_name
-      - proficiency_score
-      - location
-      title: AgentInfo
-    AgentDataRequest:
-      properties:
-        observation_name:
-          type: string
-          title: Observation Name
-          description: The observation name to search for agents and proficiency scores.
-      type: object
-      required:
-      - observation_name
-      title: AgentDataRequest
