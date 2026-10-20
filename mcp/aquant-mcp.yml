@@ -31,7 +31,15 @@ x-evidence:
   tools_file: aquant-mcp-tools.json
 tools:
 - name: part_catalog_lookup
-  description: Look up part information from the catalog using a triage product ID and a user question.
+  description: "Part Catalog Lookup\n\nLook up part information from the catalog using a triage product\
+    \ ID and a user question.\n\nArgs:\n    payload: The request body containing triage_product_id and\
+    \ question.\n    tenant_id: [TEMPORARY] The tenant ID. This should be removed in the future.\n   \
+    \ db_session: Mock database session (ready for future replacement with real DB)\n\n### Responses:\n\
+    \n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n\
+    ```json\n{\n  \"status\": \"Status\",\n  \"message\": \"Message\",\n  \"parts\": [\n    {\n      \"\
+    part_id\": \"Part Id\",\n      \"part_name\": \"Part Name\",\n      \"part_description\": \"Part Description\"\
+    ,\n      \"part_image_link\": \"Part Image Link\",\n      \"part_url_link\": \"Part Url Link\"\n \
+    \   }\n  ]\n}\n```"
   required:
   - tenant_id
   - triage_product_id
@@ -42,7 +50,12 @@ tools:
   - question
   source_operation: openapi/aquant-mcp-server-openapi.json#part_catalog_lookup
 - name: part_info
-  description: Retrieve detailed part information given catalog data from the lookup tool.
+  description: "Part Info\n\nRetrieve detailed part information given catalog data from the lookup tool.\n\
+    \nArgs:\n    payload: The request body containing catalog_data.\n    tenant_id: [TEMPORARY] The tenant\
+    \ ID. This should be removed in the future.\n    db_session: Mock database session (ready for future\
+    \ replacement with real DB)\n\n### Responses:\n\n**200**: Successful Response (Success Response)\n\
+    Content-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"status\": \"Status\",\n \
+    \ \"message\": \"Message\",\n  \"part_info\": [\n    {}\n  ]\n}\n```"
   required:
   - tenant_id
   - catalog_data
@@ -51,7 +64,12 @@ tools:
   - catalog_data
   source_operation: openapi/aquant-mcp-server-openapi.json#part_info
 - name: part_sources
-  description: Retrieve sources for parts given catalog data, model, and question.
+  description: "Part Sources\n\nRetrieve sources for parts given catalog data, model, and question.\n\n\
+    Args:\n    payload: The request body containing catalog_data, model, and question.\n    tenant_id:\
+    \ [TEMPORARY] The tenant ID. This should be removed in the future.\n    db_session: Mock database\
+    \ session (ready for future replacement with real DB)\n\n### Responses:\n\n**200**: Successful Response\
+    \ (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"status\"\
+    : \"Status\",\n  \"message\": \"Message\",\n  \"sources\": [\n    {}\n  ]\n}\n```"
   required:
   - tenant_id
   - catalog_data
@@ -64,14 +82,24 @@ tools:
   - question
   source_operation: openapi/aquant-mcp-server-openapi.json#part_sources
 - name: agent_data
-  description: Retrieve agents and their proficiency scores based on an observation name.
+  description: "Agent Data\n\nRetrieve agents and their proficiency scores based on an observation name.\n\
+    \nArgs:\n    payload: The request body containing observation_name.\n\n### Responses:\n\n**200**:\
+    \ Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n\
+    ```json\n{\n  \"status\": \"Status\",\n  \"message\": \"Message\",\n  \"agents\": [\n    {\n     \
+    \ \"event_agent_name\": \"Event Agent Name\",\n      \"proficiency_score\": 1.0,\n      \"location\"\
+    : \"Location\"\n    }\n  ]\n}\n```"
   required:
   - observation_name
   parameters:
   - observation_name
   source_operation: openapi/aquant-mcp-server-openapi.json#agent_data
 - name: technician_proximity
-  description: Retrieve technicians and their proximity to an asset location.
+  description: "Technician Proximity\n\nRetrieve technicians and their proximity to an asset location.\n\
+    \nArgs:\n    payload: The request body containing asset_location and technicians.\n\n### Responses:\n\
+    \n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n\
+    ```json\n{\n  \"status\": \"Status\",\n  \"message\": \"Message\",\n  \"technicians\": [\n    {\n\
+    \      \"event_agent_name\": \"Event Agent Name\",\n      \"location\": \"Location\",\n      \"proximity_km\"\
+    : 1.0\n    }\n  ]\n}\n```"
   required:
   - asset_location
   - technicians
@@ -80,41 +108,71 @@ tools:
   - technicians
   source_operation: openapi/aquant-mcp-server-openapi.json#technician_proximity
 - name: observation_existence
-  description: Check if an observation exists in the loaded data.
+  description: "Observation Existence\n\nCheck if an observation exists in the loaded data.\n\nArgs:\n\
+    \    payload: The request body containing observation_name.\n\n### Responses:\n\n**200**: Successful\
+    \ Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n\
+    {\n  \"status\": \"Status\",\n  \"message\": \"Message\",\n  \"exists\": true,\n  \"observation_name\"\
+    : \"Observation Name\"\n}\n```"
   required:
   - observation_name
   parameters:
   - observation_name
   source_operation: openapi/aquant-mcp-server-openapi.json#observation_existence
 - name: asset_location
-  description: Retrieve the location of an asset based on its ID.
+  description: "Asset Location\n\nRetrieve the location of an asset based on its ID.\n\nArgs:\n    payload:\
+    \ The request body containing asset_id.\n\n### Responses:\n\n**200**: Successful Response (Success\
+    \ Response)\nContent-Type: application/json\n\n**Example Response:**\n```json\n{\n  \"status\": \"\
+    Status\",\n  \"message\": \"Message\",\n  \"asset_location\": {\n    \"asset_id\": \"Asset Id\",\n\
+    \    \"location\": \"Location\"\n  }\n}\n```"
   required:
   - asset_id
   parameters:
   - asset_id
   source_operation: openapi/aquant-mcp-server-openapi.json#asset_location
 - name: preventive_maintenance_check_list
-  description: Generate a preventive maintenance check list for a model or asset.
+  description: "Preventive Maintenance Check List\n\nGenerate a preventive maintenance check list for\
+    \ a model or asset.\n\nArgs:\n    payload: The request body containing asset_id.\n\n### Responses:\n\
+    \n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n\
+    ```json\n{\n  \"schema_version\": \"Schema Version\",\n  \"agent_id\": \"Agent Id\",\n  \"steps\"\
+    : [],\n  \"status\": \"Status\",\n  \"message\": \"Message\"\n}\n```"
   required: []
   parameters:
   - asset_id
   - model
   source_operation: openapi/aquant-mcp-server-openapi.json#preventive_maintenance_check_list
 - name: summary_report
-  description: Generate a summary report for a chat history.
+  description: "Summary Report\n\nGenerate a summary report for a chat history.\n\n### Responses:\n\n\
+    **200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n\
+    ```json\n{\n  \"summary_version\": \"Summary Version\",\n  \"site\": {\n    \"name\": \"Name\",\n\
+    \    \"address\": \"Address\"\n  },\n  \"agents_used\": [\n    {\n      \"id\": \"Id\",\n      \"\
+    name\": \"Name\",\n      \"status\": \"Status\",\n      \"highlights\": [\n        \"string\"\n  \
+    \    ]\n    }\n  ],\n  \"status\": \"Status\",\n  \"message\": \"Message\"\n}\n```"
   required: []
   parameters:
   - chat_history
   source_operation: openapi/aquant-mcp-server-openapi.json#summary_report
 - name: next_symptom
-  description: Generate a next symptom for an asset based on its ID.
+  description: "Next Symptom\n\nGenerate a next symptom for an asset based on its ID.\n\n### Responses:\n\
+    \n**200**: Successful Response (Success Response)\nContent-Type: application/json\n\n**Example Response:**\n\
+    ```json\n{\n  \"asset_id\": \"Asset Id\",\n  \"top_n\": 1,\n  \"predictions\": [\n    {\n      \"\
+    rank\": 1,\n      \"obs_predict\": \"Obs Predict\",\n      \"confidence\": \"Confidence\",\n     \
+    \ \"how_to_check\": [\n        \"string\"\n      ]\n    }\n  ],\n  \"status\": \"Status\",\n  \"message\"\
+    : \"Message\"\n}\n```"
   required: []
   parameters:
   - asset_id
   - top_n
   source_operation: openapi/aquant-mcp-server-openapi.json#next_symptom
 - name: health_check
-  description: '### Responses:'
+  description: 'Health Check
+
+
+    ### Responses:
+
+
+    **200**: Successful Response (Success Response)
+
+    Content-Type: application/json'
   required: []
   parameters: []
   source_operation: openapi/aquant-mcp-server-openapi.json#health_check
@@ -150,3 +208,4 @@ tool_quality:
   scored: false
   note: Facts from the saved tools/list capture (mcp_tool_quality.py); recorded, not scored. Checks learned
     from Glimind's agent-readiness audit.
+tools_count: 11
