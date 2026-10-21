@@ -1,5 +1,7 @@
 aid: aquant
+
 name: Aquant
+
 description: 'Aquant is an agentic AI platform built for organizations that manufacture,
   sell, and service complex equipment. It turns a company''s own service content —
   manuals, service histories, parts and warranty data, case notes — and the tacit expertise
@@ -12,7 +14,9 @@ description: 'Aquant is an agentic AI platform built for organizations that manu
   mcp.aquant.ai that publishes eleven service-intelligence tools over both JSON-RPC
   Streamable HTTP and REST, and the Aquant Conversation Platform (ACP) voice/chat API
   at voiceai-api.aquant.ai fronted by a first-party browser SDK.'
+
 url: https://raw.githubusercontent.com/api-evangelist/aquant/refs/heads/main/apis.yml
+
 deliveryModel:
   model: saas
   open_source: false
@@ -24,6 +28,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: unknown
   onboarding: unknown
@@ -38,12 +43,19 @@ accessModel:
   - security
   generated: '2026-09-03'
   method: derived
+
 image: https://cdn.prod.website-files.com/687529371c5de2d8428c0a4d/6877cd3487c351b4d9032d3b_logo-aquant-light.svg
+
 x-type: company
+
 x-source: harvest:secondary-market
+
 specificationVersion: '0.23'
+
 created: '2026-07-31'
+
 modified: '2026-07-31'
+
 tags:
 - Company
 - Artificial Intelligence
@@ -57,6 +69,7 @@ tags:
 - Voice AI
 - MCP
 - Predictive Maintenance
+
 tags_raw:
 - Company
 - Artificial Intelligence
@@ -71,6 +84,107 @@ tags_raw:
 - Model Context Protocol
 - Predictive Maintenance
 - Knowledge-Management
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+- FN: APIs.json
+  email: info@apis.io
+
+common:
+- type: Spectral
+  url: rules/aquant-rules.yml
+- type: JSONLD
+  url: json-ld/aquant-context.jsonld
+- type: Vocabulary
+  url: vocabulary/aquant-vocabulary.yml
+- type: Hosts
+  url: hosts/aquant-hosts.yml
+- type: Vendors
+  url: vendors/aquant-vendors.yml
+- type: Overlay
+  url: overlays/aquant-voiceai-api-overlay.yaml
+- type: TrustCenter
+  url: security/aquant-trust-center.yml
+- type: Website
+  url: https://www.aquant.ai/
+- type: Documentation
+  url: https://www.aquant.ai/platform
+- type: APIReference
+  url: https://mcp.aquant.ai/docs
+- type: GettingStarted
+  url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start
+- type: Support
+  url: https://support.aquant.ai/
+- type: Blog
+  url: https://www.aquant.ai/resources/blog
+- type: GitHubOrganization
+  url: https://github.com/AquantIO
+- type: Login
+  url: https://login.aquant.ai/
+- type: TermsOfService
+  url: https://cdn.prod.website-files.com/687529371c5de2d8428c0a4d/688ce744542f10274811b354_Terms%20of%20Service.pdf
+- type: PrivacyPolicy
+  url: https://www.aquant.ai/privacy-policy
+- type: TrustCenter
+  url: https://security.aquant.ai/
+- type: Compliance
+  url: https://security.aquant.ai/
+- type: MCPServer
+  url: mcp/aquant-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/aquant-tool-crosswalk.yml
+- type: Packages
+  url: packages/aquant-packages.yml
+- type: SDKs
+  url: packages/aquant-packages.yml
+- type: LLMsTxt
+  url: llms/aquant-llms.txt
+- type: WellKnown
+  url: well-known/aquant-well-known.yml
+- type: Authentication
+  url: authentication/aquant-authentication.yml
+- type: OAuthScopes
+  url: scopes/aquant-scopes.yml
+- type: Conventions
+  url: conventions/aquant-conventions.yml
+- type: ErrorCatalog
+  url: errors/aquant-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/aquant-lifecycle.yml
+- type: ChangeLog
+  url: https://www.aquant.ai/company/whats-new
+- type: ChangeLog
+  url: changelog/aquant-changelog.yml
+- type: Conformance
+  url: conformance/aquant-conformance.yml
+- type: DataModel
+  url: data-model/aquant-data-model.yml
+- type: AgenticAccess
+  url: agentic-access/aquant-agentic-access.yml
+- type: DomainSecurity
+  url: security/aquant-domain-security.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Arazzo
+  name: Aquant Arazzo workflows
+  url: arazzo/_index.yml
+- type: Arazzo
+  name: Diagnose an asset and source the right replacement part
+  url: arazzo/aquant-diagnose-and-source-part.yml
+- type: Arazzo
+  name: Locate an asset and rank the nearest qualified technician
+  url: arazzo/aquant-dispatch-nearest-technician.yml
+- type: Arazzo
+  name: Run a preventive-maintenance visit and file the summary
+  url: arazzo/aquant-preventive-maintenance-visit.yml
+- type: Overlay
+  url: overlays/aquant-mcp-server-overlay.yaml
+- type: JSONSchema
+  url: json-schema/aquant-mcp-server-schemas.json
+- type: Examples
+  url: examples/aquant-mcp-server-examples.yml
+
 apis:
 - aid: aquant:aquant-agent-data-api
   name: Aquant Agent Data API
@@ -382,96 +496,9 @@ apis:
     url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start
   - type: SDKs
     url: packages/aquant-packages.yml
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
-- FN: APIs.json
-  email: info@apis.io
-common:
-- type: Overlay
-  url: overlays/aquant-voiceai-api-overlay.yaml
-- type: TrustCenter
-  url: security/aquant-trust-center.yml
-- type: Website
-  url: https://www.aquant.ai/
-- type: Documentation
-  url: https://www.aquant.ai/platform
-- type: APIReference
-  url: https://mcp.aquant.ai/docs
-- type: GettingStarted
-  url: https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start
-- type: Support
-  url: https://support.aquant.ai/
-- type: Blog
-  url: https://www.aquant.ai/resources/blog
-- type: GitHubOrganization
-  url: https://github.com/AquantIO
-- type: Login
-  url: https://login.aquant.ai/
-- type: TermsOfService
-  url: https://cdn.prod.website-files.com/687529371c5de2d8428c0a4d/688ce744542f10274811b354_Terms%20of%20Service.pdf
-- type: PrivacyPolicy
-  url: https://www.aquant.ai/privacy-policy
-- type: TrustCenter
-  url: https://security.aquant.ai/
-- type: Compliance
-  url: https://security.aquant.ai/
-- type: MCPServer
-  url: mcp/aquant-mcp.yml
-- type: ToolCrosswalk
-  url: mcp/aquant-tool-crosswalk.yml
-- type: Packages
-  url: packages/aquant-packages.yml
-- type: SDKs
-  url: packages/aquant-packages.yml
-- type: LLMsTxt
-  url: llms/aquant-llms.txt
-- type: WellKnown
-  url: well-known/aquant-well-known.yml
-- type: Authentication
-  url: authentication/aquant-authentication.yml
-- type: OAuthScopes
-  url: scopes/aquant-scopes.yml
-- type: Conventions
-  url: conventions/aquant-conventions.yml
-- type: ErrorCatalog
-  url: errors/aquant-problem-types.yml
-- type: Lifecycle
-  url: lifecycle/aquant-lifecycle.yml
-- type: ChangeLog
-  url: https://www.aquant.ai/company/whats-new
-- type: ChangeLog
-  url: changelog/aquant-changelog.yml
-- type: Conformance
-  url: conformance/aquant-conformance.yml
-- type: DataModel
-  url: data-model/aquant-data-model.yml
-- type: AgenticAccess
-  url: agentic-access/aquant-agentic-access.yml
-- type: DomainSecurity
-  url: security/aquant-domain-security.yml
-- type: AgentSkill
-  url: skills/_index.yml
-- type: Arazzo
-  name: Aquant Arazzo workflows
-  url: arazzo/_index.yml
-- type: Arazzo
-  name: Diagnose an asset and source the right replacement part
-  url: arazzo/aquant-diagnose-and-source-part.yml
-- type: Arazzo
-  name: Locate an asset and rank the nearest qualified technician
-  url: arazzo/aquant-dispatch-nearest-technician.yml
-- type: Arazzo
-  name: Run a preventive-maintenance visit and file the summary
-  url: arazzo/aquant-preventive-maintenance-visit.yml
-- type: Overlay
-  url: overlays/aquant-mcp-server-overlay.yaml
-- type: JSONSchema
-  url: json-schema/aquant-mcp-server-schemas.json
-- type: Examples
-  url: examples/aquant-mcp-server-examples.yml
+
 x-enrichment:
-  date: '2026-07-31'
+  date: '2026-10-20'
   status: enriched
-  artifacts_added: 34
-  pass: local-v1
+  artifacts_added: 0
+  pass: local-v5

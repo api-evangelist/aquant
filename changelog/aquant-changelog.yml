@@ -10,7 +10,8 @@ note: >-
   Neither the MCP server nor the ACP/VoiceAI API has a changelog of its own — the running MCP
   server reports 1.28.1 while its published OpenAPI still says 1.0.0, and no record of what
   changed between those exists publicly.
-current_version:
+current_version: null
+component_versions:
   aquant:mcp-server: 1.28.1
   aquant:acp-voiceai: null
   '@aquantinc/acp-web-sdk': 0.1.3

@@ -1,0 +1,296 @@
+{
+  "@context": {
+    "@vocab": "https://aquant.ai/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "aquant": "https://aquant.ai/schema#",
+    "AgentDataResult": "aquant:AgentDataResult",
+    "status": {
+      "@id": "aquant:status",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "aquant:message",
+      "@type": "xsd:string"
+    },
+    "agents": {
+      "@id": "aquant:agents",
+      "@container": "@list"
+    },
+    "AgentDataRequest": "aquant:AgentDataRequest",
+    "observation_name": {
+      "@id": "aquant:observation_name",
+      "@type": "xsd:string"
+    },
+    "AgentInfo": "aquant:AgentInfo",
+    "event_agent_name": {
+      "@id": "aquant:event_agent_name",
+      "@type": "xsd:string"
+    },
+    "proficiency_score": {
+      "@id": "aquant:proficiency_score",
+      "@type": "xsd:decimal"
+    },
+    "location": {
+      "@id": "aquant:location",
+      "@type": "xsd:string"
+    },
+    "ValidationError": "aquant:ValidationError",
+    "loc": {
+      "@id": "aquant:loc",
+      "@container": "@list"
+    },
+    "msg": {
+      "@id": "aquant:msg",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "aquant:type",
+      "@type": "xsd:string"
+    },
+    "input": {
+      "@id": "aquant:input"
+    },
+    "ctx": {
+      "@id": "aquant:ctx"
+    },
+    "HTTPValidationError": "aquant:HTTPValidationError",
+    "detail": {
+      "@id": "aquant:detail",
+      "@container": "@list"
+    },
+    "AssetLocationResult": "aquant:AssetLocationResult",
+    "asset_location": {
+      "@id": "aquant:asset_location",
+      "@type": "@id"
+    },
+    "AssetLocationRequest": "aquant:AssetLocationRequest",
+    "asset_id": {
+      "@id": "aquant:asset_id",
+      "@type": "xsd:string"
+    },
+    "AssetLocationInfo": "aquant:AssetLocationInfo",
+    "NextSymptomRequest": "aquant:NextSymptomRequest",
+    "top_n": {
+      "@id": "aquant:top_n"
+    },
+    "NextSymptomResult": "aquant:NextSymptomResult",
+    "predictions": {
+      "@id": "aquant:predictions",
+      "@container": "@list"
+    },
+    "Prediction": "aquant:Prediction",
+    "rank": {
+      "@id": "aquant:rank",
+      "@type": "xsd:integer"
+    },
+    "obs_predict": {
+      "@id": "aquant:obs_predict",
+      "@type": "xsd:string"
+    },
+    "confidence": {
+      "@id": "aquant:confidence",
+      "@type": "xsd:string"
+    },
+    "how_to_check": {
+      "@id": "aquant:how_to_check",
+      "@container": "@list"
+    },
+    "ObservationExistenceResult": "aquant:ObservationExistenceResult",
+    "exists": {
+      "@id": "aquant:exists",
+      "@type": "xsd:boolean"
+    },
+    "ObservationExistenceRequest": "aquant:ObservationExistenceRequest",
+    "PartCatalogInfo": "aquant:PartCatalogInfo",
+    "part_id": {
+      "@id": "aquant:part_id",
+      "@type": "xsd:string"
+    },
+    "part_name": {
+      "@id": "aquant:part_name",
+      "@type": "xsd:string"
+    },
+    "part_description": {
+      "@id": "aquant:part_description",
+      "@type": "xsd:string"
+    },
+    "part_image_link": {
+      "@id": "aquant:part_image_link",
+      "@type": "xsd:string"
+    },
+    "part_url_link": {
+      "@id": "aquant:part_url_link",
+      "@type": "xsd:string"
+    },
+    "PartCatalogLookupResult": "aquant:PartCatalogLookupResult",
+    "parts": {
+      "@id": "aquant:parts",
+      "@container": "@list"
+    },
+    "PartCatalogLookupRequest": "aquant:PartCatalogLookupRequest",
+    "triage_product_id": {
+      "@id": "aquant:triage_product_id",
+      "@type": "xsd:string"
+    },
+    "question": {
+      "@id": "aquant:question",
+      "@type": "xsd:string"
+    },
+    "PartInfoRequest": "aquant:PartInfoRequest",
+    "catalog_data": {
+      "@id": "aquant:catalog_data",
+      "@container": "@list"
+    },
+    "PartInfoResult": "aquant:PartInfoResult",
+    "part_info": {
+      "@id": "aquant:part_info",
+      "@container": "@list"
+    },
+    "PartSourcesResult": "aquant:PartSourcesResult",
+    "sources": {
+      "@id": "aquant:sources",
+      "@container": "@list"
+    },
+    "PartSourcesRequest": "aquant:PartSourcesRequest",
+    "model": {
+      "@id": "aquant:model",
+      "@type": "xsd:string"
+    },
+    "RadioOption": "aquant:RadioOption",
+    "value": {
+      "@id": "aquant:value",
+      "@type": "xsd:string"
+    },
+    "label": {
+      "@id": "aquant:label",
+      "@type": "xsd:string"
+    },
+    "FormField": "aquant:FormField",
+    "key": {
+      "@id": "aquant:key",
+      "@type": "xsd:string"
+    },
+    "disabled_if": {
+      "@id": "aquant:disabled_if"
+    },
+    "placeholder": {
+      "@id": "aquant:placeholder"
+    },
+    "NumberStep": "aquant:NumberStep",
+    "id": {
+      "@id": "aquant:id",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "aquant:title",
+      "@type": "xsd:string"
+    },
+    "required": {
+      "@id": "aquant:required",
+      "@type": "xsd:boolean"
+    },
+    "unit": {
+      "@id": "aquant:unit",
+      "@type": "xsd:string"
+    },
+    "FormStep": "aquant:FormStep",
+    "fields": {
+      "@id": "aquant:fields",
+      "@container": "@list"
+    },
+    "values": {
+      "@id": "aquant:values"
+    },
+    "PreventiveMaintenanceCheckListRequest": "aquant:PreventiveMaintenanceCheckListRequest",
+    "BlockingRule": "aquant:BlockingRule",
+    "if_value": {
+      "@id": "aquant:if_value",
+      "@type": "xsd:string"
+    },
+    "block": {
+      "@id": "aquant:block",
+      "@type": "xsd:boolean"
+    },
+    "PreventiveMaintenanceCheckListResult": "aquant:PreventiveMaintenanceCheckListResult",
+    "schema_version": {
+      "@id": "aquant:schema_version",
+      "@type": "xsd:string"
+    },
+    "agent_id": {
+      "@id": "aquant:agent_id",
+      "@type": "xsd:string"
+    },
+    "steps": {
+      "@id": "aquant:steps",
+      "@container": "@list"
+    },
+    "RadioStep": "aquant:RadioStep",
+    "options": {
+      "@id": "aquant:options",
+      "@container": "@list"
+    },
+    "blocking_rule": {
+      "@id": "aquant:blocking_rule"
+    },
+    "SelectStep": "aquant:SelectStep",
+    "SummaryReportRequest": "aquant:SummaryReportRequest",
+    "chat_history": {
+      "@id": "aquant:chat_history"
+    },
+    "AgentUsed": "aquant:AgentUsed",
+    "name": {
+      "@id": "aquant:name",
+      "@type": "xsd:string"
+    },
+    "result": {
+      "@id": "aquant:result"
+    },
+    "highlights": {
+      "@id": "aquant:highlights",
+      "@container": "@list"
+    },
+    "Site": "aquant:Site",
+    "address": {
+      "@id": "aquant:address",
+      "@type": "xsd:string"
+    },
+    "SummaryReportResult": "aquant:SummaryReportResult",
+    "summary_version": {
+      "@id": "aquant:summary_version",
+      "@type": "xsd:string"
+    },
+    "site": {
+      "@id": "aquant:site",
+      "@type": "@id"
+    },
+    "agents_used": {
+      "@id": "aquant:agents_used",
+      "@container": "@list"
+    },
+    "TechnicianLocation": "aquant:TechnicianLocation",
+    "TechnicianProximityRequest": "aquant:TechnicianProximityRequest",
+    "technicians": {
+      "@id": "aquant:technicians",
+      "@container": "@list"
+    },
+    "TechnicianProximityResult": "aquant:TechnicianProximityResult",
+    "TechnicianProximityInfo": "aquant:TechnicianProximityInfo",
+    "proximity_km": {
+      "@id": "aquant:proximity_km",
+      "@type": "xsd:decimal"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Aquant API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Aquant's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-20) from openapi/aquant-agent-data-api-openapi.yml, openapi/aquant-asset-location-api-openapi.yml, openapi/aquant-health-api-openapi.yml.",
+  "dcterms:created": "2026-10-20",
+  "dcterms:source": [
+    "openapi/aquant-agent-data-api-openapi.yml",
+    "openapi/aquant-asset-location-api-openapi.yml",
+    "openapi/aquant-health-api-openapi.yml",
+    "openapi/aquant-next-symptom-api-openapi.yml",
+    "openapi/aquant-observation-existence-api-openapi.yml"
+  ]
+}

@@ -1,0 +1,260 @@
+generated: '2026-10-20'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/aquant-agent-data-api-openapi.yml
+- openapi/aquant-asset-location-api-openapi.yml
+- openapi/aquant-health-api-openapi.yml
+- openapi/aquant-next-symptom-api-openapi.yml
+- openapi/aquant-observation-existence-api-openapi.yml
+vocabulary:
+  name: Aquant Domain Vocabulary
+  description: 'Terms declared by Aquant''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-20'
+  terms:
+  - term: AgentDataResult
+    definition: 'Object declared by the contract with fields: status, message, agents.'
+    tags:
+    - Object
+    source: openapi/aquant-agent-data-api-openapi.yml#/components/schemas/AgentDataResult
+  - term: AgentDataRequest
+    definition: 'Object declared by the contract with fields: observation_name.'
+    tags:
+    - Object
+    source: openapi/aquant-agent-data-api-openapi.yml#/components/schemas/AgentDataRequest
+  - term: AgentInfo
+    definition: 'Object declared by the contract with fields: event_agent_name, proficiency_score, location.'
+    tags:
+    - Object
+    source: openapi/aquant-agent-data-api-openapi.yml#/components/schemas/AgentInfo
+  - term: ValidationError
+    definition: 'Object declared by the contract with fields: loc, msg, type, input, ctx.'
+    tags:
+    - Object
+    source: openapi/aquant-agent-data-api-openapi.yml#/components/schemas/ValidationError
+  - term: HTTPValidationError
+    definition: 'Object declared by the contract with fields: detail.'
+    tags:
+    - Object
+    source: openapi/aquant-agent-data-api-openapi.yml#/components/schemas/HTTPValidationError
+  - term: AssetLocationResult
+    definition: 'Object declared by the contract with fields: status, message, asset_location.'
+    tags:
+    - Object
+    source: openapi/aquant-asset-location-api-openapi.yml#/components/schemas/AssetLocationResult
+  - term: AssetLocationRequest
+    definition: 'Object declared by the contract with fields: asset_id.'
+    tags:
+    - Object
+    source: openapi/aquant-asset-location-api-openapi.yml#/components/schemas/AssetLocationRequest
+  - term: AssetLocationInfo
+    definition: 'Object declared by the contract with fields: asset_id, location.'
+    tags:
+    - Object
+    source: openapi/aquant-asset-location-api-openapi.yml#/components/schemas/AssetLocationInfo
+  - term: NextSymptomRequest
+    definition: 'Object declared by the contract with fields: asset_id, top_n.'
+    tags:
+    - Object
+    source: openapi/aquant-next-symptom-api-openapi.yml#/components/schemas/NextSymptomRequest
+  - term: NextSymptomResult
+    definition: 'Object declared by the contract with fields: asset_id, top_n, predictions, status, message.'
+    tags:
+    - Object
+    source: openapi/aquant-next-symptom-api-openapi.yml#/components/schemas/NextSymptomResult
+  - term: Prediction
+    definition: 'Object declared by the contract with fields: rank, obs_predict, confidence, how_to_check.'
+    tags:
+    - Object
+    source: openapi/aquant-next-symptom-api-openapi.yml#/components/schemas/Prediction
+  - term: ObservationExistenceResult
+    definition: 'Object declared by the contract with fields: status, message, exists, observation_name.'
+    tags:
+    - Object
+    source: openapi/aquant-observation-existence-api-openapi.yml#/components/schemas/ObservationExistenceResult
+  - term: ObservationExistenceRequest
+    definition: 'Object declared by the contract with fields: observation_name.'
+    tags:
+    - Object
+    source: openapi/aquant-observation-existence-api-openapi.yml#/components/schemas/ObservationExistenceRequest
+  - term: PartCatalogInfo
+    definition: 'Object declared by the contract with fields: part_id, part_name, part_description, part_image_link, part_url_link.'
+    tags:
+    - Object
+    source: openapi/aquant-part-catalog-lookup-api-openapi.yml#/components/schemas/PartCatalogInfo
+  - term: PartCatalogLookupResult
+    definition: 'Object declared by the contract with fields: status, message, parts.'
+    tags:
+    - Object
+    source: openapi/aquant-part-catalog-lookup-api-openapi.yml#/components/schemas/PartCatalogLookupResult
+  - term: PartCatalogLookupRequest
+    definition: 'Object declared by the contract with fields: triage_product_id, question.'
+    tags:
+    - Object
+    source: openapi/aquant-part-catalog-lookup-api-openapi.yml#/components/schemas/PartCatalogLookupRequest
+  - term: PartInfoRequest
+    definition: 'Object declared by the contract with fields: catalog_data.'
+    tags:
+    - Object
+    source: openapi/aquant-part-info-api-openapi.yml#/components/schemas/PartInfoRequest
+  - term: PartInfoResult
+    definition: 'Object declared by the contract with fields: status, message, part_info.'
+    tags:
+    - Object
+    source: openapi/aquant-part-info-api-openapi.yml#/components/schemas/PartInfoResult
+  - term: PartSourcesResult
+    definition: 'Object declared by the contract with fields: status, message, sources.'
+    tags:
+    - Object
+    source: openapi/aquant-part-sources-api-openapi.yml#/components/schemas/PartSourcesResult
+  - term: PartSourcesRequest
+    definition: 'Object declared by the contract with fields: catalog_data, model, question.'
+    tags:
+    - Object
+    source: openapi/aquant-part-sources-api-openapi.yml#/components/schemas/PartSourcesRequest
+  - term: RadioOption
+    definition: 'Object declared by the contract with fields: value, label.'
+    tags:
+    - Object
+    source: openapi/aquant-preventive-maintenance-check-list-api-openapi.yml#/components/schemas/RadioOption
+  - term: FormField
+    definition: 'Object declared by the contract with fields: key, type, disabled_if, placeholder.'
+    tags:
+    - Object
+    source: openapi/aquant-preventive-maintenance-check-list-api-openapi.yml#/components/schemas/FormField
+  - term: NumberStep
+    definition: 'Object declared by the contract with fields: id, title, type, required, status, label, placeholder, key, unit, value.'
+    tags:
+    - Object
+    source: openapi/aquant-preventive-maintenance-check-list-api-openapi.yml#/components/schemas/NumberStep
+  - term: FormStep
+    definition: 'Object declared by the contract with fields: id, title, type, required, status, fields, values.'
+    tags:
+    - Object
+    source: openapi/aquant-preventive-maintenance-check-list-api-openapi.yml#/components/schemas/FormStep
+  - term: PreventiveMaintenanceCheckListRequest
+    definition: 'Object declared by the contract with fields: asset_id, model.'
+    tags:
+    - Object
+    source: openapi/aquant-preventive-maintenance-check-list-api-openapi.yml#/components/schemas/PreventiveMaintenanceCheckListRequest
+  - term: BlockingRule
+    definition: 'Object declared by the contract with fields: if_value, block.'
+    tags:
+    - Object
+    source: openapi/aquant-preventive-maintenance-check-list-api-openapi.yml#/components/schemas/BlockingRule
+  - term: PreventiveMaintenanceCheckListResult
+    definition: 'Object declared by the contract with fields: schema_version, agent_id, steps, status, message.'
+    tags:
+    - Object
+    source: openapi/aquant-preventive-maintenance-check-list-api-openapi.yml#/components/schemas/PreventiveMaintenanceCheckListResult
+  - term: RadioStep
+    definition: 'Object declared by the contract with fields: id, title, type, required, status, options, value, blocking_rule.'
+    tags:
+    - Object
+    source: openapi/aquant-preventive-maintenance-check-list-api-openapi.yml#/components/schemas/RadioStep
+  - term: SelectStep
+    definition: 'Object declared by the contract with fields: id, title, type, required, status, key, options, value.'
+    tags:
+    - Object
+    source: openapi/aquant-preventive-maintenance-check-list-api-openapi.yml#/components/schemas/SelectStep
+  - term: SummaryReportRequest
+    definition: 'Object declared by the contract with fields: chat_history.'
+    tags:
+    - Object
+    source: openapi/aquant-summary-report-api-openapi.yml#/components/schemas/SummaryReportRequest
+  - term: AgentUsed
+    definition: 'Object declared by the contract with fields: id, name, status, result, highlights.'
+    tags:
+    - Object
+    source: openapi/aquant-summary-report-api-openapi.yml#/components/schemas/AgentUsed
+  - term: Site
+    definition: 'Object declared by the contract with fields: name, address.'
+    tags:
+    - Object
+    source: openapi/aquant-summary-report-api-openapi.yml#/components/schemas/Site
+  - term: SummaryReportResult
+    definition: 'Object declared by the contract with fields: summary_version, site, agents_used, status, message.'
+    tags:
+    - Object
+    source: openapi/aquant-summary-report-api-openapi.yml#/components/schemas/SummaryReportResult
+  - term: TechnicianLocation
+    definition: 'Object declared by the contract with fields: event_agent_name, location.'
+    tags:
+    - Object
+    source: openapi/aquant-technician-proximity-api-openapi.yml#/components/schemas/TechnicianLocation
+  - term: TechnicianProximityRequest
+    definition: 'Object declared by the contract with fields: asset_location, technicians.'
+    tags:
+    - Object
+    source: openapi/aquant-technician-proximity-api-openapi.yml#/components/schemas/TechnicianProximityRequest
+  - term: TechnicianProximityResult
+    definition: 'Object declared by the contract with fields: status, message, technicians.'
+    tags:
+    - Object
+    source: openapi/aquant-technician-proximity-api-openapi.yml#/components/schemas/TechnicianProximityResult
+  - term: TechnicianProximityInfo
+    definition: 'Object declared by the contract with fields: event_agent_name, location, proximity_km.'
+    tags:
+    - Object
+    source: openapi/aquant-technician-proximity-api-openapi.yml#/components/schemas/TechnicianProximityInfo
+  - term: Agent Data
+    definition: 'Resource group in the contract; its operation POST /agent-data: Retrieve agents and their proficiency scores based on an observation
+      name.'
+    tags:
+    - Resource Group
+    source: openapi/aquant-agent-data-api-openapi.yml
+  - term: Asset Location
+    definition: 'Resource group in the contract; its operation POST /asset-location: Retrieve the location of an asset based on its ID.'
+    tags:
+    - Resource Group
+    source: openapi/aquant-asset-location-api-openapi.yml
+  - term: Health
+    definition: 'Resource group in the contract; its operation GET /health: Health Check'
+    tags:
+    - Resource Group
+    source: openapi/aquant-health-api-openapi.yml
+  - term: Next Symptom
+    definition: 'Resource group in the contract; its operation POST /next-symptom: Generate a next symptom for an asset based on its ID.'
+    tags:
+    - Resource Group
+    source: openapi/aquant-next-symptom-api-openapi.yml
+  - term: Observation Existence
+    definition: 'Resource group in the contract; its operation POST /observation-existence: Check if an observation exists in the loaded data.'
+    tags:
+    - Resource Group
+    source: openapi/aquant-observation-existence-api-openapi.yml
+  - term: Part Catalog Lookup
+    definition: 'Resource group in the contract; its operation POST /part-catalog-lookup: Look up part information from the catalog using a triage
+      product ID and a user question.'
+    tags:
+    - Resource Group
+    source: openapi/aquant-part-catalog-lookup-api-openapi.yml
+  - term: Part Info
+    definition: 'Resource group in the contract; its operation POST /part-info: Retrieve detailed part information given catalog data from the
+      lookup tool.'
+    tags:
+    - Resource Group
+    source: openapi/aquant-part-info-api-openapi.yml
+  - term: Part Sources
+    definition: 'Resource group in the contract; its operation POST /part-sources: Retrieve sources for parts given catalog data, model, and question.'
+    tags:
+    - Resource Group
+    source: openapi/aquant-part-sources-api-openapi.yml
+  - term: Preventive Maintenance Check List
+    definition: 'Resource group in the contract; its operation POST /preventive-maintenance-check-list: Generate a preventive maintenance check
+      list for a model or asset.'
+    tags:
+    - Resource Group
+    source: openapi/aquant-preventive-maintenance-check-list-api-openapi.yml
+  - term: Summary Report
+    definition: 'Resource group in the contract; its operation POST /summary-report: Generate a summary report for a chat history.'
+    tags:
+    - Resource Group
+    source: openapi/aquant-summary-report-api-openapi.yml
+  - term: Technician Proximity
+    definition: 'Resource group in the contract; its operation POST /technician-proximity: Retrieve technicians and their proximity to an asset
+      location.'
+    tags:
+    - Resource Group
+    source: openapi/aquant-technician-proximity-api-openapi.yml

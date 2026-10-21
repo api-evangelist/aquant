@@ -94,24 +94,6 @@ components:
       - msg
       - type
       title: ValidationError
-    TechnicianProximityResult:
-      properties:
-        status:
-          type: string
-          title: Status
-        message:
-          type: string
-          title: Message
-        technicians:
-          items:
-            $ref: '#/components/schemas/TechnicianProximityInfo'
-          type: array
-          title: Technicians
-          default: []
-      type: object
-      required:
-      - status
-      title: TechnicianProximityResult
     HTTPValidationError:
       properties:
         detail:
@@ -138,3 +120,21 @@ components:
       - location
       - proximity_km
       title: TechnicianProximityInfo
+    TechnicianProximityResult:
+      properties:
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+        technicians:
+          items:
+            $ref: '#/components/schemas/TechnicianProximityInfo'
+          type: array
+          title: Technicians
+          default: []
+      type: object
+      required:
+      - status
+      title: TechnicianProximityResult

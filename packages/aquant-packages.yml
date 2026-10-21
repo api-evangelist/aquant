@@ -28,32 +28,40 @@ packages:
   license: MIT
   official: true
   kind: client-sdk
-  description: >-
-    Browser SDK for the Aquant Conversation Platform — WebRTC voice calls, SSE web chat,
-    and session management from a single framework-agnostic package. Wraps
-    https://voiceai-api.aquant.ai. Ships ESM + CJS + types, with /chat and /voice subpath
-    entry points and swappable VoiceAdapter / ChatAdapter interfaces.
-  keywords: [aquant, sdk, chat, voice, websocket, webrtc, communication]
+  description: Browser SDK for the Aquant Conversation Platform — WebRTC voice calls, SSE web chat, and session management from a single framework-agnostic
+    package. Wraps https://voiceai-api.aquant.ai. Ships ESM + CJS + types, with /chat and /voice subpath entry points and swappable VoiceAdapter
+    / ChatAdapter interfaces.
+  keywords:
+  - aquant
+  - sdk
+  - chat
+  - voice
+  - websocket
+  - webrtc
+  - communication
   repository: https://github.com/aquant/acp-web-sdk
   published: '2026-04-21'
   last_updated: '2026-04-28'
   covers_api: aquant:acp-voiceai
+  ownership_audit: metadata names aquant.ai
 - language: javascript
   registry: npm
   name: '@aquant-ai/eslint-config'
   url: https://www.npmjs.com/package/@aquant-ai/eslint-config
   install: npm install @aquant-ai/eslint-config
-  official: true
+  official: false
   kind: internal-tooling
   description: Aquant's shared ESLint configuration. Engineering tooling, not an API client.
+  ownership_audit: 'registry metadata names neither the provider''s domain nor its GitHub org: official downgraded (harvest-packages.py --audit)'
 - language: javascript
   registry: npm
   name: '@aquant-ai/stylelint-config-scss'
   url: https://www.npmjs.com/package/@aquant-ai/stylelint-config-scss
   install: npm install @aquant-ai/stylelint-config-scss
-  official: true
+  official: false
   kind: internal-tooling
   description: Aquant's shared Stylelint SCSS configuration. Engineering tooling, not an API client.
+  ownership_audit: 'registry metadata names neither the provider''s domain nor its GitHub org: official downgraded (harvest-packages.py --audit)'
 - language: javascript
   registry: npm
   name: '@aquant-io/eslint-config'
@@ -61,15 +69,13 @@ packages:
   install: npm install @aquant-io/eslint-config
   official: true
   kind: internal-tooling
-  description: >-
-    Legacy @aquant-io scoped ESLint configuration, from before the aquant.io → aquant.ai
-    rebrand. Engineering tooling, not an API client.
+  description: Legacy @aquant-io scoped ESLint configuration, from before the aquant.io → aquant.ai rebrand. Engineering tooling, not an API client.
+  ownership_audit: metadata names npmjs.com
 summary:
   official_client_sdks: 1
-  languages: [javascript]
+  languages:
+  - javascript
   no_sdk_for:
   - api: aquant:mcp-server
-    note: >-
-      The Aquant MCP Server ships no client library — it is consumed through any MCP client
-      over Streamable HTTP at https://mcp.aquant.ai/mcp, or as plain REST against
-      https://mcp.aquant.ai/openapi.json.
+    note: The Aquant MCP Server ships no client library — it is consumed through any MCP client over Streamable HTTP at https://mcp.aquant.ai/mcp,
+      or as plain REST against https://mcp.aquant.ai/openapi.json.

@@ -1,5 +1,6 @@
 ---
-name: Diagnose an asset and source the right replacement part
+name: aquant-diagnose-and-source-part
+title: 'Diagnose an asset and source the right replacement part'
 description: >-
   Use the Aquant MCP Server to confirm a reported symptom, predict the next most likely
   symptom for an asset, then look up, detail, and source the replacement part.

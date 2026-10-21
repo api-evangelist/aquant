@@ -1,5 +1,6 @@
 ---
-name: Locate an asset and dispatch the nearest qualified technician
+name: aquant-dispatch-nearest-technician
+title: 'Locate an asset and dispatch the nearest qualified technician'
 description: >-
   Use the Aquant MCP Server to resolve an asset's location, pull technician proficiency data,
   and rank the available technicians by proximity to that asset.

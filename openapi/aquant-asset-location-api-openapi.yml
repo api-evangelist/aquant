@@ -38,20 +38,6 @@ paths:
       - Asset Location
 components:
   schemas:
-    AssetLocationResult:
-      properties:
-        status:
-          type: string
-          title: Status
-        message:
-          type: string
-          title: Message
-        asset_location:
-          $ref: '#/components/schemas/AssetLocationInfo'
-      type: object
-      required:
-      - status
-      title: AssetLocationResult
     ValidationError:
       properties:
         loc:
@@ -78,16 +64,6 @@ components:
       - msg
       - type
       title: ValidationError
-    AssetLocationRequest:
-      properties:
-        asset_id:
-          type: string
-          title: Asset Id
-          description: The asset ID to look up location for.
-      type: object
-      required:
-      - asset_id
-      title: AssetLocationRequest
     HTTPValidationError:
       properties:
         detail:
@@ -110,3 +86,27 @@ components:
       - asset_id
       - location
       title: AssetLocationInfo
+    AssetLocationRequest:
+      properties:
+        asset_id:
+          type: string
+          title: Asset Id
+          description: The asset ID to look up location for.
+      type: object
+      required:
+      - asset_id
+      title: AssetLocationRequest
+    AssetLocationResult:
+      properties:
+        status:
+          type: string
+          title: Status
+        message:
+          type: string
+          title: Message
+        asset_location:
+          $ref: '#/components/schemas/AssetLocationInfo'
+      type: object
+      required:
+      - status
+      title: AssetLocationResult

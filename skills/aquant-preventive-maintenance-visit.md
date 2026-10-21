@@ -1,5 +1,6 @@
 ---
-name: Run a preventive-maintenance visit and file the summary
+name: aquant-preventive-maintenance-visit
+title: 'Run a preventive-maintenance visit and file the summary'
 description: >-
   Use the Aquant MCP Server to generate a preventive-maintenance checklist for an asset,
   walk it as a structured form, then produce the service summary report.

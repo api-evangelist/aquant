@@ -66,23 +66,6 @@ components:
       required:
       - observation_name
       title: AgentDataRequest
-    AgentInfo:
-      properties:
-        event_agent_name:
-          type: string
-          title: Event Agent Name
-        proficiency_score:
-          type: number
-          title: Proficiency Score
-        location:
-          type: string
-          title: Location
-      type: object
-      required:
-      - event_agent_name
-      - proficiency_score
-      - location
-      title: AgentInfo
     ValidationError:
       properties:
         loc:
@@ -118,3 +101,20 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    AgentInfo:
+      properties:
+        event_agent_name:
+          type: string
+          title: Event Agent Name
+        proficiency_score:
+          type: number
+          title: Proficiency Score
+        location:
+          type: string
+          title: Location
+      type: object
+      required:
+      - event_agent_name
+      - proficiency_score
+      - location
+      title: AgentInfo

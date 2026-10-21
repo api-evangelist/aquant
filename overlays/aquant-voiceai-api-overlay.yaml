@@ -13,7 +13,7 @@ x-note: >-
   required fields), and their semantics are documented in Aquant's own first-party SDK. This
   overlay records them as an enhancement to the provider's spec; it does not modify the
   original, and no field is asserted that was not observed or published.
-extends: openapi/aquant-voiceai-api-openapi.json
+extends: ../openapi/_original/aquant-voiceai-api-openapi.json
 actions:
 - target: $.info
   update:

@@ -10,7 +10,7 @@ x-note: >-
   The original document at openapi/aquant-mcp-server-openapi.json is never mutated. Every
   addition below is grounded in evidence captured elsewhere in this repo — the MCP handshake
   (mcp/aquant-mcp.yml), the tool crosswalk, and live probes — not invented.
-extends: openapi/aquant-mcp-server-openapi.json
+extends: ../openapi/_original/aquant-mcp-server-openapi.json
 actions:
 - target: $.info
   update:
