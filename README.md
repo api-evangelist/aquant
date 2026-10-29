@@ -64,55 +64,166 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Aquant is an agentic AI platform for organizations that build, sell, and service complex
-equipment — industrial equipment, medical devices, manufacturing plants, food equipment,
-high-tech and electronics, and printing. It turns a company's service content and its
-technicians' tacit expertise into role-specific AI agents delivered over web, mobile, voice,
-offline, and API channels.
+Aquant is an agentic AI platform built for organizations that manufacture, sell, and service complex equipment. It turns a company's own service content — manuals, service histories, parts and warranty data, case notes — and the tacit expertise in its technicians' heads into role-specific AI agents for field technicians, call centers, customer self-service, and service leaders. The platform ships a library of prebuilt agents (Troubleshooting, Knowledge, Parts, IoT, Voice AI, Vision AI, Preventive Maintenance) plus an Agent Studio for building custom agents, and delivers them across web, mobile, voice, offline, and API channels into CRM, FSM, and support-portal workflows. Aquant exposes two public machine-readable surfaces: an MCP server at mcp.aquant.ai that publishes eleven service-intelligence tools over both JSON-RPC Streamable HTTP and REST, and the Aquant Conversation Platform (ACP) voice/chat API at voiceai-api.aquant.ai fronted by a first-party browser SDK.
 
-- Website: https://www.aquant.ai/
-- Platform: https://www.aquant.ai/platform
-- Trust center: https://security.aquant.ai/
-- Support: https://support.aquant.ai/
+**Areas:** Company · Artificial Intelligence · Agents · Field Service Management · Service Management · Manufacturing · Medical Devices · Industrial Equipment · Knowledge Management · Voice AI · MCP · Predictive Maintenance
 
-## Public API surfaces
+## Aquant on APIs.io
 
-| API | Base URL | Contract |
-|---|---|---|
-| Aquant MCP Server | `https://mcp.aquant.ai` | [OpenAPI 3.1.0](openapi/aquant-mcp-server-openapi.json) (11 ops) + live MCP `tools/list` (11 tools) |
-| Aquant Conversation Platform (VoiceAI) | `https://voiceai-api.aquant.ai` | [OpenAPI 3.1.0](openapi/aquant-voiceai-api-openapi.json) (health only) + `@aquantinc/acp-web-sdk` |
+Everything profiled for Aquant is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/aquant/](https://apis.io/providers/aquant/)** — or go straight to one of the APIs or properties below.
 
-The MCP server is the substantive surface. It publishes eleven service-intelligence tools —
-parts lookup/detail/sourcing, technician data and proximity, asset location, observation and
-next-symptom diagnostics, preventive-maintenance checklists, summary reporting, health — twice
-over: as MCP tools on `POST /mcp` (JSON-RPC Streamable HTTP, protocol `2025-06-18`, server
-`1.28.1`) and as REST `POST` operations described by `/openapi.json`. `tools/list` answers
-anonymously; tool invocation is tenant-scoped. See [mcp/aquant-tool-crosswalk.yml](mcp/aquant-tool-crosswalk.yml)
-for the one-to-one binding.
+### APIs (11)
 
-The Conversation Platform powers Voice AI and web chat. `POST /acp/token` exchanges an API key
-and secret for a one-hour bearer token; `POST /vss/web-chat` streams replies as Server-Sent
-Events; voice runs over WebRTC. Those routes are live but absent from the served OpenAPI —
-they are documented in Aquant's own browser SDK and recorded in
-[overlays/aquant-voiceai-api-overlay.yaml](overlays/aquant-voiceai-api-overlay.yaml).
+- [Aquant Agent Data API](https://apis.io/apis/aquant/aquant-agent-data-api/) — The Agent Data API from Aquant — 1 operation(s) for agent data.
+- [Aquant Asset Location API](https://apis.io/apis/aquant/aquant-asset-location-api/) — The Asset Location API from Aquant — 1 operation(s) for asset location.
+- [Aquant Health API](https://apis.io/apis/aquant/aquant-health-api/) — The Health API from Aquant — 3 operation(s) for health.
+- [Aquant Next Symptom API](https://apis.io/apis/aquant/aquant-next-symptom-api/) — The Next Symptom API from Aquant — 1 operation(s) for next symptom.
+- [Aquant Observation Existence API](https://apis.io/apis/aquant/aquant-observation-existence-api/) — The Observation Existence API from Aquant — 1 operation(s) for observation existence.
+- [Aquant Part Catalog Lookup API](https://apis.io/apis/aquant/aquant-part-catalog-lookup-api/) — The Part Catalog Lookup API from Aquant — 1 operation(s) for part catalog lookup.
+- [Aquant Part Info API](https://apis.io/apis/aquant/aquant-part-info-api/) — The Part Info API from Aquant — 1 operation(s) for part info.
+- [Aquant Part Sources API](https://apis.io/apis/aquant/aquant-part-sources-api/) — The Part Sources API from Aquant — 1 operation(s) for part sources.
+- [Aquant Preventive Maintenance Check List API](https://apis.io/apis/aquant/aquant-preventive-maintenance-check-list-api/) — The Preventive Maintenance Check List API from Aquant — 1 operation(s) for preventive maintenance check list.
+- [Aquant Summary Report API](https://apis.io/apis/aquant/aquant-summary-report-api/) — The Summary Report API from Aquant — 1 operation(s) for summary report.
+- [Aquant Technician Proximity API](https://apis.io/apis/aquant/aquant-technician-proximity-api/) — The Technician Proximity API from Aquant — 1 operation(s) for technician proximity.
 
-## Notable gaps
+### Published properties
 
-- No A2A agent card on any host (`/.well-known/agent-card.json` and `/.well-known/agent.json`
-  are 404 everywhere) — nothing is written to `a2a/`.
-- No `securitySchemes` in either OpenAPI; no `/.well-known/oauth-protected-resource` on the MCP
-  server, so MCP clients cannot discover how to authenticate tool calls.
-- No RFC 9457 problem details — three incompatible error envelopes are in use.
-- No idempotency contract, no pagination, no rate-limit signalling, no public status page, and
-  no deprecation policy.
-- No AsyncAPI and no webhook catalog; the event surface is client-pull SSE only.
-- The legacy `aquant.io` domain (including `docs.aquant.io`) returns HTTP 521 — dead, not
-  redirected.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Artifacts
+#### Arazzo workflows (3)
 
-`openapi/` `mcp/` `arazzo/` `skills/` `overlays/` `json-schema/` `examples/` `data-model/`
-`errors/` `conventions/` `lifecycle/` `changelog/` `conformance/` `authentication/` `scopes/`
-`packages/` `well-known/` `security/` `agentic-access/` `llms/`
+Multi-step workflows that chain operations into a business task.
 
-Provenance is stamped in the frontmatter of every artifact (`generated`, `method`, `source`).
+- [Diagnose an asset and source the right replacement part](https://apis.io/arazzos/aquant/aquant-diagnose-and-source-part/)
+- [Locate an asset and rank the nearest qualified technician](https://apis.io/arazzos/aquant/aquant-dispatch-nearest-technician/)
+- [Run a preventive-maintenance visit and file the summary](https://apis.io/arazzos/aquant/aquant-preventive-maintenance-visit/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [Aquant MCP Server (Authenticated)](https://apis.io/servers/aquant/aquant-mcp-server-authenticated/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Aquant Agentic Access](https://apis.io/agentic-access/aquant/aquant-agentic-access/)
+
+#### JSON Schema (1)
+
+The data models the API reads and writes.
+
+- [Aquant Mcp Server Schemas](https://apis.io/schemas/aquant/aquant-mcp-server-schemas/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Aquant Context](https://apis.io/jsonld/aquant/aquant-context/)
+
+#### Collections (2)
+
+Postman and Open Collection request collections.
+
+- [Aquant MCP Server](https://apis.io/collections/aquant/open-aquant-mcp-server/)
+- [FastAPI](https://apis.io/collections/aquant/open-aquant-voiceai-api/)
+
+#### Overlays (2)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Aquant Mcp Server Overlay](https://apis.io/overlays/aquant/aquant-mcp-server-overlay/)
+- [Aquant Voiceai Api Overlay](https://apis.io/overlays/aquant/aquant-voiceai-api-overlay/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Aquant API Rules](https://apis.io/rules/aquant/aquant-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Aquant Authentication](https://apis.io/security/aquant/aquant-authentication/)
+- [Aquant Domain Security](https://apis.io/security/aquant/aquant-domain-security/)
+- [Aquant Trust Center](https://apis.io/security/aquant/aquant-trust-center/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Aquant Scopes](https://apis.io/scopes/aquant/aquant-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.aquant.ai/)
+- [Documentation](https://www.aquant.ai/platform)
+- [Getting started](https://www.npmjs.com/package/@aquantinc/acp-web-sdk#quick-start)
+- [API reference](https://mcp.aquant.ai/docs)
+- [Support](https://support.aquant.ai/)
+- [Changelog](https://www.aquant.ai/company/whats-new)
+- [Blog](https://www.aquant.ai/resources/blog)
+- [Compliance](https://security.aquant.ai/)
+- [Trust centre](https://security.aquant.ai/)
+- [Terms of service](https://cdn.prod.website-files.com/687529371c5de2d8428c0a4d/688ce744542f10274811b354_Terms%20of%20Service.pdf)
+- [Privacy policy](https://www.aquant.ai/privacy-policy)
+- [GitHub](https://github.com/AquantIO)
+
+## API Evangelist rating
+
+**Kin Score 50.1** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 55.2 |
+| Contract governance | 19.7 |
+| Operational transparency | 28.9 |
+| Developer ergonomics | 56.5 |
+| Access clarity | 43.4 |
+
+**Agent readiness 42.6** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 34.6** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/aquant/](https://apis.io/providers/aquant/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Aquant: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/aquant/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
